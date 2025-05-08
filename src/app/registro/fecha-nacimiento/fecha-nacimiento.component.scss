@@ -11,7 +11,7 @@
 .n[type="date"] {
   position: absolute;
   top: 70%;
-  left: 50%;
+  left: 31%;
   color: #0f172a;
   background-color: #f8fafc;
   transform: translate(-50%, -50%);
@@ -23,13 +23,14 @@
   cursor: pointer;
 }
 .dispfecha{
-  background-color: #0f172a;
   width:215px ;
   height: 50px;
 }
 .pos{
-  position: relative;
-  top: 5%;
-  left: 50%;
-  color: #dde1eb;
+  width: 160px;
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  color:#0f172a;
+  transform: translate(-50%, -50%);
 }
