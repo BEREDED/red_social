@@ -1,10 +1,12 @@
 <ion-content>
   <body>
-  componente-prin works!
-  <app-contrasena></app-contrasena>
-  <app-correo></app-correo>
-
-      <button [routerLink]="['/home']" class="botonclr">home</button>
+    <div>
+      <div class="panel">
+        <h1 class="titulo">Inicio de sesion</h1>
+        <app-correo class="poscorreo"></app-correo>
+        <app-contrasena class="poscontrasena"></app-contrasena>
+        <button [routerLink]="['/home']" class="botonclr">home</button>
+      </div>
+    </div>
   </body>
-
 </ion-content>

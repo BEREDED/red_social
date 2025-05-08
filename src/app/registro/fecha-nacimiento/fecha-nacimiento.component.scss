@@ -1,0 +1,35 @@
+.n[type="text"]{
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  color: #0f172a;
+  background-color: #f8fafc;
+  transform: translate(-50%,-50%);
+  width: auto;
+}
+
+.n[type="date"] {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  color: #0f172a;
+  background-color: #f8fafc;
+  transform: translate(-50%, -50%);
+  width: auto;
+}
+
+.n[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(18%) sepia(88%) saturate(749%) hue-rotate(180deg) brightness(90%) contrast(85%);
+  cursor: pointer;
+}
+.dispfecha{
+  background-color: #0f172a;
+  width:215px ;
+  height: 50px;
+}
+.pos{
+  position: relative;
+  top: 5%;
+  left: 50%;
+  color: #dde1eb;
+}

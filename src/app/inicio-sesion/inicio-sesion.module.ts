@@ -6,20 +6,21 @@ import { CorreoComponent } from './correo/correo.component';
 import { ContrasenaComponent } from './contrasena/contrasena.component';
 import { ComponentePrinComponent } from './componente-prin/componente-prin.component';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
-import { IonContent } from '@ionic/angular/standalone';
-
+import { IonicModule } from '@ionic/angular';
+import { RegistroModule } from "../registro/registro.module";
+import { NombreComponent } from '../registro/nombre/nombre.component';
 
 @NgModule({
   declarations: [
     ComponentePrinComponent,
     CorreoComponent,
-    ContrasenaComponent
+    ContrasenaComponent,
   ],
   imports: [
     CommonModule,
     InicioSesionRoutingModule,
     RouterModule,
-    IonContent
+    IonicModule,
   ],
   exports:[
     ContrasenaComponent,

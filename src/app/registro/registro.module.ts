@@ -18,7 +18,6 @@ import { IonContent } from '@ionic/angular/standalone';
     PrincipalComponent,
     FechaNacimientoComponent,
     ConfirmarContrasenaComponent
-
   ],
   imports: [
     CommonModule,
