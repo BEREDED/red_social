@@ -1,6 +1,31 @@
-<p>
-<app-barra-busqueda></app-barra-busqueda>
-<app-boton-cerrar></app-boton-cerrar>
-<app-boton-perfil></app-boton-perfil>
-<app-boton-tgf></app-boton-tgf>
-</p>
+<body class="body">
+  <header class="header">
+    <div class="logo">AppName</div>
+    <app-barra-busqueda></app-barra-busqueda>
+    <app-boton-cerrar class="poscerrar"></app-boton-cerrar>
+    <app-boton-perfil class="posperfil"></app-boton-perfil>
+  </header>
+
+  <main class="main-content">
+    <section class="filters">
+      <app-boton-tgf></app-boton-tgf>
+    </section>
+
+    <section class="card-grid">
+      <div class="card">Ingresar con código</div>
+      <div class="card">Group 2</div>
+      <div class="card">Group 3</div>
+      <div class="card">Foro 1</div>
+      <div class="card">Foro 2</div>
+      <div class="card">Foro 3</div>
+      <div class="card">Foro 4</div>
+      <div class="card">Foro 5</div>
+      <div class="card">Foro 5</div>
+    </section>
+
+    <div class="floating-buttons">
+      <app-boton-mas></app-boton-mas>
+      <app-boton-chats></app-boton-chats>
+    </div>
+  </main>
+</body>

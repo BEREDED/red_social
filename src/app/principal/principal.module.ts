@@ -9,6 +9,7 @@ import { BotonPerfilComponent } from './boton-perfil/boton-perfil.component';
 import { BotonTgfComponent } from './boton-tgf/boton-tgf.component';
 import { PrinPrinComponent } from './prin-prin/prin-prin.component';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -25,7 +26,8 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     RouterModule,
-    PrincipalRoutingModule
+    PrincipalRoutingModule,
+    FormsModule
   ]
 })
 export class PrincipalModule { }

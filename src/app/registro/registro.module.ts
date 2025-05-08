@@ -10,6 +10,7 @@ import { FechaNacimientoComponent } from './fecha-nacimiento/fecha-nacimiento.co
 import { ConfirmarContrasenaComponent } from './confirmar-contrasena/confirmar-contrasena.component';
 import { InicioSesionModule } from '../inicio-sesion/inicio-sesion.module';
 import { IonContent } from '@ionic/angular/standalone';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { IonContent } from '@ionic/angular/standalone';
     CommonModule,
     RegistroRoutingModule,
     InicioSesionModule,
-    IonContent
+    IonContent,
+    FormsModule
   ],
   exports:[
     NombreComponent,
