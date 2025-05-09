@@ -22,7 +22,17 @@
   flex-wrap: nowrap;
   overflow-x: auto;
 }
-
+.container2 {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+}
 
 .logo {
   font-weight: bold;
@@ -50,7 +60,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 16px;
-  max-width: 960px; /* puedes ajustar este ancho máximo */
+  max-width: 960px;
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
@@ -79,7 +89,7 @@
 
 .floating-buttons {
   position: fixed;
-  bottom: 20px;
+  bottom: 10px;
   right: 20px;
   display: flex;
   flex-direction: column;

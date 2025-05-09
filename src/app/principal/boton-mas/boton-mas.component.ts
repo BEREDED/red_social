@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-boton-mas',
@@ -8,8 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BotonMasComponent  implements OnInit {
 
-  constructor() { }
+  ngOnInit(): void {
+    // Puedes dejarlo vacío o usarlo más adelante
+  }
+    desplegado = false;
+  constructor(private router: Router) {}
 
-  ngOnInit() {}
+  toggleDesplegado() {
+    this.desplegado = !this.desplegado;
+  }
+
+  crearForo() {
+    console.log('Crear foro');
+    this.router.navigate(['/crear-foro']);
+  }
+
+  crearGrupo() {
+    console.log('Crear grupo');
+    this.router.navigate(['/crear-grupo']);
+  }
 
 }
