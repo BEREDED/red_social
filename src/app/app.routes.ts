@@ -27,6 +27,10 @@ export const routes: Routes = [
     loadChildren: () => import('./principal/principal.module').then((m) => m.PrincipalModule),
   },
   {
+    path:'foro',
+    loadChildren: () => import('./foro/foro.module').then((m) => m.ForoModule),
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
