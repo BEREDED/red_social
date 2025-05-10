@@ -1,0 +1,63 @@
+<!-- side-panel.component.html -->
+<div class="side-panel-container">
+  <!-- Título del panel -->
+  <div class="side-panel-header">
+    <h2>{{ title }}</h2>
+  </div>
+
+  <!-- Contenido del panel -->
+  <div class="side-panel-content">
+    <!-- Acordeón 1 -->
+<!-- <div class="accordion">
+      <div class="accordion-header" (click)="toggleAccordion('one')">
+        <ion-item lines="none" detail="false">
+          <ion-label>Opciones</ion-label>
+          <ion-icon slot="end"
+                   [name]="accordionOneExpanded ? 'chevron-up' : 'chevron-down'"
+                   class="accordion-icon"></ion-icon>
+        </ion-item>
+      </div>
+
+      <div class="accordion-content" [class.expanded]="accordionOneExpanded">
+        <ion-list>
+          <ion-item *ngFor="let item of accordionOneItems"
+                    button
+                    detail="false"
+                    (click)="selectOption(item)"
+                    [class.selected]="item.selected">
+            <ion-label>{{ item.name }}</ion-label>
+            <ion-icon *ngIf="item.selected"
+                     name="checkmark"
+                     slot="end"
+                     color="primary"></ion-icon>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+
+    <!-- Acordeón 2
+    <div class="accordion">
+      <div class="accordion-header" (click)="toggleAccordion('two')">
+        <ion-item lines="none" detail="false">
+          <ion-label>Navegación</ion-label>
+          <ion-icon slot="end"
+                   [name]="accordionTwoExpanded ? 'chevron-up' : 'chevron-down'"
+                   class="accordion-icon"></ion-icon>
+        </ion-item>
+      </div>
+
+      <div class="accordion-content" [class.expanded]="accordionTwoExpanded">
+        <ion-list>
+          <ion-item *ngFor="let item of accordionTwoItems"
+                    button
+                    detail="false"
+                    [routerLink]="item.route"
+                    routerLinkActive="active-item">
+            <ion-icon [name]="item.icon" slot="start"></ion-icon>
+            <ion-label>{{ item.name }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>*/ -->
+  </div>
+</div>
