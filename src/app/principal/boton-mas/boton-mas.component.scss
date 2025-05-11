@@ -1,7 +1,8 @@
+/* Modified to make the "mas" button smaller */
 .mas{
   color: #f0f0f0;
   background-color: #0f172a;
-  padding: 0.5em;
+  padding: 0.5em; /* Reduced padding for smaller button */
   border: none;
   outline: none;
   cursor: pointer;
@@ -18,19 +19,18 @@
 }
 
 .mas img {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
+  width: 35px; /* Reduced image size */
+  height: 35px; /* Reduced image size */
   display: block;
 }
 .boton-mas-container {
   position: fixed;
-  bottom: 4vh;
-  right: 25vh;
+  bottom: 2.2vh;
+  right: 5vh;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
-  gap: 10px;
+  gap: 7px;
   z-index: 1000;
 }
 
@@ -43,8 +43,8 @@
 }
 
 .opcion {
-  padding: 10px 16px;
-  background-color: white;
+  padding: 15px 20px;
+  background-color:#0f172a;
   border: 1px solid #ccc;
   border-radius: 8px;
   cursor: pointer;
@@ -54,4 +54,5 @@
 
 .opcion:hover {
   background-color: #f0f0f0;
+  color: #0f172a;
 }
