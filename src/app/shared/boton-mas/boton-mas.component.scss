@@ -2,7 +2,7 @@
 .mas{
   color: #f0f0f0;
   background-color: #0f172a;
-  padding: 0.5em; /* Reduced padding for smaller button */
+  padding: .7em; /* Reduced padding for smaller button */
   border: none;
   outline: none;
   cursor: pointer;
@@ -20,13 +20,13 @@
 
 .mas img {
   width: 35px; /* Reduced image size */
-  height: 35px; /* Reduced image size */
+  height: 34px; /* Reduced image size */
   display: block;
 }
 .boton-mas-container {
   position: fixed;
   bottom: 2.2vh;
-  right: 60vh;
+  right: 35vh;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
