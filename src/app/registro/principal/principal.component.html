@@ -2,12 +2,18 @@
   <body>
     <div>
       <div class="panel">
-        <app-contrasena class="poscontrasena"></app-contrasena>
-        <app-correo class="poscorreo"></app-correo>
-        <app-nombre class="posname"></app-nombre>
-        <app-confirmar-contrasena class="posconfcontr"></app-confirmar-contrasena>
-        <app-fecha-nacimiento class="posfecha"></app-fecha-nacimiento>
-        <button routerLink="['/home']" class="botonclr">confirmar</button>
+        <div class="title">
+            <h2>Registro</h2>
+        </div>
+        <div class="container">
+          <app-nombre class="posname"></app-nombre>
+          <app-correo class="poscorreo"></app-correo>
+          <app-fecha-nacimiento class="posfecha"></app-fecha-nacimiento>
+          <app-contrasena class="poscontrasena"></app-contrasena>
+          <app-confirmar-contrasena class="posconfcontr"></app-confirmar-contrasena>
+          <button routerLink="['/home']" class="botonclr">confirmar</button>
+        </div>
+
       </div>
     </div>
   </body>

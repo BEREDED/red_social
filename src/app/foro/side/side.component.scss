@@ -2,13 +2,28 @@
 :host {
   display: block;
 }
+.return{
+  background: transparent;
+  color: white;
+  text-decoration: none;
 
+}
+
+.title{
+  margin: auto;
+  padding-top: 1em;
+  text-align: center;
+}
+
+.container{
+  margin: 10px;
+ }
 .side-panel-container {
-  width: 40vh;
-  height: 90vh
+  width: 30vh;
+  height: 70vh;
   ;
-  background-color: #0f172a;
-  border-right: 1px solid var(--ion-color-light-shade);
+  background-color: white;
+  border: 1px solid;
   position: sticky;
   top: 0;
   left: 0;
@@ -16,19 +31,22 @@
   z-index: 100;
   display: flex;
   flex-direction: column;
+  border-bottom-right-radius: 5%;
+
 }
 
 .side-panel-header {
+  height: 15vh;
   padding: 16px;
   border-bottom: 1px solid var(--ion-color-light-shade);
-  background-color: var(--ion-color-light);
+  background-color: #0f172a;
   position: sticky;
   top: 0;
   z-index: 10;
 
   h2 {
     margin: 0;
-    font-size: 18px;
+    font-size: 30px;
     font-weight: 600;
     color: white;
   }
@@ -47,13 +65,15 @@
     cursor: pointer;
 
     ion-item {
-      --background: transparent;
+      color: black;
+      --background: transparent
       --padding-start: 16px;
       --min-height: 48px;
       font-weight: 500;
 
       &:hover {
-        --background: var(--ion-color-light-shade);
+        color:  white;
+        --background: #0f172a;
       }
     }
 
@@ -76,15 +96,19 @@
       padding: 0;
 
       ion-item {
+        color: black;
         --background: transparent;
         --padding-start: 24px;
         --min-height: 40px;
 
         &:hover {
+          color: black;
           --background: rgba(var(--ion-color-primary-rgb), 0.1);
         }
 
         &.selected {
+          color: black;
+
           --background: rgba(var(--ion-color-primary-rgb), 0.15);
           font-weight: 500;
         }
@@ -111,9 +135,21 @@
     border-bottom-color: var(--ion-color-dark-shade);
 
     h2 {
+
       color: var(--ion-color-primary-contrast);
     }
   }
+}
+
+
+.floating-buttons {
+  position: fixed;
+  bottom: 10px;
+  right: 60px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
 }
 
 // Media queries para dispositivos pequeños

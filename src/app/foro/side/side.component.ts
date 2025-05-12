@@ -9,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 })
 export class SideComponent implements OnInit {
-  @Input() title: string = 'Panel de Control';
+  @Input() title: string = 'HOME';
 
   // Variables para controlar la expansión de los acordeones
   accordionOneExpanded: boolean = false;

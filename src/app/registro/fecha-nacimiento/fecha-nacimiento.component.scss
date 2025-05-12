@@ -1,21 +1,13 @@
 .n[type="text"]{
-  position: absolute;
-  top: 20%;
-  left: 50%;
-  color: #0f172a;
+  color: gray;
   background-color: #f8fafc;
-  transform: translate(-50%,-50%);
   width: auto;
 }
 
 .n[type="date"] {
-  position: absolute;
-  top: 70%;
-  left: 31%;
   color: #0f172a;
   background-color: #f8fafc;
-  transform: translate(-50%, -50%);
-  width: auto;
+  width: 88%;
 }
 
 .n[type="date"]::-webkit-calendar-picker-indicator {
@@ -23,14 +15,15 @@
   cursor: pointer;
 }
 .dispfecha{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
   width:215px ;
   height: 50px;
 }
 .pos{
   width: 160px;
-  position: absolute;
-  top: 20%;
-  left: 40%;
+
   color:#0f172a;
-  transform: translate(-50%, -50%);
+
 }

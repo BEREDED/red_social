@@ -10,33 +10,42 @@ transform: translate(-50%,-50%);
 top: 50%;
 left: 50%;
 background-color:#f8fafc;
-padding: 5%;
+padding: 3em;
 border-radius: 5%;
 height: 450px;
 width: 450px;
-align-items: center;
+  h2{
+    font-size: 25px;
+    color: black;
+    margin: 1em;
+  }
 }
+
+.title{
+  text-align: center;
+  margin-top: -40px;
+}
+
+.container{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  margin: 2em;
+  padding-left: 4vh;
+  /* Propiedades opcionales útiles */
+  gap: 15px; /* Espacio entre elementos */
+}
+
 .poscorreo{
-position: absolute;
-top: 40%;
-left: 50%;
-transform: translate(-50%,-50%);
-width: auto;
 
 }
+
 .poscontrasena{
-position: absolute;
-top: 60%;
-left: 50%;
-transform: translate(-50%,-50%);
 width: auto;
 }
 .titulo{
-position: absolute;
-top: 15%;
-left: 50%;
+
 color: #0f172a;
-transform: translate(-50%,-50%);
 width: auto;
 }
 .botonclr{
@@ -44,29 +53,14 @@ width: 6em;
 height: 3em;
 background-color: #0f172a;
 color: #f8fafc;
-//margin: 1em;
-position: absolute;
-top: 80%;
-left: 50%;
-transform: translate(-50%,-50%);
+align-items: center;
+transform: translate(69%,30%);
 }
 .posfecha{
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
   width: auto;
 }
 .posname{
-  position: absolute;
-  top: 32%;
-  left: 50%;
-  transform: translate(-50%,-50%);
 }
 .posconfcontr{
-  position: absolute;
-  top: 68%;
-  left: 50%;
-  transform: translate(-50%,-50%);
   width: auto;
 }
