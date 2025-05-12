@@ -11,16 +11,20 @@ import { BotonPerfilComponent } from './boton-perfil/boton-perfil.component';
 import { BotonCerrarComponent } from './boton-cerrar/boton-cerrar.component';
 
 import { BotonChatsComponent } from './boton-chats/boton-chats.component';
+import { BotonTgfComponent } from './boton-tgf/boton-tgf.component';
+import { BotonMasComponent } from './boton-mas/boton-mas.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
+    BotonPerfilComponent,
     FooterComponent,
     BarraBusquedaComponent,
     BotonPerfilComponent,
     BotonCerrarComponent,
     BotonChatsComponent,
-
+    BotonTgfComponent,
+    BotonMasComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +41,8 @@ import { BotonChatsComponent } from './boton-chats/boton-chats.component';
     BotonPerfilComponent,
     BotonCerrarComponent,
     BotonChatsComponent,
+    BotonTgfComponent,
+    BotonMasComponent
   ]
 })
 export class SharedModule { }

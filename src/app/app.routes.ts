@@ -32,7 +32,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'inicio_sesion',
     pathMatch: 'full',
   },
 ];

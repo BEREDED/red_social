@@ -16,11 +16,11 @@
 .boton-chats-container {
   position: fixed;
   bottom: 2.2vh;
-  right: 5vh;
+  right: -5vh;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
-  gap: 7px;
+  gap: 5px;
   z-index: 1000;
 }
 

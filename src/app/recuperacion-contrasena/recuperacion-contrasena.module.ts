@@ -5,6 +5,9 @@ import { RecuperacionContrasenaRoutingModule } from './recuperacion-contrasena-r
 import { RegistroModule } from '../registro/registro.module';
 import { PrinRecComponent } from './prin-rec/prin-rec.component';
 import { InicioSesionModule } from '../inicio-sesion/inicio-sesion.module';
+import { IonContent } from '@ionic/angular/standalone';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -15,7 +18,9 @@ import { InicioSesionModule } from '../inicio-sesion/inicio-sesion.module';
     CommonModule,
     RecuperacionContrasenaRoutingModule,
     RegistroModule,
-    InicioSesionModule
+    InicioSesionModule,
+    IonicModule,
+    RouterModule
   ]
 })
 export class RecuperacionContrasenaModule { }

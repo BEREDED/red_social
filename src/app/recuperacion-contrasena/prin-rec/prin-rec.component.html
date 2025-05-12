@@ -1,4 +1,16 @@
-<h1>
-<app-correo></app-correo>
-<app-fecha-nacimiento></app-fecha-nacimiento>
-</h1>
+<ion-content>
+  <body>
+  <div class="fondo">
+    <div class="panel">
+      <div class="title">
+          <h2>recuperacion de contraseña</h2>
+      </div>
+      <div class="container">
+        <app-correo class="poscorreo"></app-correo>
+        <app-fecha-nacimiento class="posfecha"></app-fecha-nacimiento>
+        <button [routerLink]="['/inicio_sesion']" class="botonclr">confirmar</button>
+      </div>
+    </div>
+  </div>
+  </body>
+</ion-content>

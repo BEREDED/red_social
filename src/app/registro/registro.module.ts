@@ -11,6 +11,7 @@ import { ConfirmarContrasenaComponent } from './confirmar-contrasena/confirmar-c
 import { InicioSesionModule } from '../inicio-sesion/inicio-sesion.module';
 import { IonContent } from '@ionic/angular/standalone';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
