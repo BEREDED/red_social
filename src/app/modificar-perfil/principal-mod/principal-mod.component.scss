@@ -1,6 +1,6 @@
 body {
-    color: #0f172a;
-    background-color: #f8fafc;
+    background-color: #0f172a;
+    color: #f8fafc;
     align-items: center;
     justify-content: center;
 }
@@ -9,7 +9,7 @@ body {
   transform: translate(-50%,-50%);
   top: 50%;
   left: 50%;
-  background-color:#0f172a;
+  background-color:#f8fafc;
   padding: 5%;
   border-radius: 5%;
   height:500px;
@@ -42,15 +42,15 @@ body {
   position: absolute;
   top: 15%;
   left: 50%;
-  color:#f8fafc;
+  color:#0f172a;
   transform: translate(-50%,-50%);
   width: auto;
 }
 .botonclr{
   width: 6em;
   height: 3em;
-  color: #0f172a;
-  background-color: #f8fafc;
+  background-color: #0f172a;
+  color: #f8fafc;
   //margin: 1em;
   position: absolute;
   top: 80%;
