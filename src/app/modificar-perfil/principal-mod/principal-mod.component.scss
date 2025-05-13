@@ -59,12 +59,13 @@ body {
 .botonclr2{
   width: 6em;
   height: 3em;
-    background-color: #0f172a;
+  background-color: #0f172a;
   color: #f8fafc;
   position: absolute;
   top: 10%;
   left: 10%;
   transform: translate(-50%,-50%);
+  border-radius: 20%;
 }
 .botonclr2:hover{
    filter: brightness(10);
