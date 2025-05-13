@@ -31,6 +31,10 @@ export const routes: Routes = [
     loadChildren: () => import('./foro/foro.module').then((m) => m.ForoModule),
   },
   {
+    path:'chats',
+    loadChildren: () => import('./chats/chats.module').then((m) => m.ChatsModule),
+  },
+  {
     path: '',
     redirectTo: 'inicio_sesion',
     pathMatch: 'full',

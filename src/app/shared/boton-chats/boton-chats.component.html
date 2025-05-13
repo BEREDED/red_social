@@ -1,5 +1,8 @@
 <div class="boton-chats-container">
-  <button class="chats" (click)="toggleDesplegado()">Chats</button>
+  <button class="chats" (click)="toggleDesplegado()">
+      <a href="/chats" class="chats">Chats</a>
+  </button>
+
   <div class="chats-desplegados" *ngIf="desplegado">
     <!--*ngFor="let chat of chats"-->
     <div class="listado-chats-desplegados-izquierda" >
