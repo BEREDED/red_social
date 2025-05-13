@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonContent } from "@ionic/angular/standalone";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-principal-mod',
@@ -9,8 +10,11 @@ import { IonContent } from "@ionic/angular/standalone";
 })
 export class PrincipalModComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private _location: Location) {}
 
+ goBack(){
+   this._location.back();
+ }
   ngOnInit() {}
 
 }

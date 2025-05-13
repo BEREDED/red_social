@@ -51,19 +51,19 @@ body {
   height: 3em;
   background-color: #0f172a;
   color: #f8fafc;
-  //margin: 1em;
   position: absolute;
   top: 80%;
   left: 50%;
   transform: translate(-50%,-50%);
 }
 .botonclr2{
-  text-decoration: underline;
-  background-color: transparent;
-  color: #0f172a;
+  width: 6em;
+  height: 3em;
+    background-color: #0f172a;
+  color: #f8fafc;
   position: absolute;
-  top: 90%;
-  left: 50%;
+  top: 10%;
+  left: 10%;
   transform: translate(-50%,-50%);
 }
 .botonclr2:hover{

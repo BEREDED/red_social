@@ -8,6 +8,7 @@ import { PrincipalModComponent } from './principal-mod/principal-mod.component';
 import { InicioSesionModule } from '../inicio-sesion/inicio-sesion.module';
 import { SharedModule } from '../shared/shared.module';
 import { IonContent } from '@ionic/angular/standalone';
+import { RouterEvent, RouterLink, RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { IonContent } from '@ionic/angular/standalone';
     ModificarPerfilRoutingModule,
     InicioSesionModule,
     SharedModule,
-    IonContent
+    IonContent,
+    RouterModule
   ]
 })
 export class ModificarPerfilModule { }
