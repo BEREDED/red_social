@@ -4,8 +4,8 @@ import { PrincipalModComponent } from './principal-mod/principal-mod.component';
 
 const routes: Routes = [
   {
-    path:'perfil',
-    component:PrincipalModComponent
+    path:'',
+    component:PrincipalModComponent,
   }
 ];
 

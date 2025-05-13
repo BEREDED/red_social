@@ -31,10 +31,6 @@ export const routes: Routes = [
     loadChildren: () => import('./foro/foro.module').then((m) => m.ForoModule),
   },
   {
-    path: 'perfil',
-    loadChildren: () => import('./perfil/perfil.module').then((m) => m.PerfilModule),
-  },
-  {
     path: '',
     redirectTo: 'inicio_sesion',
     pathMatch: 'full',

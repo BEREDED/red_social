@@ -1,0 +1,93 @@
+body {
+    color: #0f172a;
+    background-color: #f8fafc;
+    align-items: center;
+    justify-content: center;
+}
+.panel{
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  background-color:#0f172a;
+  padding: 5%;
+  border-radius: 5%;
+  height:500px;
+  width: 900px;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  color: #0f172a;
+  position: fixed;
+  z-index: 1100;
+  border: 1px solid black;
+}
+.poscorreo{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: auto;
+
+}
+.poscontrasena{
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: auto;
+}
+.titulo{
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  color:#f8fafc;
+  transform: translate(-50%,-50%);
+  width: auto;
+}
+.botonclr{
+  width: 6em;
+  height: 3em;
+  color: #0f172a;
+  background-color: #f8fafc;
+  //margin: 1em;
+  position: absolute;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.botonclr2{
+  text-decoration: underline;
+  background-color: transparent;
+  color: #0f172a;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.botonclr2:hover{
+   filter: brightness(10);
+}
+
+.botonclr:hover{
+   filter: brightness(0.8);
+}
+.div-izquierda{
+  width: 450px;
+  height: 500px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Removed position absolute and transform */
+}
+.div-derecha {
+  width: 450px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 1rem;
+  gap: 1rem;
+}
