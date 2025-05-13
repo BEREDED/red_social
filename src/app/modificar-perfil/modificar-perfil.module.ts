@@ -7,6 +7,7 @@ import { FotoComponent } from './foto/foto.component';
 import { BoletaComponent } from './boleta/boleta.component';
 import { PrincipalModComponent } from './principal-mod/principal-mod.component';
 import { InicioSesionModule } from '../inicio-sesion/inicio-sesion.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { InicioSesionModule } from '../inicio-sesion/inicio-sesion.module';
     CommonModule,
     ModificarPerfilRoutingModule,
     InicioSesionModule,
-    RegistroModule
+    SharedModule
   ]
 })
 export class ModificarPerfilModule { }

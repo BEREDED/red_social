@@ -13,6 +13,11 @@ import { BotonCerrarComponent } from './boton-cerrar/boton-cerrar.component';
 import { BotonChatsComponent } from './boton-chats/boton-chats.component';
 import { BotonTgfComponent } from './boton-tgf/boton-tgf.component';
 import { BotonMasComponent } from './boton-mas/boton-mas.component';
+import { ContrasenaComponent } from './contrasena/contrasena.component';
+import { CorreoComponent } from './correo/correo.component';
+import { NombreComponent } from './nombre/nombre.component';
+import { FechaNacimientoComponent } from './fecha-nacimiento/fecha-nacimiento.component';
+import { ConfirmarContrasenaComponent } from './confirmar-contrasena/confirmar-contrasena.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,14 @@ import { BotonMasComponent } from './boton-mas/boton-mas.component';
     BotonCerrarComponent,
     BotonChatsComponent,
     BotonTgfComponent,
-    BotonMasComponent
+    BotonMasComponent,
+    ContrasenaComponent,
+    CorreoComponent,
+    NombreComponent,
+    CorreoComponent,
+    FechaNacimientoComponent,
+    ConfirmarContrasenaComponent,
+
   ],
   imports: [
     CommonModule,
@@ -36,13 +48,20 @@ import { BotonMasComponent } from './boton-mas/boton-mas.component';
   ],
   exports: [
     HeaderComponent,
+    BotonPerfilComponent,
     FooterComponent,
     BarraBusquedaComponent,
     BotonPerfilComponent,
     BotonCerrarComponent,
     BotonChatsComponent,
     BotonTgfComponent,
-    BotonMasComponent
+    BotonMasComponent,
+    ContrasenaComponent,
+    CorreoComponent,
+    NombreComponent,
+    CorreoComponent,
+    FechaNacimientoComponent,
+    ConfirmarContrasenaComponent,
   ]
 })
 export class SharedModule { }

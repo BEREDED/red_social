@@ -8,6 +8,7 @@ import { InicioSesionModule } from '../inicio-sesion/inicio-sesion.module';
 import { IonContent } from '@ionic/angular/standalone';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { RouterModule } from '@angular/router';
     RegistroModule,
     InicioSesionModule,
     IonicModule,
-    RouterModule
+    SharedModule
   ]
 })
 export class RecuperacionContrasenaModule { }

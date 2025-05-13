@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { PerfilRoutingModule } from './perfil-routing.module';
 import { SharedModule } from '../shared/shared.module';
+import { IonContent } from '@ionic/angular/standalone';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     PerfilRoutingModule,
-    SharedModule
+    SharedModule,
+    IonContent
   ]
 })
 export class PerfilModule { }
