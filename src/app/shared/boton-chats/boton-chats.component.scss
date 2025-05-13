@@ -7,20 +7,20 @@
   border-radius: 5%;
   font-size: 22px; /* Reduced font size */
   position: fixed;
-  bottom: 0.5rem;
-  right: 0.5rem;
+  bottom: 2vh;
+  right: 2vw;
 }
 .chats:hover{
   filter: brightness(0.8);
 }
 .boton-chats-container {
   position: fixed;
-  bottom: 0.5rem;
-  right: 0.5rem;
+  bottom: 2vh;
+  right: 2vw;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;
-  gap: 5px;
+  gap: 0.5rem;
   z-index: 1000;
 }
 
