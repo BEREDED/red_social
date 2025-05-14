@@ -10,6 +10,7 @@ import { IonicModule } from '@ionic/angular';
 import { RegistroModule } from "../registro/registro.module";
 import { NombreComponent } from '../shared/nombre/nombre.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { SharedModule } from '../shared/shared.module';
     InicioSesionRoutingModule,
     RouterModule,
     IonicModule,
-    SharedModule
+    SharedModule,
+    FormsModule
   ],
 })
 export class InicioSesionModule { }

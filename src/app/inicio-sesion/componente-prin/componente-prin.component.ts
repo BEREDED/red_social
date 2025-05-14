@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+
+import { ContrasenaComponent } from 'src/app/shared/contrasena/contrasena.component';
 
 @Component({
   selector: 'app-componente-prin',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
   standalone:false
 })
 export class ComponentePrinComponent  implements OnInit {
-
+  @ViewChild(ContrasenaComponent) contrasenaComp!: ContrasenaComponent;
   constructor() { }
 
   ngOnInit() {}
-
+  obtenerDatos(){
+    const contrasena=this.contrasenaComp.contrasena;
+    console.log("la contraseña es",contrasena);
+  }
 }

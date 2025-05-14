@@ -5,10 +5,14 @@
         <h1 class="titulo">Inicio de sesion</h1>
         <app-correo class="poscorreo"></app-correo>
         <app-contrasena class="poscontrasena"></app-contrasena>
-        <button [routerLink]="['/principal']" class="botonclr">home</button>
+        <button  class="botonclr" (click)="obtenerDatos()">home</button>
         <button [routerLink]="['/recuperacion']" class="botonclr2">¿Recuperar conraseña?</button>
         <button [routerLink]="['/registro']" class="botonclr3">Registrarse</button>
       </div>
     </div>
   </body>
 </ion-content>
+<!--
+*agregar los enrutado de principal despues del backend
+[routerLink]="['/principal']"
+-->
