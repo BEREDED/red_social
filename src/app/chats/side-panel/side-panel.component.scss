@@ -1,0 +1,29 @@
+.panel-container {
+  height: 60%;
+  width: 50vh;
+  padding: 16px;
+  background-color: #0f172a;
+
+  top: 0;
+  z-index: 10;
+}
+
+.panel-header{
+  color: white;
+  border: solid;
+  border-color: white;
+  padding: 1em;
+
+ h1{
+   text-align: center;
+   font-size: 30px;
+ }
+}
+
+.return{
+  font-size: 14px;
+  background: transparent;
+  color: white;
+  text-decoration: none;
+
+}

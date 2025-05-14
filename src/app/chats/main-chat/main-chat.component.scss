@@ -1,0 +1,14 @@
+.body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: black;
+  background-color: #f0f0f0;
+}
+
+.canvas {
+  color: black;
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+  gap: 2 px;
+}
