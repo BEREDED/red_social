@@ -5,9 +5,7 @@ import { RecuperacionContrasenaRoutingModule } from './recuperacion-contrasena-r
 import { RegistroModule } from '../registro/registro.module';
 import { PrinRecComponent } from './prin-rec/prin-rec.component';
 import { InicioSesionModule } from '../inicio-sesion/inicio-sesion.module';
-import { IonContent } from '@ionic/angular/standalone';
 import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 
 
