@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, output } from '@angular/core';
 
 @Component({
   selector: 'app-correo',
@@ -7,9 +7,26 @@ import { Component, OnInit } from '@angular/core';
   standalone:false,
 })
 export class CorreoComponent  implements OnInit {
-  Correo:string='';
+  Correo: string = '';
+  isValidCorreo: boolean = true;
+
+  @Output() correoChange = new EventEmitter<string>();
+  @Output() correoValid = new EventEmitter<boolean>();
+  @Output() correoVacio = new EventEmitter<boolean>();
   constructor() { }
 
   ngOnInit() {}
 
+
+
+  onCorreoInput() {
+    this.validateCorreo();
+    this.correoChange.emit(this.Correo);
+    this.correoValid.emit(this.isValidCorreo);
+  }
+
+  validateCorreo() {
+    const pattern = /@ipn\.mx$|@alumno\.ipn\.mx$/;
+    this.isValidCorreo = pattern.test(this.Correo);
+  }
 }

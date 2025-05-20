@@ -1,1 +1,4 @@
-<input type="text" class="panel" placeholder="correo electronico" [(ngModel)]="Correo">
+<input type="text" class="panel" placeholder="correo electronico" [(ngModel)]="Correo" (input)="onCorreoInput()">
+<div *ngIf="!isValidCorreo" style="color: red; font-weight: bold;">
+  El correo debe terminar en &#64;ipn.mx o &#64;alumno.ipn.mx
+</div>

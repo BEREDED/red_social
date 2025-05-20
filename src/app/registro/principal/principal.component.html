@@ -7,11 +7,15 @@
         </div>
         <div class="container">
           <app-nombre class="posname"></app-nombre>
-          <app-correo class="poscorreo"></app-correo>
+          <app-correo class="poscorreo" (correoValid)="onCorreoValidChange($event)"></app-correo>
           <app-fecha-nacimiento class="posfecha"></app-fecha-nacimiento>
-          <app-contrasena class="poscontrasena"></app-contrasena>
-          <app-confirmar-contrasena class="posconfcontr"></app-confirmar-contrasena>
-          <button (click)="obtenerDatos()" [routerLink]="['/inicio_sesion']" class="botonclr">confirmar</button>
+          <app-contrasena class="poscontrasena" (contrasenaChange)="onContrasenaChange($event)"></app-contrasena>
+          <app-confirmar-contrasena class="posconfcontr" (confirmPasswordChange)="onConfirmPasswordChange($event)"></app-confirmar-contrasena>
+          <div *ngIf="errorMessage" style="color: red; font-weight: bold;">
+            {{ errorMessage }}
+          </div>
+          <button (click)="obtenerDatos()"  class="botonclr">Registrarse</button>
+          <!--[routerLink]="['/inicio_sesion']"-->
         </div>
 
       </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-confirmar-contrasena',
@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
   standalone:false,
 })
 export class ConfirmarContrasenaComponent  implements OnInit {
+  confirmPassword: string = '';
+
+  @Output() confirmPasswordChange = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {}
 
+  onConfirmPasswordInput() {
+    this.confirmPasswordChange.emit(this.confirmPassword);
+  }
 }
