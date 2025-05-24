@@ -1,0 +1,78 @@
+<div class="chat-window">
+  <!-- Header del chat -->
+  <div class="chat-header">
+    <div class="participant-info">
+      <div class="participant-avatar">
+        <img *ngIf="participant.avatar; else initialsAvatar"
+             [src]="participant.avatar"
+             [alt]="participant.name"
+             class="avatar-image">
+
+        <ng-template #initialsAvatar>
+          <div class="avatar-initials">
+            {{ getInitials() }}
+          </div>
+        </ng-template>
+
+        <div *ngIf="participant.isOnline" class="online-indicator"></div>
+      </div>
+
+      <div class="participant-details">
+        <h3 class="participant-name">{{ participant.name }}</h3>
+        <span class="participant-status">
+          {{ participant.isOnline ? 'En línea' : 'Desconectado' }}
+        </span>
+      </div>
+    </div>
+
+    <div class="chat-actions">
+      <button class="action-btn" title="Más opciones">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="1"></circle>
+          <circle cx="12" cy="5" r="1"></circle>
+          <circle cx="12" cy="19" r="1"></circle>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Área de mensajes -->
+  <div class="messages-container" #messagesContainer>
+    <div class="messages-list">
+      <div *ngFor="let message of messages"
+           class="message-wrapper"
+           [class.own-message]="message.isFromCurrentUser"
+           [class.other-message]="!message.isFromCurrentUser">
+
+        <div class="message-bubble">
+          <div class="message-content">
+            {{ message.content }}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input para escribir mensajes -->
+  <div class="message-input-container">
+    <div class="message-input-wrapper">
+      <textarea>
+        <!--  [(ngModel)]="newMessage"
+        (keydown)="onKeyPress($event)"
+        placeholder="Escribe un mensaje..."
+        class="message-input"
+        rows="1"--> </textarea>
+
+      <button
+        (click)="onSendMessage()"
+        [disabled]="!newMessage.trim()"
+        class="send-button">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22,2 15,22 11,13 2,9"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

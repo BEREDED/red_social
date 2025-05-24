@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-main-chat',
   templateUrl: './main-chat.component.html',
   styleUrls: ['./main-chat.component.scss'],
-  standalone : false,
+  standalone: false
 })
-export class MainChatComponent  implements OnInit {
+export class MainChatComponent {
+  selectedChatId: string | null = null;
 
   constructor() { }
 
-  ngOnInit() {}
-
+  onChatSelected(chatId: string) {
+    this.selectedChatId = chatId;
+  }
 }

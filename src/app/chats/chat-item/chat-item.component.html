@@ -1,0 +1,36 @@
+<div class="chat-item"
+     [class.selected]="isSelected"
+     (click)="onChatClick()">
+
+  <!-- Avatar del usuario -->
+  <div class="user-avatar">
+    <img *ngIf="participantAvatar; else initialsAvatar"
+         [src]="participantAvatar"
+         [alt]="participantName"
+         class="avatar-image">
+
+    <ng-template #initialsAvatar>
+      <div class="avatar-initials">
+        {{ getInitials() }}
+      </div>
+    </ng-template>
+
+    <!-- Indicador de estado online -->
+    <div *ngIf="isOnline" class="online-indicator"></div>
+  </div>
+
+  <!-- Contenido del chat -->
+  <div class="chat-content">
+    <div class="chat-header">
+      <h4 class="participant-name">{{ participantName }}</h4>
+      <span class="time-stamp">{{ getTimeDisplay() }}</span>
+    </div>
+
+    <div class="chat-preview">
+      <p class="last-message">{{ lastMessage || 'Sin mensajes' }}</p>
+      <div *ngIf="unreadCount > 0" class="unread-badge">
+        {{ unreadCount > 99 ? '99+' : unreadCount }}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,25 @@
 <body class="body">
   <app-header></app-header>
-  <div class="canvas">
-      <app-side-panel></app-side-panel>
-      <h1>text</h1>
+  <div class="chat-container">
+  <!-- Sidebar izquierdo -->
+  <div class="sidebar">
+    <app-side-panel>   <!--(chatSelected)="onChatSelected($event)" --></app-side-panel>
   </div>
 
+    <!-- Área principal de chat -->
+    <div class="chat-area">
+      <div *ngIf="selectedChatId; else noSelection" class="chat-window-wrapper">
+        <app-chat-window [chatId]="selectedChatId"></app-chat-window>
+      </div>
 
-    <app-footer></app-footer>
-
+      <ng-template #noSelection>
+        <div class="no-chat-selected">
+          <div class="no-chat-content">
+            <h3>Selecciona una conversación</h3>
+            <p>Elige un chat de la lista para comenzar a conversar</p>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
 </body>
