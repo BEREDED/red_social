@@ -1,3 +1,39 @@
-<p>
-  chat-header works!
-</p>
+<div class="chat-header">
+  <!-- Información del participante -->
+  <div class="participant-info">
+    <div class="participant-avatar">
+      <img *ngIf="participant.avatar; else initialsAvatar"
+           [src]="participant.avatar"
+           [alt]="participant.name"
+           class="avatar-image">
+
+      <ng-template #initialsAvatar>
+        <div class="avatar-initials">
+          {{ getInitials() }}
+        </div>
+      </ng-template>
+
+      <div *ngIf="participant.isOnline" class="online-indicator"></div>
+    </div>
+
+    <div class="participant-details">
+      <h3 class="participant-name">{{ participant.name }}</h3>
+      <span class="participant-status"
+            [class.typing]="isTyping"
+            [class.online]="participant.isOnline && !isTyping">
+        {{ getStatusText() }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Acciones básicas del chat -->
+  <div class="chat-actions">
+    <button class="action-btn" title="Más opciones" (click)="toggleMenu()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="1"></circle>
+        <circle cx="12" cy="5" r="1"></circle>
+        <circle cx="12" cy="19" r="1"></circle>
+      </svg>
+    </button>
+  </div>
+</div>

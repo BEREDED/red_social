@@ -1,11 +1,58 @@
-<div class="list">
-  <ion-item lines="none" detail="false">
-  </ion-item>
-  <ul>
-      <li>potato1</li>
-      <li>potato2</li>
-      <li>potato3</li>
-      <li>potato4</li>
-  </ul>
+<div class="chat-list">
 
+  <div class="conversations-list">
+    <div *ngFor="let conversation of conversations"
+         class="conversation-item"
+         [class.selected]="selectedChatId === conversation.id"
+         (click)="onChatClick(conversation.id)">
+
+      <div class="conversation-avatar">
+        <img *ngIf="conversation.participant.avatar; else initialsAvatar"
+             [src]="conversation.participant.avatar"
+             [alt]="conversation.participant.name"
+             class="avatar-image">
+
+        <ng-template #initialsAvatar>
+          <div class="avatar-initials">
+            {{ getInitials(conversation.participant.name) }}
+          </div>
+        </ng-template>
+
+        <div *ngIf="conversation.participant.isOnline" class="online-status"></div>
+      </div>
+
+      <div class="conversation-content">
+        <div class="conversation-header">
+          <h3 class="participant-name">{{ conversation.participant.name }}</h3>
+          <span *ngIf="conversation.lastMessage" class="message-time">
+            {{ getTimeAgo(conversation.lastMessage.timestamp) }}
+          </span>
+        </div>
+
+        <div class="conversation-preview">
+          <p *ngIf="conversation.lastMessage" class="last-message">
+            <span *ngIf="conversation.lastMessage.isFromCurrentUser" class="message-prefix">Tú: </span>
+            {{ conversation.lastMessage.content }}
+          </p>
+          <p *ngIf="!conversation.lastMessage" class="no-messages">
+            No hay mensajes
+          </p>
+
+          <div *ngIf="conversation.unreadCount > 0" class="unread-badge">
+            {{ conversation.unreadCount }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="conversations.length === 0" class="empty-state">
+      <div class="empty-icon">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"></path>
+        </svg>
+      </div>
+      <h3>No hay conversaciones</h3>
+      <p>Inicia una nueva conversación</p>
+    </div>
+  </div>
 </div>

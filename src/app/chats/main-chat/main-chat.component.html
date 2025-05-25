@@ -1,10 +1,10 @@
 <body class="body">
   <app-header></app-header>
   <div class="chat-container">
-  <!-- Sidebar izquierdo -->
-  <div class="sidebar">
-    <app-side-panel>   <!--(chatSelected)="onChatSelected($event)" --></app-side-panel>
-  </div>
+    <!-- Sidebar izquierdo -->
+    <div class="sidebar">
+      <app-side-panel (chatSelected)="onChatSelected($event)"></app-side-panel>
+    </div>
 
     <!-- Área principal de chat -->
     <div class="chat-area">

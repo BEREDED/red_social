@@ -1,3 +1,52 @@
-<p>
-  message works!
-</p>
+<div class="message-container"
+     [class.own-message]="message.isFromCurrentUser"
+     [class.other-message]="!message.isFromCurrentUser">
+
+  <!-- Avatar para mensajes de otros usuarios -->
+  <div *ngIf="!message.isFromCurrentUser && showAvatar" class="message-avatar">
+    <img *ngIf="senderAvatar; else avatarInitials"
+         [src]="senderAvatar"
+         [alt]="senderName || 'Usuario'"
+         class="avatar-image">
+
+    <ng-template #avatarInitials>
+      <div class="avatar-initials">
+        {{ getInitials() }}
+      </div>
+    </ng-template>
+  </div>
+
+  <!-- Contenido del mensaje -->
+  <div class="message-content">
+    <!-- Nombre del remitente (solo para mensajes de otros) -->
+    <div *ngIf="!message.isFromCurrentUser && senderName" class="sender-name">
+      {{ senderName }}
+    </div>
+
+    <!-- Burbuja del mensaje -->
+    <div class="message-bubble"
+         [class.long-message]="isLongMessage()"
+         [class.multiline]="hasLineBreaks()"
+         (click)="toggleTimeDisplay()">
+
+      <div class="message-text">
+        {{ getProcessedContent() }}
+      </div>
+
+      <!-- Estado del mensaje (solo para mensajes propios) -->
+      <div *ngIf="message.isFromCurrentUser" class="message-status">
+        <svg class="status-icon delivered" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20,6 9,17 4,12"></polyline>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Timestamp -->
+    <div *ngIf="showTime" class="message-time">
+      {{ getTimeString() }}
+    </div>
+  </div>
+
+  <!-- Espaciador para mensajes propios -->
+  <div *ngIf="message.isFromCurrentUser" class="message-spacer"></div>
+</div>
