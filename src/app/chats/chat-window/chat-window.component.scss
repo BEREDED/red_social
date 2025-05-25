@@ -159,6 +159,8 @@
 
   // Input para mensajes
   .message-input-container {
+    position: sticky;
+    color: black;
     padding: 16px 20px;
     background-color: #ffffff;
     border-top: 1px solid #e1e5e9;

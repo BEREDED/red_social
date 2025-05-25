@@ -1,5 +1,10 @@
 <div class="chat-window">
-  <!-- Header del chat -->
+  <!-- Header del chat
+
+  <span class="participant-status">
+    {{ participant.isOnline ? 'En línea' : 'Desconectado' }}
+  </span>
+-->
   <div class="chat-header">
     <div class="participant-info">
       <div class="participant-avatar">
@@ -14,14 +19,11 @@
           </div>
         </ng-template>
 
-        <div *ngIf="participant.isOnline" class="online-indicator"></div>
       </div>
 
       <div class="participant-details">
         <h3 class="participant-name">{{ participant.name }}</h3>
-        <span class="participant-status">
-          {{ participant.isOnline ? 'En línea' : 'Desconectado' }}
-        </span>
+
       </div>
     </div>
 
@@ -57,12 +59,13 @@
   <!-- Input para escribir mensajes -->
   <div class="message-input-container">
     <div class="message-input-wrapper">
-      <textarea>
-        <!--  [(ngModel)]="newMessage"
+
+      <textarea
+         [(ngModel)]="newMessage"
         (keydown)="onKeyPress($event)"
         placeholder="Escribe un mensaje..."
         class="message-input"
-        rows="1"--> </textarea>
+        rows="1"></textarea>
 
       <button
         (click)="onSendMessage()"

@@ -59,15 +59,6 @@ export class InputComponent implements AfterViewInit {
     textarea.focus();
   }
 
-  onFocus(): void {
-    // Opcional: notificar que el usuario está escribiendo
-  }
-
-  onBlur(): void {
-    // Opcional: notificar que el usuario dejó de escribir
-    this.isTyping = false;
-  }
-
   // Métodos para emojis (opcional)
   addEmoji(emoji: string): void {
     this.message += emoji;
