@@ -59,13 +59,13 @@
   <!-- Input para escribir mensajes -->
   <div class="message-input-container">
     <div class="message-input-wrapper">
-
-      <textarea
+      <app-input></app-input>
+      <!--   <textarea
          [(ngModel)]="newMessage"
         (keydown)="onKeyPress($event)"
         placeholder="Escribe un mensaje..."
         class="message-input"
-        rows="1"></textarea>
+        rows="1"><app-input></app-input></textarea>
 
       <button
         (click)="onSendMessage()"
@@ -75,7 +75,7 @@
           <line x1="22" y1="2" x2="11" y2="13"></line>
           <polygon points="22,2 15,22 11,13 2,9"></polygon>
         </svg>
-      </button>
+      </button>-->
     </div>
   </div>
 </div>
