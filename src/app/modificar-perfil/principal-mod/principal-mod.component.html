@@ -8,12 +8,18 @@
             <app-foto></app-foto>
           </div>
           <div class="div-derecha">
-            <app-nombre></app-nombre>
-            <app-contrasena></app-contrasena>
-            <app-correo></app-correo>
-            <app-fecha-nacimiento></app-fecha-nacimiento>
+            <div [class.disabled]="!isEditing" class="distribuir">
+              <app-nombre></app-nombre>
+              <app-correo></app-correo>
+              <app-fecha-nacimiento></app-fecha-nacimiento>
+            </div>
+            <div *ngIf="isEditing" class="oculto">
+              <app-contrasena></app-contrasena>
+              <app-confirmar-contrasena></app-confirmar-contrasena>
+            </div>
           </div>
-          <button class="botonclr">Editar perfil</button>
+          <button class="botonclr" *ngIf="!isEditing" (click)="toggleEdit()">Editar perfil</button>
+          <button class="botonclr" *ngIf="isEditing" (click)="acceptEdit()">Aceptar</button>
       </div>
     </div>
   </body>
