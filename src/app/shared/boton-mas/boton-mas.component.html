@@ -1,17 +1,22 @@
 <div class="boton-mas-container">
   <!-- Botón "+" principal -->
-  <button class="mas" (click)="toggleDesplegado()"><img src="assets/recursos de imagenes base/pngwing.com (2).png" alt=""></button>
+  <button class="mas" (click)="toggleDesplegado()" [disabled]="showCrearForoModal"><img src="assets/recursos de imagenes base/pngwing.com (2).png" alt=""></button>
 
   <!-- Botones que se despliegan al hacer clic -->
   <div class="botones-desplegados" *ngIf="desplegado">
-    <button class="opcion" >Crear foro</button>
+    <button class="opcion" (click)="openCrearForoModal()">Crear foro</button>
   <!--  <button class="opcion" >Crear grupo</button> -->
   </div>
-<!--
-  llamado de metodos para backend
-  (click)="crearForo()"
-  (click)="crearGrupo()"
--->
-  <!-- Botón fijo de chats -->
 
+  <!-- Modal para crear foro -->
+  <div class="modal" *ngIf="showCrearForoModal">
+    <div class="modal-content">
+      <h2>Crear Foro</h2>
+      <input type="text" [(ngModel)]="foroName" placeholder="Nombre del foro" />
+      <div class="modal-buttons">
+        <button (click)="crearForo()" class="botonpopup">Crear</button>
+        <button (click)="closeCrearForoModal()" class="botonpopup">Cancelar</button>
+      </div>
+    </div>
+  </div>
 </div>

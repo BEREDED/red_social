@@ -10,11 +10,21 @@ import { Location } from '@angular/common';
 })
 export class PrincipalModComponent  implements OnInit {
 
+  isEditing: boolean = false;
+
   constructor(private _location: Location) {}
 
- goBack(){
-   this._location.back();
- }
+  goBack(){
+    this._location.back();
+  }
+
   ngOnInit() {}
 
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+  }
+
+  acceptEdit() {
+    this.isEditing = false;
+  }
 }

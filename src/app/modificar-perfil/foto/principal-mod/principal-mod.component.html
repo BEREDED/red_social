@@ -1,0 +1,26 @@
+<ion-content>
+  <body>
+    <div>
+      <div class="panel">
+        <button mat-raised-button (click)="goBack()" class="botonclr2">◀ Regresar</button>
+        <h1 class="titulo">Inicio de sesion</h1>
+          <div class="div-izquierda">
+            <app-foto></app-foto>
+          </div>
+          <div class="div-derecha">
+            <div [class.disabled]="!isEditing" class="distribuir">
+              <app-nombre></app-nombre>
+              <app-correo></app-correo>
+              <app-fecha-nacimiento></app-fecha-nacimiento>
+            </div>
+            <div *ngIf="isEditing" class="oculto">
+              <app-contrasena></app-contrasena>
+              <app-confirmar-contrasena></app-confirmar-contrasena>
+            </div>
+          </div>
+          <button class="botonclr" *ngIf="!isEditing" (click)="toggleEdit()">Editar perfil</button>
+          <button class="botonclr" *ngIf="isEditing" (click)="acceptEdit()">Aceptar</button>
+      </div>
+    </div>
+  </body>
+</ion-content>

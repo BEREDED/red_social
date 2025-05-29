@@ -67,6 +67,16 @@ body {
   transform: translate(-50%,-50%);
   border-radius: 20%;
 }
+.botonclr3{
+  width: 6em;
+  height: 3em;
+  background-color: #0f172a;
+  color: #f8fafc;
+  position: absolute;
+  top: 80%;
+  left: 20%;
+  transform: translate(-50%,-50%);
+}
 .botonclr2:hover{
    filter: brightness(10);
 }
@@ -86,9 +96,42 @@ body {
 .div-derecha {
   width: 450px;
   height: 500px;
+  padding-left: 1rem;
+   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+.distribuir{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 1rem;
   gap: 1rem;
+}
+#oculto{
+    margin-top:1 0px;
+    display: none;
+}
+
+#oculto p{
+    color: mediumseagreen;
+}
+.oculto{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+.botones{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  top: 80%;
+  left: 50%;
 }
