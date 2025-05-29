@@ -1,5 +1,5 @@
 .post-container {
-  max-width: 600px;
+  max-width: 700px;
   margin: 20px auto;
   padding: 20px;
   background: white;
@@ -16,7 +16,7 @@
 
 .post-textarea {
   width: 100%;
-  min-height: 120px;
+  height: auto;
   padding: 16px;
   border: 1px solid #e1e8ed;
   border-radius: 12px;
@@ -53,7 +53,7 @@
 }
 
 .post-button {
-  background: #1da1f2;
+  background: #0f172a;
   color: white;
   border: none;
   border-radius: 24px;
@@ -65,7 +65,7 @@
 }
 
 .post-button:hover:not(:disabled) {
-  background: #1a91da;
+  background:  #344A8F;
 }
 
 .post-button:disabled {

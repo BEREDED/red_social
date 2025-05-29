@@ -2,7 +2,7 @@
 .feed-container {
   scrollbar-width: none; /* Firefox */
  -ms-overflow-style: none; /* Internet Explorer y Edge */
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
   padding: 20px 16px;
   background: transparent;
@@ -159,6 +159,7 @@
   }
 
   .comment-textarea {
+    background-color:  #EAEAEA;
     flex: 1;
     border: 1px solid #d1d5db;
     border-radius: 20px;
@@ -196,7 +197,7 @@
     min-height: 36px;
 
     &:hover:not(:disabled) {
-      background-color: #1e293b;
+      background-color: #344A8F;
       transform: translateY(-1px);
     }
 
