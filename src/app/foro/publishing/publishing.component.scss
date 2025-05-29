@@ -1,0 +1,86 @@
+.post-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.post-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 16px;
+  border: 1px solid #e1e8ed;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+  background-color: #EAEAEA;
+}
+
+.post-textarea:focus {
+  border-color: #1da1f2;
+  box-shadow: 0 0 0 2px rgba(29, 161, 242, 0.1);
+}
+
+.post-textarea::placeholder {
+  color: #657786;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.character-count {
+  font-size: 14px;
+  color: #657786;
+}
+
+.character-count.warning {
+  color: #e0245e;
+}
+
+.post-button {
+  background: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 24px;
+  padding: 8px 24px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.post-button:hover:not(:disabled) {
+  background: #1a91da;
+}
+
+.post-button:disabled {
+  background: #ccd6dd;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .post-container {
+    margin: 10px;
+    padding: 16px;
+  }
+
+  .post-textarea {
+    min-height: 100px;
+    font-size: 16px; /* Evita zoom en iOS */
+  }
+}
