@@ -4,6 +4,7 @@ import { ContrasenaComponent } from 'src/app/shared/contrasena/contrasena.compon
 import { UserDataService } from 'src/app/services/user-data.service';
 
 import { Usuario_ini } from 'src/app/modelos/Usuario_ini';
+import { CorreoComponent } from 'src/app/shared/correo/correo.component';
 
 @Component({
   selector: 'app-componente-prin',
@@ -12,21 +13,20 @@ import { Usuario_ini } from 'src/app/modelos/Usuario_ini';
   standalone:false
 })
 export class ComponentePrinComponent  implements OnInit {
+  usu_ini:Usuario_ini={
+    Correo:'',
+    Contraseña:''
+  }
   @ViewChild(ContrasenaComponent) contrasenaComp!: ContrasenaComponent;
-  email: string = '';
+  @ViewChild(CorreoComponent) correoComp!: CorreoComponent;
 
-  constructor(private userDataService: UserDataService) { }
+  constructor() { }
 
   ngOnInit() {}
 
-  onCorreoChange(newCorreo: string) {
-    this.email = newCorreo;
-    this.userDataService.setEmail(this.email);
-  }
-
-  obtenerDatos(){
-    const contrasena=this.contrasenaComp.contrasena;
-    console.log("la contraseña es",contrasena);
-    console.log("el correo es", this.email);
+  revisardatosdb(){
+    this.usu_ini.Correo= this.correoComp;
+    this.usu_ini.Contraseña= this.contrasenaComp;
+    //this.userDataService.getUsuario().subscribe(data =>
   }
 }
