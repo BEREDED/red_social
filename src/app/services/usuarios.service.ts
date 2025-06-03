@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { foros, Usuario } from '../modelos/modelosinfo.models';
+import { foros, Usuario, Usuario_ini } from '../modelos/modelosinfo.models';
 import { Post } from '../modelos/Post.interface';
 
 @Injectable({ providedIn: 'root' })
@@ -24,4 +24,8 @@ export class UsuariosService {
   postCreacionPost(post:Post){
     return this.http.post(`${this.api_http_rout}posts`, post);
   }
+  postLogin(us_ini: Usuario_ini) {
+  return this.http.post<{ autenticado: boolean, token?: string }>(`${this.api_http_rout}usuarios/login`, us_ini);
+}
+
 }

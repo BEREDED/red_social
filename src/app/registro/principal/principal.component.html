@@ -14,9 +14,7 @@
           <div *ngIf="errorMessage" style="color: red; font-weight: bold;">
             {{ errorMessage }}
           </div>
-          <button (click)="obtenerDatos()" [routerLink]="['/inicio_sesion']" class="botonclr"
-            [disabled]="!nombreComp?.Nombre || !correoComponent?.Correo || !contrasenaValue || !confirmPasswordValue || !fechaNacimientoComp?.Fecha_Nacimiento_string || contrasenaValue !== confirmPasswordValue || !correoValido">
-            Registrarse
+          <button (click)="obtenerDatos()" [routerLink]="['/inicio_sesion']" class="botonclr">Registrarse
           </button>
         </div>
       </div>

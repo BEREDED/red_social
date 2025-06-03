@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth-guard.service';
 
 export const routes: Routes = [
   {
@@ -8,6 +9,7 @@ export const routes: Routes = [
   {
     path:'inicio_sesion',
     loadChildren: () => import('./inicio-sesion/inicio-sesion.module').then((m) => m.InicioSesionModule),
+
   }
   ,
   {
@@ -17,6 +19,7 @@ export const routes: Routes = [
   {
     path:'perfil',
     loadChildren: () => import('./modificar-perfil/modificar-perfil.module').then((m) => m.ModificarPerfilModule),
+    canActivate:[AuthGuard]
   },
   {
     path:'recuperacion',
@@ -25,14 +28,17 @@ export const routes: Routes = [
   {
     path:'principal',
     loadChildren: () => import('./principal/principal.module').then((m) => m.PrincipalModule),
+    canActivate:[AuthGuard]
   },
   {
     path:'foro',
     loadChildren: () => import('./foro/foro.module').then((m) => m.ForoModule),
+    canActivate:[AuthGuard]
   },
   {
     path:'chats',
     loadChildren: () => import('./chats/chats.module').then((m) => m.ChatsModule),
+    canActivate:[AuthGuard]
   },
   {
     path: '',

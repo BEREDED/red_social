@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
+import { AuthService } from './services/auth-service.service';
 
 
 @Component({
@@ -9,5 +10,13 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    if (this.authService.isAuthenticated()) {
+      console.log('Usuario aún autenticado');
+    } else {
+      console.log('Usuario no autenticado');
+    }
+  }
 }
