@@ -3,7 +3,7 @@
     <div>
       <div class="panel">
         <h1 class="titulo">Inicio de sesion</h1>
-        <app-correo class="poscorreo"></app-correo>
+        <app-correo class="poscorreo" (correoChange)="onCorreoChange($event)"></app-correo>
         <app-contrasena class="poscontrasena"></app-contrasena>
         <button  class="botonclr" (click)="obtenerDatos()">home</button>
         <button [routerLink]="['/recuperacion']" class="botonclr2">¿Recuperar conraseña?</button>

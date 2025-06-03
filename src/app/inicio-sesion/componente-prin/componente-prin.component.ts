@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ContrasenaComponent } from 'src/app/shared/contrasena/contrasena.component';
+import { UserDataService } from 'src/app/services/user-data.service';
+
+import { Usuario_ini } from 'src/app/modelos/Usuario_ini';
 
 @Component({
   selector: 'app-componente-prin',
@@ -10,11 +13,20 @@ import { ContrasenaComponent } from 'src/app/shared/contrasena/contrasena.compon
 })
 export class ComponentePrinComponent  implements OnInit {
   @ViewChild(ContrasenaComponent) contrasenaComp!: ContrasenaComponent;
-  constructor() { }
+  email: string = '';
+
+  constructor(private userDataService: UserDataService) { }
 
   ngOnInit() {}
+
+  onCorreoChange(newCorreo: string) {
+    this.email = newCorreo;
+    this.userDataService.setEmail(this.email);
+  }
+
   obtenerDatos(){
     const contrasena=this.contrasenaComp.contrasena;
     console.log("la contraseña es",contrasena);
+    console.log("el correo es", this.email);
   }
 }

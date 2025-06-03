@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserDataService } from 'src/app/services/user-data.service';
 
 @Component({
   selector: 'app-prin-prin',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
   standalone:false
 })
 export class PrinPrinComponent  implements OnInit {
+  email: string = '';
 
-  constructor() { }
+  constructor(private userDataService: UserDataService) { }
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.userDataService.currentEmail.subscribe(email => {
+      this.email = email;
+      console.log('Email received in prin-prin:', this.email);
+    });
+  }
 }

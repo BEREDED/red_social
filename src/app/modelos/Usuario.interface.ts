@@ -1,7 +1,9 @@
 export interface Usuario{
-    nombre:string;
-    correo:string;
-    Fecha: Date;
-    contraseña:string;
+    Nombre:string;
+    Apellido_pat:string;
+    Apellido_mat:string;
+    Correo:string;
+    Fch_Nacimiento: Date;
+    Contraseña:string;
     image?:File;
   }
