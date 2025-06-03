@@ -1,0 +1,80 @@
+<!-- feed.component.html -->
+<div class="feed-container" (scroll)="onScroll($event)">
+  <!-- Publishing Component Integration -->
+  <div class="publishing-section">
+    <app-publishing></app-publishing>
+  </div>
+
+  <!-- Posts Feed -->
+  <div class="posts-container">
+    <div *ngFor="let post of posts" class="post-card">
+      <!-- Post Header -->
+      <div class="post-header">
+        <div class="author-info">
+          <div class="author-avatar">
+            {{ post.author.charAt(0).toUpperCase() }}
+          </div>
+          <div class="author-details">
+            <h4 class="author-name">{{ post.author }}</h4>
+            <span class="post-time">{{ getTimeAgo(post.createdAt) }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post Content -->
+      <div class="post-content">
+        <p>{{ post.content }}</p>
+      </div>
+
+      <!-- Comments Section -->
+      <div class="comments-section" *ngIf="post.comments.length > 0">
+        <div class="comments-list">
+          <div *ngFor="let comment of post.comments" class="comment">
+            <div class="comment-avatar">
+              {{ comment.author.charAt(0).toUpperCase() }}
+            </div>
+            <div class="comment-content">
+              <span class="comment-author">{{ comment.author }}</span>
+              <p class="comment-text">{{ comment.content }}</p>
+              <span class="comment-time">{{ getTimeAgo(comment.createdAt) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Comment -->
+      <div class="add-comment">
+        <div class="comment-input-container">
+          <textarea
+            [(ngModel)]="commentTexts[post.id]"
+            placeholder="Escribe un comentario..."
+            class="comment-textarea"
+            maxlength="300"
+            rows="1"
+          ></textarea>
+          <button
+            class="comment-button"
+            [disabled]="!canComment(post.id)"
+            (click)="onComment(post.id)"
+          >
+            Comentar
+          </button>
+        </div>
+        <div class="comment-counter" *ngIf="commentTexts[post.id]">
+          {{ (commentTexts[post.id] || '').length }}/300
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="loading-spinner"></div>
+      <p>Cargando más publicaciones...</p>
+    </div>
+
+    <!-- No more posts message -->
+    <div *ngIf="!hasMorePosts && !isLoading" class="no-more-posts">
+      <p>No hay más publicaciones que mostrar</p>
+    </div>
+  </div>
+</div>

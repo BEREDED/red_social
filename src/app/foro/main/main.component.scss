@@ -2,11 +2,23 @@
   margin: 0;
   font-family: Arial, sans-serif;
   color: black;
-  background-color: #f0f0f0;
+  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
 }
 
 .container {
   display: flex;
   width: 100%;
-  min-height: 100vh;
+  gap: 16px;
+  padding: 0 16px;
+  height: calc(100vh - 80px); /* Altura fija para el contenedor */
+}
+
+app-feed {
+  flex: 1;
+}
+
+app-side,
+app-panel {
+  flex-shrink: 0;
+  height: 100%; /* Ocupar toda la altura del contenedor */
 }

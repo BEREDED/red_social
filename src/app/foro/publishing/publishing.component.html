@@ -1,0 +1,22 @@
+<div class="post-container">
+  <div class="post-form">
+    <textarea
+      [(ngModel)]="postContent"
+      placeholder="¿Qué está pasando?"
+      class="post-textarea"
+      maxlength="500"
+      (input)="onInputChange()"
+    ></textarea>
+
+    <div class="post-footer">
+      <span class="character-count" [class.warning]="isNearLimit()">
+        {{ postContent.length }}/500
+      </span>
+      <button
+        class="post-button"
+        [disabled]="!canPost()"
+        (click)="onPost()"> Postear
+      </button>
+    </div>
+  </div>
+</div>
