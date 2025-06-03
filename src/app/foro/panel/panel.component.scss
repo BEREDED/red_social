@@ -1,7 +1,7 @@
 .panel-container {
   position: relative;
   width: 350px; /* Cambiar de 40vh a px fijo */
-  height: calc(60vh - 96px); /* Altura total menos header */
+  height: auto; /* Altura total menos header */
   background-color: white;
   border: 1px solid #e5e7eb;
   border-radius: 0 0 0 16px;
@@ -35,7 +35,7 @@
   margin-inline: auto;
 }
 .button{
-  position: absolute;
+
   background: #1da1f2;
   color: white;
   border: none;
@@ -45,9 +45,6 @@
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.2s;
-
-  bottom: 15%; /* x píxeles desde abajo */
-  left: 50%;
-  transform: translateX(-50%);
-
+  margin: auto;
+  margin-bottom: 10%
 }
