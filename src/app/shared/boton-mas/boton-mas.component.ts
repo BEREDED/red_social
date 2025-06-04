@@ -12,6 +12,7 @@ export class BotonMasComponent  implements OnInit {
   desplegado = false;
   showCrearForoModal = false;
   foroName: string = '';
+  foroDesc: string = '';
 
   constructor(private router: Router) {}
 

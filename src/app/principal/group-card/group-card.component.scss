@@ -1,0 +1,22 @@
+.card {
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  border-radius: 16px;
+  padding: 16px;
+  color: white;
+  display: flex;
+  align-items: flex-end;
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  .group-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+  }
+}

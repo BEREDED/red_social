@@ -13,6 +13,8 @@
     <div class="modal-content">
       <h2>Crear Foro</h2>
       <input type="text" [(ngModel)]="foroName" placeholder="Nombre del foro" />
+        <input type="text" rows = "3" [(ngModel)]="foroDesc" placeholder="Descripcion del foro" />
+        
       <div class="modal-buttons">
         <button (click)="crearForo()" class="botonpopup">Crear</button>
         <button (click)="closeCrearForoModal()" class="botonpopup">Cancelar</button>
