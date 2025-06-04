@@ -1,9 +1,7 @@
 <div class="panel-container">
   <div class="panel-header">
-      <a routerLink="/principal" class="return">◀ Regresar</a>
+  <button mat-raised-button (click)="goBack()" class="return">◀ Regresar</button>
     <h1>Mis Chats</h1>
   </div>
-
-  <app-lista></app-lista>
-
+  <app-lista (chatSelected)="onChatSelected($event)"></app-lista>
 </div>

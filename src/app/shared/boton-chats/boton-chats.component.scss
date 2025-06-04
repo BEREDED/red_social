@@ -5,7 +5,7 @@
   background-color: #0f172a;
   padding: 0.8em;
   padding-inline: 3em;
-  border-radius: 5%;
+  border-radius: 100px;
   font-size: 22px; /* Reduced font size */
   position: fixed;
   bottom: 2vh;
@@ -15,7 +15,7 @@
   filter: brightness(0.8);
 }
 .boton-chats-container {
-  position: fixed;
+  position: relative;
   bottom: 2vh;
   right: 2vw;
   display: flex;

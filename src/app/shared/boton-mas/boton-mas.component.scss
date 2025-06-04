@@ -1,7 +1,7 @@
 .mas {
   color: #f0f0f0;
   background-color: #0f172a;
-  padding: 0.7em;
+  padding: 0.9em;
   border: none;
   outline: none;
   cursor: pointer;
@@ -29,9 +29,9 @@
 }
 
 .boton-mas-container {
-  position: fixed;
-  bottom: 2.2vh;
-  right: 40vh;
+  position: relative;
+  bottom: 1vh;
+  right: 10vw;
   display: flex;
   flex-direction: column-reverse;
   align-items: flex-end;

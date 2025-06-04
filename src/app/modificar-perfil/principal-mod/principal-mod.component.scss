@@ -11,7 +11,7 @@ body {
   left: 50%;
   background-color:#f8fafc;
   padding: 5%;
-  border-radius: 5%;
+  border-radius: 40px;
   height:500px;
   width: 900px;
   align-items: center;
@@ -55,6 +55,7 @@ body {
   top: 80%;
   left: 50%;
   transform: translate(-50%,-50%);
+  border-radius: 8px;
 }
 .botonclr2{
   width: 6em;
@@ -65,7 +66,7 @@ body {
   top: 10%;
   left: 10%;
   transform: translate(-50%,-50%);
-  border-radius: 20%;
+  border-radius: 8px;
 }
 .botonclr3{
   width: 6em;
