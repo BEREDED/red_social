@@ -8,8 +8,16 @@
       <div class="container">
         <app-correo class="poscorreo"></app-correo>
         <app-fecha-nacimiento class="posfecha"></app-fecha-nacimiento>
-        <button [routerLink]="['/inicio_sesion']" class="botonclr">confirmar</button>
+        <button (click)="openPopup()" [disabled]="isCorreoEmpty" class="botonclr">confirmar</button>
       </div>
+    </div>
+  </div>
+
+  <div *ngIf="showPopup" class="popup-overlay">
+    <div class="popup-content">
+      <app-contrasena></app-contrasena>
+      <button (click)="confirmPassword()" class="boton-confirmar">Confirmar Contraseña</button>
+      <button (click)="closePopup()" class="boton-cerrar">Cerrar</button>
     </div>
   </div>
   </body>

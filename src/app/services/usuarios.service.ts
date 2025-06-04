@@ -28,6 +28,6 @@ export class UsuariosService {
     return this.http.post<{ autenticado: boolean, token?: string }>(`${this.api_http_rout}usuarios/login`,us_ini);
   }
   postNuevaContr(usu_rec:Usuario_rec){
-    return this.http.post(`${this.api_http_rout}usuarios/act_contr`, usu_rec)
+    return this.http.post<{cambio_contr: boolean}>(`${this.api_http_rout}usuarios/act_contr`, usu_rec)
   }
 }
