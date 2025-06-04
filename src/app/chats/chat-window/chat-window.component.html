@@ -39,7 +39,7 @@
   </div>
 
   <!-- Área de mensajes -->
-  <div class="messages-container" #messagesContainer>
+  <div class="messages-container" #messagesContainer >
     <div class="messages-list">
       <div *ngFor="let message of messages"
            class="message-wrapper"
@@ -57,25 +57,7 @@
   </div>
 
   <!-- Input para escribir mensajes -->
-  <div class="message-input-container">
-    <div class="message-input-wrapper">
-      <app-input></app-input>
-      <!--   <textarea
-         [(ngModel)]="newMessage"
-        (keydown)="onKeyPress($event)"
-        placeholder="Escribe un mensaje..."
-        class="message-input"
-        rows="1"><app-input></app-input></textarea>
 
-      <button
-        (click)="onSendMessage()"
-        [disabled]="!newMessage.trim()"
-        class="send-button">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="22" y1="2" x2="11" y2="13"></line>
-          <polygon points="22,2 15,22 11,13 2,9"></polygon>
-        </svg>
-      </button>-->
-    </div>
-  </div>
+    <app-input></app-input>
+
 </div>

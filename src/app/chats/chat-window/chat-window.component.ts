@@ -58,7 +58,87 @@ export class ChatWindowComponent implements OnInit, AfterViewChecked {
       content: '¿Podemos revisar los componentes de Angular que estamos creando? Tengo algunas dudas sobre la estructura',
       timestamp: new Date(Date.now() - 1000 * 60 * 10), // 10 min ago
       isFromCurrentUser: false
-    }
+    },
+    {
+      id: '5',
+      senderId: '2',
+      receiverId: '1',
+      content: '¿Podemos revisar los componentes de Angular que estamos creando? Tengo algunas dudas sobre la estructura',
+      timestamp: new Date(Date.now() - 1000 * 60 * 10), // 10 min ago
+      isFromCurrentUser: false
+    },
+    {
+      id: '5',
+      senderId: '2',
+      receiverId: '1',
+      content: '¿Podemos revisar los componentes de Angular que estamos creando? Tengo algunas dudas sobre la estructura',
+      timestamp: new Date(Date.now() - 1000 * 60 * 10), // 10 min ago
+      isFromCurrentUser: false
+    },
+    {
+      id: '5',
+      senderId: '2',
+      receiverId: '1',
+      content: '¿Podemos revisar los componentes de Angular que estamos creando? Tengo algunas dudas sobre la estructura',
+      timestamp: new Date(Date.now() - 1000 * 60 * 10), // 10 min ago
+      isFromCurrentUser: false
+    },
+    {
+      id: '5',
+      senderId: '2',
+      receiverId: '1',
+      content: '¿Podemos revisar los componentes de Angular que estamos creando? Tengo algunas dudas sobre la estructura',
+      timestamp: new Date(Date.now() - 1000 * 60 * 10), // 10 min ago
+      isFromCurrentUser: false
+    },
+    {
+      id: '2',
+      senderId: '1',
+      receiverId: '2',
+      content: '¡Hola! Todo bien por aquí, ¿y tú?',
+      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
+      isFromCurrentUser: true
+    },
+    {
+      id: '2',
+      senderId: '1',
+      receiverId: '2',
+      content: '¡Hola! Todo bien por aquí, ¿y tú?',
+      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
+      isFromCurrentUser: true
+    },
+    {
+      id: '2',
+      senderId: '1',
+      receiverId: '2',
+      content: '¡Hola! Todo bien por aquí, ¿y tú?',
+      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
+      isFromCurrentUser: true
+    },
+    {
+      id: '2',
+      senderId: '1',
+      receiverId: '2',
+      content: '¡Hola! Todo bien por aquí, ¿y tú?',
+      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
+      isFromCurrentUser: true
+    },
+    {
+      id: '2',
+      senderId: '1',
+      receiverId: '2',
+      content: '¡Hola! Todo bien por aquí, ¿y tú?',
+      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
+      isFromCurrentUser: true
+    },
+    {
+      id: '2',
+      senderId: '1',
+      receiverId: '2',
+      content: '¡Hola! Todo bien por aquí, ¿y tú?',
+      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
+      isFromCurrentUser: true
+    },
   ];
 
   newMessage: string = '';

@@ -1,6 +1,13 @@
+.body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
 .chat-container {
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 60px); /* Ajusta según la altura de tu header */
   background-color: #f8f9fa;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
@@ -11,6 +18,9 @@
     border-right: 1px solid #e1e5e9;
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Importante para el scroll interno */
   }
 
   .chat-area {
@@ -18,6 +28,7 @@
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
+    overflow: hidden;
 
     .chat-window-wrapper {
       height: 100%;
@@ -48,28 +59,6 @@
           opacity: 0.8;
         }
       }
-    }
-  }
-}
-
-// Responsive design
-@media (max-width: 768px) {
-  .chat-container {
-    .sidebar {
-      width: 100%;
-      position: absolute;
-      height: 100%;
-      z-index: 20;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-
-      &.mobile-open {
-        transform: translateX(0);
-      }
-    }
-
-    .chat-area {
-      width: 100%;
     }
   }
 }
