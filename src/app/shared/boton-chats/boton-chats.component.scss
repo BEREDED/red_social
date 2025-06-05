@@ -10,12 +10,15 @@
   position: fixed;
   bottom: 2vh;
   right: 2vw;
+  max-width: 190px;
+
 }
 .chats:hover{
   filter: brightness(0.8);
 }
 .boton-chats-container {
   position: relative;
+  margin-inline: 10px;
   bottom: 2vh;
   right: 2vw;
   display: flex;
