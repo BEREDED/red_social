@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-boton-perfil',
@@ -8,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BotonPerfilComponent  implements OnInit {
 
-  constructor() { }
+  constructor(private usuariosService: UsuariosService) { }
 
   ngOnInit() {}
-
 }

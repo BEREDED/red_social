@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-boton-cerrar',
@@ -8,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BotonCerrarComponent  implements OnInit {
 
-  constructor() { }
+constructor(private router: Router) {}
 
   ngOnInit() {}
-
+  eliminartkn(){
+    localStorage.removeItem('token');
+    this.router.navigate(['/inicio_sesion']);
+  }
 }

@@ -1,7 +1,7 @@
 import { Usuario } from './Usuario.interface';
 import { foros } from './foro.interface';
 import { Comentario } from './comentario.interface';
-import { Post } from './Post.interface';
+import { Post } from './post.interface';
 import { Mensajes } from './mensajes.interface';
 import { Usuario_ini } from './Usuario_ini';
 import { Usuario_rec } from './usuario_rec';
