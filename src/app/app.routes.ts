@@ -31,7 +31,7 @@ export const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
-    path:'foro',
+    path:'foro/:titulo',
     loadChildren: () => import('./foro/foro.module').then((m) => m.ForoModule),
     canActivate:[AuthGuard]
   },

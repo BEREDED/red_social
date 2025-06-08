@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-group-card',
@@ -8,9 +9,11 @@ import { Component, Input } from '@angular/core';
 })
 export class GroupCardComponent {
   @Input() titulo: string = '';
-  constructor(){}
+  @Output() titulo_llamada:string= this.titulo;
+  constructor(private router: Router) {}
   ngOnInit(): void {}
   public send_name(titulo : string): void {
     console.log(this.titulo);
+    this.router.navigate(['/foro', titulo]);
   }
 }

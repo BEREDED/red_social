@@ -34,7 +34,7 @@ export class PublishingComponent {
       this.postContent = '';
 
       // Mostrar confirmación
-      alert('¡Post publicado exitosamente!');
+
     }
   }
 }
