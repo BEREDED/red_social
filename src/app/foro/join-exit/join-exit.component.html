@@ -1,0 +1,6 @@
+<button
+      class="join-leave-btn"
+      [class.joined]="isJoined"
+      (click)="toggleJoin()">
+      <span class="btn-text">{{ isJoined ? 'Salir' : '+ Unirse' }}</span>
+</button>

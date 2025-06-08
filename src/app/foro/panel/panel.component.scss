@@ -1,52 +1,58 @@
+// panel.component.scss - Versión corregida
+
 .panel-container {
   position: relative;
-  width: 350px; /* Cambiar de 40vh a px fijo */
-  height: auto; /* Altura total menos header */
+  width: 350px;
+  height: auto;
   background-color: white;
   border: 1px solid #e5e7eb;
   border-radius: 0 0 0 16px;
-  /* Quitar position: fixed y right: 0 */
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-
 }
 
-.panel-header{
+.panel-header {
   text-align: center;
   font-size: 32px;
   padding: 1rem;
   border-bottom: 1px solid #e0e0e0;
 
-  .Title{
+  .Title {
     font-size: 30px;
     font-weight: bold;
+    margin: 0; // Quita márgenes por defecto del h2
   }
 }
 
-.description{
+.description {
   text-align: justify;
-  margin-inline: 3rem;
+  margin: 1rem 2rem; // Cambié margin-inline por margin completo
   color: gray;
-  font-size: math;
+  font-size: 14px; // Corregí "math" por un tamaño específico
   height: auto;
+  line-height: 1.5; // Mejor legibilidad
 }
-.center{
-  align-content: center;
-  margin-inline: auto;
-}
-.button{
 
-    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 14px 24px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  margin: auto;
-  margin-bottom: 10%
+// Corregí la clase para que coincida con el HTML
+.Boton {
+  display: flex;
+  justify-content: center; // Centra el botón
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem 0;
+}
+
+// Responsive para pantallas pequeñas
+@media (max-width: 768px) {
+  .panel-container {
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .description,
+  .Boton {
+    margin: 1rem 1.5rem;
+  }
 }
