@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import { SideComponent } from './side/side.component';
 import { PanelComponent } from './panel/panel.component';
 import { PublishingComponent } from './publishing/publishing.component';
+import { JoinExitComponent } from './join-exit/join-exit.component';
 import { FeedComponent } from './feed/feed.component';
 
 
@@ -22,6 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     PanelComponent,
     FeedComponent,
     PublishingComponent,
+    JoinExitComponent,
   ],
   imports: [
     CommonModule,
