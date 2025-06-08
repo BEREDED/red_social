@@ -8,13 +8,19 @@ import { Component, Input } from '@angular/core';
 })
 export class JoinExitComponent {
   @Input() communityId: string = '';
-  @Input() initialJoinState: boolean = false;
+
+  private _isinscrito: boolean = false;
+
+  @Input()
+  set isinscrito(value: boolean) {
+    this._isinscrito = value;
+    this.isJoined = value;
+  }
+  get isinscrito(): boolean {
+    return this._isinscrito;
+  }
 
   isJoined: boolean = false;
-
-  ngOnInit() {
-    this.isJoined = this.initialJoinState;
-  }
 
   toggleJoin() {
     this.isJoined = !this.isJoined;
@@ -28,13 +34,11 @@ export class JoinExitComponent {
 
   private joinCommunity() {
     console.log(`Uniéndose a la comunidad: ${this.communityId}`);
-    // Aquí harías la llamada a tu API para unirse
-    // this.communityService.joinCommunity(this.communityId).subscribe(...)
+    // Lógica para unirse
   }
 
   private leaveCommunity() {
     console.log(`Saliendo de la comunidad: ${this.communityId}`);
-    // Aquí harías la llamada a tu API para salir
-    // this.communityService.leaveCommunity(this.communityId).subscribe(...)
+    // Lógica para salir
   }
 }

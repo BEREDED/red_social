@@ -24,27 +24,29 @@ export class MainComponent  implements OnInit {
     this.ConseguirData(this.Titulo_foro )
     this.isUsersuscribed(this.Titulo_foro,String(localStorage.getItem("correoGlobal")))
   }
-  public isUsersuscribed(Titulo_foro:string,correo:string){
-    return this.usuariosService.postissuscribed(Titulo_foro,correo).subscribe({
-      next:(response)=>{
-        console.log(response)
-      },
-      error:(error)=>{
-        console.log(error)
-      }
-    });
-  }
-  public ConseguirData(Titulo_foro:string){
-    console.log("este es el nombre que se manda a la funcion:",this.Titulo_foro)
-    this.usuariosService.getInfoForo(this.Titulo_foro).subscribe({
-      next:(response)=>{
-        this.Titulo_foro=this.Titulo_foro;
-        this.description=response.Descripcion;
-        console.log(response.Descripcion);
-      },
-      error:(error)=>{
-        console.log(error);
-      }
-    })
-  }
+  public isUsersuscribed(Titulo_foro: string, correo: string) {
+  this.usuariosService.postissuscribed(Titulo_foro, correo).subscribe({
+    next: (response) => {
+      console.log('✅ Usuario suscrito:', response);
+      this.isinscrito = true;
+    },
+    error: (error) => {
+      console.warn('⚠️ Usuario NO suscrito');
+      this.isinscrito = false;
+    }
+  });
+}
+
+  public ConseguirData(Titulo_foro: string) {
+  this.usuariosService.getInfoForo(Titulo_foro).subscribe({
+    next: (response) => {
+      this.description = response.Descripcion;
+      console.log('📘 Descripción:', this.description);
+    },
+    error: (error) => {
+      console.error('❌ Error al obtener descripción:', error);
+    }
+  });
+}
+
 }
