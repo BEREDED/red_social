@@ -9,7 +9,7 @@
           </div>
           <div class="div-derecha">
             <div [class.disabled]="!isEditing" class="distribuir">
-              <app-nombre ></app-nombre>
+              <app-nombre [Nombre]="nombreCompleto"></app-nombre>
             </div>
             <div *ngIf="isEditing" class="oculto">
               <app-contrasena></app-contrasena>

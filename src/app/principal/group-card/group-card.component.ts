@@ -7,5 +7,10 @@ import { Component, Input } from '@angular/core';
   standalone: false,
 })
 export class GroupCardComponent {
-  @Input() groupName: string = 'grupito :3';
+  @Input() titulo: string = '';
+  constructor(){}
+  ngOnInit(): void {}
+  public send_name(titulo : string): void {
+    console.log(this.titulo);
+  }
 }

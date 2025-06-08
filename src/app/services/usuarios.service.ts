@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { foros, Usuario, Usuario_ini, Usuario_rec, Post } from '../modelos/modelosinfo.models';
 import { Usu_actulizar } from '../modelos/us_actulizar';
-import { Token } from '@angular/compiler';
+import { getdata } from '../modelos/getdata.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
@@ -19,8 +20,14 @@ export class UsuariosService {
   postRegistroUsuario(usuario:Usuario){
     return this.http.post(`${this.api_http_rout}usuarios/crear_us`, usuario);
   }
+  getListadoForos(Correo: string): Observable<{ foros_Inscritos: { Titulo_foro: string }[] }> {
+  return this.http.post<{ foros_Inscritos: { Titulo_foro: string }[] }>(
+    `${this.api_http_rout}usuarios/listarForos`,
+    { Correo });
+}
+
   postCreacionForo(foro:foros){
-    return this.http.post(`${this.api_http_rout}foros`, foro);
+    return this.http.post(`${this.api_http_rout}foro/create_foro`, foro);
   }
   postCreacionPost(post:Post){
     return this.http.post(`${this.api_http_rout}posts`, post);
@@ -34,7 +41,8 @@ export class UsuariosService {
   postActualizardata(usu_act:Usu_actulizar){
     return this.http.post(`${this.api_http_rout}usuarios/actualizar`, usu_act)
   }
- Postsoldata() {
-  return this.http.get<any>(`${this.api_http_rout}usuarios/datosUs`);
-}
+  Postsoldata(correo:getdata) {
+  return this.http.post<{namedb:string}>(`${this.api_http_rout}usuarios/get_data`,correo);
+  }
+
 }

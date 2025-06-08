@@ -5,23 +5,20 @@
 
     <div class="contenedor-centrado">
       <div class="grupos-container">
-        <app-group-card></app-group-card>
-        <app-group-card></app-group-card>
-        <app-group-card></app-group-card>
-        <app-group-card></app-group-card>
-        <app-group-card></app-group-card>
-        <app-group-card></app-group-card>
-        <app-group-card></app-group-card>
 
+        <app-group-card
+        *ngFor="let foro of forosInscritos"
+        [titulo]="foro.Titulo_foro">
+        </app-group-card>
       </div>
     </div>
 
 
       <div class="floating-buttons">
 
-          <app-boton-mas></app-boton-mas>
+          <app-boton-mas (foroCreado)="getForos()" ></app-boton-mas>
           <app-boton-chats></app-boton-chats>
-    
+
     </div>
   </main>
 </body>

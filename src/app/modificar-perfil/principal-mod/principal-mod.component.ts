@@ -4,6 +4,7 @@ import { Location } from '@angular/common';
 import { Usu_actulizar } from '../../modelos/us_actulizar';
 import { NombreComponent } from 'src/app/shared/nombre/nombre.component';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { getdata } from 'src/app/modelos/getdata.interface';
 
 
 @Component({
@@ -14,13 +15,19 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class PrincipalModComponent implements OnInit {
   usu_actulizar: Usu_actulizar = {
+    Correo:'',
     Nombre: '',
     Apellido_pat: '',
     Apellido_mat: '',
     Contraseña: ''
   }
+  getData:getdata={
+    Correo:''
+  }
+  @ViewChild(NombreComponent) Nomcomp!: NombreComponent;
+
+  nombreCompleto: string = '';
   @ViewChild(ContrasenaComponent)Contracomp!:ContrasenaComponent
-  @ViewChild(NombreComponent)Nomcomp!:NombreComponent
 
   isEditing: boolean = false;
   usuario: any;
@@ -31,18 +38,18 @@ export class PrincipalModComponent implements OnInit {
     this._location.back();
   }
 
-  ngOnInit() {
-    this.usuarioservice.Postsoldata().subscribe({
-      next: (data: any) => {
-        this.usuario = data;
+
+  ngOnInit(): void {
+    const coerroenstring= String(localStorage.getItem('correoGlobal'))
+    this.getData.Correo=coerroenstring
+    this.usuarioservice.Postsoldata(this.getData).subscribe({
+      next: (res) => {
+        this.nombreCompleto = res.namedb;
+        this.Nomcomp.Nombre=this.nombreCompleto
       },
-      error: (err) => {
-        console.error('Error al obtener datos del usuario', err);
-      }
+      error: (e) => console.error('Error al obtener nombre:', e),
     });
   }
-
-
   toggleEdit() {
     this.isEditing = !this.isEditing;
   }
@@ -64,13 +71,20 @@ export class PrincipalModComponent implements OnInit {
   }
   acceptEdit() {
     const nameparts=this.extractNameParts(this.Nomcomp.Nombre)
+    this.usu_actulizar.Correo=String(localStorage.getItem('correoGlobal'))
     this.usu_actulizar.Nombre=nameparts.nombre
     this.usu_actulizar.Apellido_pat=nameparts.apellido_pat
     this.usu_actulizar.Apellido_mat=nameparts.apellido_mat
     this.usu_actulizar.Contraseña=this.Contracomp.contrasena
+    console.log(this.usu_actulizar)
     this.isEditing = false;
     this.usuarioservice.postActualizardata(this.usu_actulizar).subscribe({
-
+      next: (Response) =>{
+        console.log(Response)
+      },
+      error: (Error)=>{
+        console.log(Error)
+      }
     })
   }
 }

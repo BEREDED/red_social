@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { getdata } from 'src/app/modelos/getdata.interface';
+
 
 @Component({
   selector: 'app-boton-perfil',
@@ -9,7 +11,9 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class BotonPerfilComponent  implements OnInit {
 
-  constructor(private usuariosService: UsuariosService) { }
+  nombrecompleto:string=''
+  constructor(private usuariosService: UsuariosService) {
+   }
 
   ngOnInit() {}
 }

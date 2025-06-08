@@ -8,13 +8,14 @@ import { PrincipalModComponent } from './principal-mod/principal-mod.component';
 import { InicioSesionModule } from '../inicio-sesion/inicio-sesion.module';
 import { SharedModule } from '../shared/shared.module';
 import { IonContent } from '@ionic/angular/standalone';
-import { RouterEvent, RouterLink, RouterModule } from '@angular/router';
+import {  RouterModule } from '@angular/router';
+import { NombreComponent } from '../shared/nombre/nombre.component';
 
 
 @NgModule({
   declarations: [
     FotoComponent,
-    PrincipalModComponent
+    PrincipalModComponent,
   ],
   imports: [
     CommonModule,
@@ -22,7 +23,8 @@ import { RouterEvent, RouterLink, RouterModule } from '@angular/router';
     InicioSesionModule,
     SharedModule,
     IonContent,
-    RouterModule
-  ]
+    RouterModule,
+
+  ],
 })
 export class ModificarPerfilModule { }

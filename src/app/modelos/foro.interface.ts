@@ -1,4 +1,6 @@
 export interface foros{
-    creador:string;
-    nombreforo:string;
+    Correo_Creador:string;
+    Titulo_foro:string;
+    Descripcion:string;
+    Fecha_creacion:string;
   }

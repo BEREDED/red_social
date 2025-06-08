@@ -1,12 +1,11 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContrasenaComponent } from 'src/app/shared/contrasena/contrasena.component';
-
 
 import { Usuario_ini } from 'src/app/modelos/Usuario_ini';
 import { CorreoComponent } from 'src/app/shared/correo/correo.component';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-componente-prin',
@@ -35,6 +34,7 @@ export class ComponentePrinComponent  implements OnInit {
           localStorage.setItem('token', response.token);
           console.log('Sesión iniciada con éxito');
           this.router.navigate(['/principal']);
+          localStorage.setItem('correoGlobal', this.correoComp.Correo);
         } else {
           console.log('No se pudo iniciar sesión');
         }

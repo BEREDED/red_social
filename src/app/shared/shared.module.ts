@@ -25,18 +25,15 @@ import { ConfirmarContrasenaComponent } from './confirmar-contrasena/confirmar-c
     BotonPerfilComponent,
     FooterComponent,
     BarraBusquedaComponent,
-    BotonPerfilComponent,
     BotonCerrarComponent,
     BotonChatsComponent,
     BotonTgfComponent,
     BotonMasComponent,
     ContrasenaComponent,
     CorreoComponent,
-    NombreComponent,
-    CorreoComponent,
     FechaNacimientoComponent,
     ConfirmarContrasenaComponent,
-
+    NombreComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +41,7 @@ import { ConfirmarContrasenaComponent } from './confirmar-contrasena/confirmar-c
     RouterModule,
     RouterLinkActive,
     FormsModule,
-    IonicModule,
+    IonicModule
   ],
   exports: [
     HeaderComponent,
@@ -59,9 +56,8 @@ import { ConfirmarContrasenaComponent } from './confirmar-contrasena/confirmar-c
     ContrasenaComponent,
     CorreoComponent,
     NombreComponent,
-    CorreoComponent,
     FechaNacimientoComponent,
-    ConfirmarContrasenaComponent,
+    ConfirmarContrasenaComponent
   ]
 })
 export class SharedModule { }
