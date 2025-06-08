@@ -1,0 +1,29 @@
+<!-- post-card.component.html -->
+<div class="post-card">
+  <!-- Post Header -->
+  <div class="post-header">
+    <div class="author-info">
+      <div class="author-avatar">
+        {{ post.author.charAt(0).toUpperCase() }}
+      </div>
+      <div class="author-details">
+        <h4 class="author-name">{{ post.author }}</h4>
+        <span class="post-time">{{ getTimeAgo(post.createdAt) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post Content -->
+  <div class="post-content">
+    <p>{{ post.content }}</p>
+  </div>
+
+  <!-- Comments Section -->
+  <app-comments-section
+    [comments]="post.comments"
+    [postId]="post.id"
+    [commentText]="commentText"
+    (commentTextChange)="onCommentTextChange($event)"
+    (addComment)="onAddComment()">
+  </app-comments-section>
+</div>

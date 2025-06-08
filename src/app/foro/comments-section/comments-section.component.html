@@ -1,0 +1,40 @@
+<!-- comments-section.component.html -->
+<!-- Comments Section -->
+<div class="comments-section" *ngIf="comments.length > 0">
+  <div class="comments-list">
+    <div *ngFor="let comment of comments" class="comment">
+      <div class="comment-avatar">
+        {{ comment.author.charAt(0).toUpperCase() }}
+      </div>
+      <div class="comment-content">
+        <span class="comment-author">{{ comment.author }}</span>
+        <p class="comment-text">{{ comment.content }}</p>
+        <span class="comment-time">{{ getTimeAgo(comment.createdAt) }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add Comment -->
+<div class="add-comment">
+  <div class="comment-input-container">
+    <textarea
+      [value]="commentText"
+      (input)="onCommentTextChange($event)"
+      placeholder="Escribe un comentario..."
+      class="comment-textarea"
+      maxlength="300"
+      rows="1"
+    ></textarea>
+    <button
+      class="comment-button"
+      [disabled]="!canComment()"
+      (click)="onAddComment()"
+    >
+      Comentar
+    </button>
+  </div>
+  <div class="comment-counter" *ngIf="commentText">
+    {{ commentText.length }}/300
+  </div>
+</div>

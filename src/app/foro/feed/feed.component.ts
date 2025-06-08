@@ -1,21 +1,8 @@
 // feed.component.ts
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Post, Comment } from '../../modelos/post.interface';
 
 // Interfaces definidas directamente en el componente
-interface Comment {
-  id: string;
-  author: string;
-  content: string;
-  createdAt: Date;
-}
-
-interface Post {
-  id: string;
-  author: string;
-  content: string;
-  createdAt: Date;
-  comments: Comment[];
-}
 
 @Component({
   selector: 'app-feed',

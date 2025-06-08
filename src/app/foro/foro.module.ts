@@ -11,10 +11,12 @@ import { PanelComponent } from './panel/panel.component';
 import { PublishingComponent } from './publishing/publishing.component';
 import { JoinExitComponent } from './join-exit/join-exit.component';
 import { FeedComponent } from './feed/feed.component';
+import { PostCardComponent } from './post-card/post-card.component';
+import { CommentsSectionComponent } from './comments-section/comments-section.component';
 
 
 import { SharedModule } from '../shared/shared.module';
-//import { Post, Comment } from '../../modelos/post.interface.ts';
+//import { Post, Comment } from '../../modelos/post.interface';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { SharedModule } from '../shared/shared.module';
     FeedComponent,
     PublishingComponent,
     JoinExitComponent,
+    PostCardComponent,
+    CommentsSectionComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +35,8 @@ import { SharedModule } from '../shared/shared.module';
     ForoRoutingModule,
     SharedModule,
     IonicModule,
+  //  Post,
+    //Comment,
   ]
 
 })
