@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-panel',
@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
   standalone:false
 })
 export class PanelComponent  implements OnInit {
-
+  @Input() Titulo_foro: string = '';
+  @Input() description: string = '';
   constructor() { }
 
   ngOnInit() {}
