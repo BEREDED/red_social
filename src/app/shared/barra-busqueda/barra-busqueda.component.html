@@ -2,18 +2,17 @@
 <div class="search-container">
   <input
     type="text"
-
-    placeholder="Buscar..."
+    [(ngModel)]="searchTerm"
+    (input)="filterUsuarios()"
+    placeholder="Buscar usuario por correo..."
     class="search-input"
   />
-  <button class="search-button" >
+  <button class="search-button" (click)="onSearch()">🔍</button>
 
-    🔍
-  </button>
+  <!-- Lista desplegable -->
+  <ul class="suggestions-list" *ngIf="filteredUsuarios.length > 0">
+    <li *ngFor="let usuario of filteredUsuarios" (click)="selectUsuario(usuario)">
+      {{ usuario.Correo }}
+    </li>
+  </ul>
 </div>
-<!--
-metodos para el backend
-//[(ngModel)]="searchTerm" en el input
-//(click)="onSearch()" en el boton class ="search-button"
--->
-

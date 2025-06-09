@@ -41,3 +41,47 @@
   filter: brightness(0.8);
 
 }
+.search-container {
+  position: relative; // Importante para que .suggestions-list se posicione respecto a este contenedor
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.search-button {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.suggestions-list {
+  position: absolute;
+  top: 100%; // Aparece justo debajo del input
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-list li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-list li:hover {
+  background-color: #f0f0f0;
+}

@@ -1,15 +1,7 @@
 export interface Post {
-  id: string;
-  author: string;
-  content: string;
-  createdAt: Date;
-  comments: Comment[];
-
-}
-
-export interface Comment {
-  id: string;
-  author: string;
-  content: string;
-  createdAt: Date;
+  Titulo_foro:string;
+  correo_Usuario:string;
+  Contenido:string;
+  Fecha_Publicacion:Date;
+  Usuario_creador: string;
 }

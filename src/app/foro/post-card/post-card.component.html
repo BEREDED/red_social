@@ -1,28 +1,22 @@
-<!-- post-card.component.html -->
 <div class="post-card">
   <!-- Post Header -->
   <div class="post-header">
     <div class="author-info">
       <div class="author-avatar">
-        {{ post.author.charAt(0).toUpperCase() }}
+        {{post.Usuario_creador[0] }}{{post.Usuario_creador[1]}}
       </div>
       <div class="author-details">
-        <h4 class="author-name">{{ post.author }}</h4>
-        <span class="post-time">{{ getTimeAgo(post.createdAt) }}</span>
+        <h4 class="author-name">{{ post.Usuario_creador }}</h4>
+        <span class="post-time">{{ post.Fecha_Publicacion | date: 'short' }}</span>
       </div>
     </div>
   </div>
 
   <!-- Post Content -->
   <div class="post-content">
-    <p>{{ post.content }}</p>
+    <p>{{ post.Contenido }}</p>
   </div>
 
   <!-- Comments Section -->
-  <app-comments-section
-    [postId]="post.id"
-    [commentText]="commentText"
-    (commentTextChange)="onCommentTextChange($event)"
-    (addComment)="onAddComment()">
-  </app-comments-section>
+  <app-comments-section></app-comments-section>
 </div>

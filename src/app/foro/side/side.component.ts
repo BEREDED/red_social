@@ -1,5 +1,7 @@
 // side-panel.component.ts
 import { Component, OnInit, Input } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+
 
 @Component({
   selector: 'app-side',
@@ -30,9 +32,11 @@ export class SideComponent implements OnInit {
     { name: 'Elemento C', icon: 'settings', route: '/settings' }
   ];
 
-  constructor() { }
-
-  ngOnInit() {}
+  constructor( private usuariosService: UsuariosService ) { }
+   forosInscritos: any[] = [];
+  ngOnInit() {
+    this.getForos()
+  }
 
   // Método para alternar el estado del acordeón
   toggleAccordion(accordion: string) {
@@ -47,6 +51,18 @@ export class SideComponent implements OnInit {
   selectOption(item: any) {
     this.accordionOneItems.forEach(option => {
       option.selected = (option === item);
+    });
+  }
+  getForos(): void {
+    const correo = localStorage.getItem('correoGlobal');
+    if (!correo) return;
+
+    this.usuariosService.getListadoForos(correo).subscribe({
+      next: (response: any) => {
+        console.log("Foros recibidos:", response.foros_Inscritos);
+        this.forosInscritos = response.foros_Inscritos;
+      },
+      error: (err) => console.error('Error al obtener foros:', err)
     });
   }
 }

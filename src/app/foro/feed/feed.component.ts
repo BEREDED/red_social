@@ -1,7 +1,6 @@
-// feed.component.ts
-import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Post, Comment } from '../../modelos/post.interface';
+import { Component, OnInit, OnDestroy, HostListener, Input } from '@angular/core';
+import { Post } from '../../modelos/post.interface';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-feed',
@@ -10,30 +9,21 @@ import { Post, Comment } from '../../modelos/post.interface';
   standalone: false,
 })
 export class FeedComponent implements OnInit, OnDestroy {
+  @Input() Titulo_foro: string = '';
   posts: Post[] = [];
   isLoading = false;
   page = 1;
   hasMorePosts = true;
 
-  // Para comentarios
   commentTexts: { [postId: string]: string } = {};
 
-  // Para manejar subscripciones
-  private subscriptions: Subscription[] = [];
-
-  constructor(
-    // Inyectar aquí los servicios necesarios
-    // private postService: PostService,
-    // private authService: AuthService
-  ) {}
+  constructor(private usuariosService: UsuariosService) {}
 
   ngOnInit(): void {
     this.loadInitialPosts();
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
+  ngOnDestroy(): void {}
 
   loadInitialPosts(): void {
     if (this.isLoading) return;
@@ -41,23 +31,24 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.page = 1;
 
-    // Implementar aquí la llamada al servicio
-    // this.postService.getPosts(this.page).subscribe({
-    //   next: (response) => {
-    //     this.posts = response.posts;
-    //     this.hasMorePosts = response.hasMore;
-    //     this.isLoading = false;
-    //   },
-    //   error: (error) => {
-    //     console.error('Error loading posts:', error);
-    //     this.isLoading = false;
-    //     this.handleLoadError();
-    //   }
-    // });
-
-    // Placeholder temporal - remover cuando se implemente el servicio
-    console.log('Loading initial posts - implement service call here');
-    this.isLoading = false;
+    this.usuariosService.recuperarpsots(this.Titulo_foro).subscribe({
+      next: (response) => {
+        console.log("post recibidos:", response.posts);
+        const correoUsuario = localStorage.getItem('correoGlobal') || '';
+        this.posts = response.posts.map(post => ({
+          Titulo_foro: this.Titulo_foro,
+          correo_Usuario: correoUsuario,
+          Contenido: post.Contenido,
+          Fecha_Publicacion:new Date( post.Fecha_Publicacion ) ,
+          Usuario_creador: post.Usuario_creador
+        }));
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error al obtener posts:', error);
+        this.isLoading = false;
+      }
+    });
   }
 
   loadMorePosts(): void {
@@ -66,23 +57,8 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     const nextPage = this.page + 1;
 
-    // Implementar aquí la llamada al servicio para más posts
-    // this.postService.getPosts(nextPage).subscribe({
-    //   next: (response) => {
-    //     this.posts = [...this.posts, ...response.posts];
-    //     this.page = nextPage;
-    //     this.hasMorePosts = response.hasMore;
-    //     this.isLoading = false;
-    //   },
-    //   error: (error) => {
-    //     console.error('Error loading more posts:', error);
-    //     this.isLoading = false;
-    //     this.handleLoadError();
-    //   }
-    // });
-
-    // Placeholder temporal - remover cuando se implemente el servicio
-    console.log(`Loading more posts for page ${nextPage} - implement service call here`);
+    // Aquí iría la lógica real paginada
+    console.log(`Loading more posts for page ${nextPage}`);
     this.isLoading = false;
   }
 
@@ -93,7 +69,6 @@ export class FeedComponent implements OnInit, OnDestroy {
     const scrollHeight = element.scrollHeight;
     const clientHeight = element.clientHeight;
 
-    // Cargar más cuando esté cerca del final (100px antes)
     if (scrollTop + clientHeight >= scrollHeight - 100) {
       this.loadMorePosts();
     }
@@ -105,39 +80,9 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   onComment(postId: string): void {
-    const content = this.commentTexts[postId];
-    if (!this.canComment(postId)) return;
-
-    const post = this.posts.find(p => p.id === postId);
-    if (!post) return;
-
-    // Implementar aquí la llamada al servicio para agregar comentario
-    // this.postService.addComment(postId, content.trim()).subscribe({
-    //   next: (newComment) => {
-    //     post.comments.push(newComment);
-    //     this.commentTexts[postId] = '';
-    //   },
-    //   error: (error) => {
-    //     console.error('Error adding comment:', error);
-    //     this.handleCommentError();
-    //   }
-    // });
-
-    // Placeholder temporal - crear comentario local
-    const newComment: Comment = {
-      id: `temp-comment-${Date.now()}`,
-      author: 'Usuario Actual', // Obtener del servicio de autenticación
-      content: content.trim(),
-      createdAt: new Date()
-    };
-
-    post.comments.push(newComment);
-    this.commentTexts[postId] = '';
-
-    console.log('Adding comment - implement service call here:', newComment);
+    // Implementación de comentarios futura
   }
 
-  // Métodos para manejar datos desde servicios externos
   setPosts(posts: Post[]): void {
     this.posts = posts;
   }
@@ -147,24 +92,16 @@ export class FeedComponent implements OnInit, OnDestroy {
   }
 
   addPost(post: Post): void {
-    this.posts.unshift(post); // Agregar al inicio
+    this.posts.unshift(post);
   }
 
-  updatePost(updatedPost: Post): void {
-    const index = this.posts.findIndex(p => p.id === updatedPost.id);
-    if (index !== -1) {
-      this.posts[index] = updatedPost;
-    }
-  }
+  updatePost(updatedPost: Post): void {}
 
-  removePost(postId: string): void {
-    this.posts = this.posts.filter(p => p.id !== postId);
-  }
+  removePost(postId: string): void {}
 
-  // Métodos de utilidad
   getTimeAgo(date: Date): string {
     const now = new Date();
-    const diffInMs = now.getTime() - date.getTime();
+    const diffInMs = now.getTime() - new Date(date).getTime();
     const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
     const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
     const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
@@ -174,23 +111,17 @@ export class FeedComponent implements OnInit, OnDestroy {
     if (diffInHours < 24) return `${diffInHours}h`;
     if (diffInDays < 7) return `${diffInDays}d`;
 
-    return date.toLocaleDateString();
+    return new Date(date).toLocaleDateString();
   }
 
-  // Métodos para manejar errores
   private handleLoadError(): void {
-    // Implementar manejo de errores para carga de posts
-    // Mostrar toast, mensaje de error, etc.
     console.error('Error loading posts');
   }
 
   private handleCommentError(): void {
-    // Implementar manejo de errores para comentarios
-    // Mostrar toast, mensaje de error, etc.
     console.error('Error adding comment');
   }
 
-  // Métodos para refresh y recarga
   refreshFeed(): void {
     this.posts = [];
     this.page = 1;
@@ -198,7 +129,6 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.loadInitialPosts();
   }
 
-  // Getters para el template
   get hasPosts(): boolean {
     return this.posts.length > 0;
   }

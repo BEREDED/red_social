@@ -11,7 +11,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class CommentsSectionComponent {
   @Input() comments: Comment[] = [];
   @Input() postId: string = '';
-  @Input() commentText: string = '';
+  commentText: string = '';
   @Output() commentTextChange = new EventEmitter<string>();
   @Output() addComment = new EventEmitter<void>();
 

@@ -54,6 +54,15 @@ export class UsuariosService {
     return this.http.post<{Mensaje:string}>(`${this.api_http_rout}foro/deinscribir_foro`,{Titulo_foro,correo_Usuario})
   }
   postCrearPost(post:Post){
-    return this.http.post<{Mensaje:string}>(`${this.api_http_rout}foro/crear_foro`, post)
+    return this.http.post<{Mensaje:string}>(`${this.api_http_rout}foro/Crear_post`, post)
+  }
+  recuperarpsots(nombreForo: string): Observable<{ posts: { Fecha_Publicacion: string, Contenido: string, Usuario_creador: string }[] }> {
+  return this.http.post<{ posts: { Fecha_Publicacion: string, Contenido: string, Usuario_creador: string }[] }>(
+    `${this.api_http_rout}foro/recuperar_posts`,
+    { nombreForo }
+  );
+  }
+  getallUsers(activated:boolean):Observable<{usuario:{correo:string}[]}>{
+    return this.http.post<{usuario:{correo:string}[]}>(`${this.api_http_rout}usuarios/getallusers`,{activated});
   }
 }
