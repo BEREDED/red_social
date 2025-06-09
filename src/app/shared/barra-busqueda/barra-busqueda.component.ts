@@ -40,6 +40,7 @@ export class BarraBusquedaComponent  implements OnInit {
   onSearch(): void {
   // lógica adicional si el usuario presiona el botón 🔍
   }
+
 }
 
 

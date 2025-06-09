@@ -85,3 +85,23 @@
 .suggestions-list li:hover {
   background-color: #f0f0f0;
 }
+.suggestions-fixed {
+  position: fixed;
+  z-index: 9999;
+  background: white;
+  border: 1px solid #ccc;
+  max-height: 200px;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.suggestions-fixed li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.suggestions-fixed li:hover {
+  background-color: #eee;
+}
