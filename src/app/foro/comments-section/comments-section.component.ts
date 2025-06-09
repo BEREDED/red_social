@@ -1,6 +1,6 @@
 // comments-section.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Comment } from '../../modelos/post.interface';
+
 
 @Component({
   selector: 'app-comments-section',

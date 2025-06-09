@@ -27,26 +27,24 @@ export class MainComponent  implements OnInit {
   public isUsersuscribed(Titulo_foro: string, correo: string) {
   this.usuariosService.postissuscribed(Titulo_foro, correo).subscribe({
     next: (response) => {
-      console.log('✅ Usuario suscrito:', response);
+      console.log('Usuario suscrito:', response);
       this.isinscrito = true;
     },
     error: (error) => {
-      console.warn('⚠️ Usuario NO suscrito');
+      console.warn(' Usuario NO suscrito');
       this.isinscrito = false;
     }
   });
 }
-
   public ConseguirData(Titulo_foro: string) {
   this.usuariosService.getInfoForo(Titulo_foro).subscribe({
     next: (response) => {
       this.description = response.Descripcion;
-      console.log('📘 Descripción:', this.description);
+      console.log(' Descripción:', this.description);
     },
     error: (error) => {
-      console.error('❌ Error al obtener descripción:', error);
+      console.error(' Error al obtener descripción:', error);
     }
   });
 }
-
 }

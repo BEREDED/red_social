@@ -47,4 +47,13 @@ export class UsuariosService {
   postissuscribed(Titulo_foro:string,correo_Usuario:string){
     return this.http.post<{issus:boolean}>(`${this.api_http_rout}foro/issuscribed`,{Titulo_foro,correo_Usuario})
   }
+  postInscribirForo(Titulo_foro:string,correo_Usuario:string, Fecha_Union:string){
+    return this.http.post<{Mensaje:string}>(`${this.api_http_rout}foro/inscribir_foro`,{Titulo_foro,correo_Usuario,Fecha_Union})
+  }
+  postDesinscribirForo(Titulo_foro:string,correo_Usuario:string){
+    return this.http.post<{Mensaje:string}>(`${this.api_http_rout}foro/deinscribir_foro`,{Titulo_foro,correo_Usuario})
+  }
+  postCrearPost(post:Post){
+    return this.http.post<{Mensaje:string}>(`${this.api_http_rout}foro/crear_foro`, post)
+  }
 }

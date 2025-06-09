@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Post } from 'src/app/modelos/post.interface';
 
 @Component({
   selector: 'app-publishing',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class PublishingComponent {
-  postContent: string = '';
+  postContent=''
+
+
+  constructor( private usuariosService: UsuariosService) { }
 
   onInputChange(): void {
     // Aquí puedes agregar lógica adicional cuando cambie el texto
@@ -23,7 +28,7 @@ export class PublishingComponent {
 
   onPost(): void {
     if (this.canPost()) {
-      // Aquí iría la lógica para enviar el post
+
       console.log('Publicando:', this.postContent);
 
       // Ejemplo de cómo podrías emitir el evento o llamar a un servicio

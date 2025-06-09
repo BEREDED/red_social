@@ -4,12 +4,13 @@
   <div class="comments-list">
     <div *ngFor="let comment of comments" class="comment">
       <div class="comment-avatar">
-        {{ comment.author.charAt(0).toUpperCase() }}
+
       </div>
+
       <div class="comment-content">
-        <span class="comment-author">{{ comment.author }}</span>
-        <p class="comment-text">{{ comment.content }}</p>
-        <span class="comment-time">{{ getTimeAgo(comment.createdAt) }}</span>
+        <span class="comment-author"></span>
+        <p class="comment-text"></p>
+        <span class="comment-time"></span>
       </div>
     </div>
   </div>
@@ -38,3 +39,9 @@
     {{ commentText.length }}/300
   </div>
 </div>
+<!--
+{{ comment.author.charAt(0).toUpperCase() }}
+ {{ comment.author }}
+{{ comment.content }}
+ {{ getTimeAgo(comment.createdAt) }}
+-->
