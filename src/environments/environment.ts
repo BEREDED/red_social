@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'apiv2-production-9002.up.railway.app'
+  apiUrl: 'https://apiv2-production-9002.up.railway.app/'
 
 };
 
