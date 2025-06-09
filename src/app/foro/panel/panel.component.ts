@@ -9,7 +9,6 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PanelComponent  implements OnInit {
   @Input() Titulo_foro: string = '';
   @Input() description: string = '';
-  @Input() isinscrito: boolean=false;
   constructor() { }
 
   ngOnInit() {}
