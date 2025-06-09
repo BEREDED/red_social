@@ -14,7 +14,10 @@
           <div *ngIf="errorMessage" style="color: red; font-weight: bold;">
             {{ errorMessage }}
           </div>
-          <button (click)="obtenerDatos()" [routerLink]="['/inicio_sesion']" class="botonclr">Registrarse
+          <button  (click)="obtenerDatos()"
+                  [disabled]="!formularioValido"
+                  [routerLink]="['/inicio_sesion']"
+                  class="botonclr">Registrarse
           </button>
         </div>
       </div>

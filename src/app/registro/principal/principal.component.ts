@@ -27,6 +27,7 @@ export class PrincipalComponent implements OnInit {
   contrasenaValue: string = '';
   confirmPasswordValue: string = '';
   correoValido: boolean = true;
+  contraValida: boolean = true;
   errorMessage: string = '';
 
   constructor(private usuariosService: UsuariosService) { }
@@ -40,6 +41,12 @@ export class PrincipalComponent implements OnInit {
 
   onContrasenaChange(value: string) {
     this.contrasenaValue = value;
+    // Validación de longitud mínima
+    if (this.contrasenaValue.length < 8) {
+      this.errorMessage = 'La contraseña debe tener al menos 8 caracteres.';
+    } else {
+      this.errorMessage = ''; // limpiar si todo está bien
+    }
   }
 
   onConfirmPasswordChange(value: string) {
@@ -53,6 +60,16 @@ export class PrincipalComponent implements OnInit {
   get passwordsMatch(): boolean {
     return this.contrasenaValue === this.confirmPasswordValue;
   }
+  get formularioValido(): boolean {
+  return (
+    !!this.nombreComp?.Nombre &&
+    !!this.correoComponent?.Correo &&
+    !!this.fechaNacimientoComp?.Fecha_Nacimiento_string &&
+    this.correoValido &&
+    this.contrasenaValue.length >= 8 &&
+    this.passwordsMatch
+  );
+}
 
   private extractNameParts(fullName: string): { nombre: string; apellido_pat: string; apellido_mat: string } {
     const nameParts = fullName.trim().split(' ');
@@ -82,6 +99,12 @@ export class PrincipalComponent implements OnInit {
 
     if (!this.correoValido) {
       this.errorMessage = 'El correo no es válido.';
+      console.error(this.errorMessage);
+      return;
+    }
+
+    if (this.contrasenaValue.length < 8) {
+      this.errorMessage = 'La contraseña debe tener al menos 8 caracteres.';
       console.error(this.errorMessage);
       return;
     }

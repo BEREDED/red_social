@@ -43,12 +43,25 @@ body {
   width: 6em;
   height: 3em;
   background-color: #0f172a;
-  color: #f8fafc;
+  color: white;
+  border-radius: 6px;
   //margin: 1em;
   position: absolute;
+  cursor: pointer;
+
   top: 80%;
   left: 50%;
   transform: translate(-50%,-50%);
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:disabled {
+    background-color: #cccccc; // gris claro
+    color: #666666;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
 }
 .botonclr2{
   text-decoration: underline;

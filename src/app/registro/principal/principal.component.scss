@@ -27,13 +27,14 @@ width: 450px;
 }
 
 .container{
-  position: absolute;
+  position: relative;
   display: flex;
   flex-direction: column;
   margin: 2em;
-  padding-left: 4vh;
+  padding-left: 2.5vw;
   /* Propiedades opcionales útiles */
   gap: 15px; /* Espacio entre elementos */
+  width: 65%;
 }
 
 .poscontrasena{
@@ -44,17 +45,31 @@ width: auto;
 color: #0f172a;
 width: auto;
 }
-.botonclr{
-width: 6em;
-height: 3em;
-background-color: #0f172a;
-color: #f8fafc;
-align-items: center;
-transform: translate(69%,30%);
+.botonclr {
+  background-color: #0f172a; // color activo (puedes cambiarlo)
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-inline: auto;
+  margin-top: 3vh;
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:disabled {
+    background-color: #cccccc; // gris claro
+    color: #666666;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
 }
 .posfecha{
-  width: auto;
+  width: 100%;
 }
 .posconfcontr{
-  width: auto;
+  width: 100%;
 }
