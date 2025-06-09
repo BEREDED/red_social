@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Post } from 'src/app/modelos/post.interface';
 
@@ -9,8 +9,15 @@ import { Post } from 'src/app/modelos/post.interface';
   standalone: false,
 })
 export class PublishingComponent {
+  @Input() Titulo_foro: string = '';
   postContent=''
-
+  postcreate:Post={
+    Titulo_foro:'',
+    correo_Usuario:'',
+    Contenido:'',
+    Fecha_Publicacion:new Date(),
+    Usuario_creador: ''
+  }
 
   constructor( private usuariosService: UsuariosService) { }
 
@@ -28,18 +35,23 @@ export class PublishingComponent {
 
   onPost(): void {
     if (this.canPost()) {
-
+      const fecha=new Date()
+      const fechaFormateada = fecha.toISOString().slice(0, 16).replace('T', ' ');
+      this.postcreate.Contenido=this.postContent
+      this.postcreate.correo_Usuario=String(localStorage.getItem('correoGlobal'))
+      this.postcreate.Titulo_foro=this.Titulo_foro
+      this.postcreate.Fecha_Publicacion=new Date(fechaFormateada)
+      this.usuariosService.postCrearPost(this.postcreate).subscribe({
+        next: (response) =>{
+          console.log(response.Mensaje)
+        },
+        error: (error) =>{
+          console.error(error)
+        }
+      })
+      console.log("esto es el post", this.postcreate)
       console.log('Publicando:', this.postContent);
-
-      // Ejemplo de cómo podrías emitir el evento o llamar a un servicio
-      // this.postService.createPost(this.postContent);
-      // this.postCreated.emit(this.postContent);
-
-      // Limpiar el textarea después de publicar
-      this.postContent = '';
-
-      // Mostrar confirmación
-
+      this.postContent=''
     }
   }
 }

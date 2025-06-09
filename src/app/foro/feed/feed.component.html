@@ -1,38 +1,31 @@
-<!-- feed.component.html -->
-<div class="feed-container" (scroll)="onScroll($event)">
-  <!-- Publishing Component Integration -->
+<div class="feed-container">
+  <!-- Publicar nuevo contenido -->
   <div class="publishing-section">
-    <app-publishing></app-publishing>
+    <app-publishing [Titulo_foro]="Titulo_foro"></app-publishing>
   </div>
 
-  <!-- Posts Feed -->
-  <div class="posts-container">
-    <!-- Posts List -->
-    <app-post-card
-      *ngFor="let post of posts"
-      [post]="post"
-      [commentText]="commentTexts[post.id] || ''"
-      (commentTextChange)="commentTexts[post.id] = $event"
-      (addComment)="onComment(post.id)">
-    </app-post-card>
+  <!-- Lista de publicaciones -->
+  <div *ngFor="let post of posts">
+    <app-post-card [post]="post"></app-post-card>
+  </div>
 
-    <!-- No Posts Message -->
+
+    <!-- Mensaje si no hay publicaciones -->
     <div *ngIf="showNoPostsMessage" class="no-posts-message">
-      <p>No hay publicaciones que mostrar</p>
+      <p>No hay publicaciones que mostrar.</p>
       <button (click)="refreshFeed()" class="refresh-button">
         Actualizar
       </button>
     </div>
 
-    <!-- Loading indicator -->
+    <!-- Indicador de carga -->
     <div *ngIf="isLoading" class="loading-container">
       <div class="loading-spinner"></div>
-      <p>Cargando más publicaciones...</p>
+      <p>Cargando publicaciones...</p>
     </div>
 
-    <!-- No more posts message -->
+    <!-- Fin de publicaciones -->
     <div *ngIf="!hasMorePosts && !isLoading && hasPosts" class="no-more-posts">
-      <p>No hay más publicaciones que mostrar</p>
+      <p>No hay más publicaciones.</p>
     </div>
   </div>
-</div>

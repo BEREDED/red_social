@@ -9,13 +9,22 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class JoinExitComponent {
   @Input() communityId: string = '';
-  @Input() initialJoinState: boolean = false;
+
+  private _isinscrito: boolean = false;
+
+  @Input()
+  set isinscrito(value: boolean) {
+    this._isinscrito = value;
+    this.isJoined = value; // se actualiza el estado visible
+  }
+
+  get isinscrito(): boolean {
+    return this._isinscrito;
+  }
 
   isJoined: boolean = false;
 
-  ngOnInit() {
-    this.isJoined = this.initialJoinState;
-  }
+  constructor(private usuariosService: UsuariosService) {}
 
   toggleJoin() {
     this.isJoined = !this.isJoined;
@@ -26,14 +35,26 @@ export class JoinExitComponent {
       this.leaveCommunity();
     }
   }
+
   private joinCommunity() {
     console.log(`Uniéndose a la comunidad: ${this.communityId}`);
-    // Aquí harías la llamada a tu API para unirse
-    // this.communityService.joinCommunity(this.communityId).subscribe(...)
+    const Fecha_Union = new Date().toISOString().split('T')[0];
+    this.usuariosService.postInscribirForo(
+      this.communityId,
+      String(localStorage.getItem('correoGlobal')),
+      Fecha_Union
+    ).subscribe({
+      next: (response) => {
+        console.log(response.Mensaje);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    });
   }
+
   private leaveCommunity() {
     console.log(`Saliendo de la comunidad: ${this.communityId}`);
-    // Aquí harías la llamada a tu API para salir
-    // this.communityService.leaveCommunity(this.communityId).subscribe(...)
+    // Aquí podrías hacer una llamada similar para eliminar al usuario del foro
   }
 }
