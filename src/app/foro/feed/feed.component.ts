@@ -1,8 +1,7 @@
 // feed.component.ts
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Post, Comment } from '../../modelos/post.interface';
-
-// Interfaces definidas directamente en el componente
 
 @Component({
   selector: 'app-feed',
@@ -10,7 +9,7 @@ import { Post, Comment } from '../../modelos/post.interface';
   styleUrls: ['./feed.component.scss'],
   standalone: false,
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   isLoading = false;
   page = 1;
@@ -19,36 +18,72 @@ export class FeedComponent implements OnInit {
   // Para comentarios
   commentTexts: { [postId: string]: string } = {};
 
+  // Para manejar subscripciones
+  private subscriptions: Subscription[] = [];
+
+  constructor(
+    // Inyectar aquí los servicios necesarios
+    // private postService: PostService,
+    // private authService: AuthService
+  ) {}
+
   ngOnInit(): void {
     this.loadInitialPosts();
   }
 
-  loadInitialPosts(): void {
-    this.isLoading = true;
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 
-    setTimeout(() => {
-      this.posts = this.generateMockPosts(10);
-      this.isLoading = false;
-    }, 500);
+  loadInitialPosts(): void {
+    if (this.isLoading) return;
+
+    this.isLoading = true;
+    this.page = 1;
+
+    // Implementar aquí la llamada al servicio
+    // this.postService.getPosts(this.page).subscribe({
+    //   next: (response) => {
+    //     this.posts = response.posts;
+    //     this.hasMorePosts = response.hasMore;
+    //     this.isLoading = false;
+    //   },
+    //   error: (error) => {
+    //     console.error('Error loading posts:', error);
+    //     this.isLoading = false;
+    //     this.handleLoadError();
+    //   }
+    // });
+
+    // Placeholder temporal - remover cuando se implemente el servicio
+    console.log('Loading initial posts - implement service call here');
+    this.isLoading = false;
   }
 
   loadMorePosts(): void {
     if (this.isLoading || !this.hasMorePosts) return;
 
     this.isLoading = true;
+    const nextPage = this.page + 1;
 
-    setTimeout(() => {
-      const newPosts = this.generateMockPosts(5, this.posts.length);
-      this.posts = [...this.posts, ...newPosts];
-      this.page++;
+    // Implementar aquí la llamada al servicio para más posts
+    // this.postService.getPosts(nextPage).subscribe({
+    //   next: (response) => {
+    //     this.posts = [...this.posts, ...response.posts];
+    //     this.page = nextPage;
+    //     this.hasMorePosts = response.hasMore;
+    //     this.isLoading = false;
+    //   },
+    //   error: (error) => {
+    //     console.error('Error loading more posts:', error);
+    //     this.isLoading = false;
+    //     this.handleLoadError();
+    //   }
+    // });
 
-      // Simular que no hay más posts después de cargar muchos
-      if (this.posts.length > 50) {
-        this.hasMorePosts = false;
-      }
-
-      this.isLoading = false;
-    }, 800);
+    // Placeholder temporal - remover cuando se implemente el servicio
+    console.log(`Loading more posts for page ${nextPage} - implement service call here`);
+    this.isLoading = false;
   }
 
   @HostListener('scroll', ['$event'])
@@ -64,62 +99,6 @@ export class FeedComponent implements OnInit {
     }
   }
 
-  generateMockPosts(count: number, startIndex: number = 0): Post[] {
-    const authors = [
-      'María González', 'Carlos Rodríguez', 'Ana Martínez', 'Luis García',
-      'Carmen López', 'José Hernández', 'Laura Pérez', 'Miguel Torres',
-      'Elena Ruiz', 'David Morales', 'Isabel Jiménez', 'Antonio Muñoz'
-    ];
-
-    const contents = [
-      '¡Hola a todos! ¿Cómo están pasando su día? Espero que muy bien 😊',
-      'Acabo de terminar mi proyecto final. ¡Qué alivio! Ya era hora de descansar un poco.',
-      'Compartiendo algunos pensamientos sobre el nuevo curso que empecé. Muy interesante hasta ahora.',
-      '¿Alguien más está emocionado por el fin de semana? Ya tengo planes increíbles.',
-      'Reflexionando sobre los cambios que he hecho este año. Ha sido todo un viaje.',
-      'Buenos días comunidad. Espero que tengan un excelente día lleno de logros.',
-      'Pregunta para ustedes: ¿cuál ha sido su mayor aprendizaje este mes?',
-      'Compartiendo un momento de gratitud. Agradecido por todas las oportunidades.',
-      'Terminé de leer un libro increíble. Las recomendaciones siempre son bienvenidas.',
-      '¡Por fin viernes! ¿Qué planes tienen para relajarse?',
-      'Motivación del día: cada pequeño paso cuenta hacia nuestros objetivos.',
-      'Reflexión matutina: la perseverancia siempre da frutos al final.',
-    ];
-
-    return Array.from({ length: count }, (_, i) => {
-      const randomAuthor = authors[Math.floor(Math.random() * authors.length)];
-      const randomContent = contents[Math.floor(Math.random() * contents.length)];
-      const randomDate = new Date(Date.now() - Math.random() * 7 * 24 * 60 * 60 * 1000);
-
-      return {
-        id: `post-${startIndex + i + 1}`,
-        author: randomAuthor,
-        content: randomContent,
-        createdAt: randomDate,
-        comments: this.generateMockComments(Math.floor(Math.random() * 4)) // 0-3 comentarios
-      };
-    });
-  }
-
-  generateMockComments(count: number): Comment[] {
-    const authors = ['Pedro Silva', 'Lucía Moreno', 'Roberto Castro', 'Andrea Vega'];
-    const comments = [
-      '¡Totalmente de acuerdo!',
-      'Muy buen punto, gracias por compartir.',
-      'Interesante perspectiva.',
-      '¡Excelente! Me gusta tu enfoque.',
-      'Gracias por la inspiración.',
-      '¡Qué genial! Felicidades.',
-    ];
-
-    return Array.from({ length: count }, (_, i) => ({
-      id: `comment-${Date.now()}-${i}`,
-      author: authors[Math.floor(Math.random() * authors.length)],
-      content: comments[Math.floor(Math.random() * comments.length)],
-      createdAt: new Date(Date.now() - Math.random() * 24 * 60 * 60 * 1000)
-    }));
-  }
-
   canComment(postId: string): boolean {
     const content = this.commentTexts[postId] || '';
     return content.trim().length > 0 && content.length <= 300;
@@ -130,19 +109,59 @@ export class FeedComponent implements OnInit {
     if (!this.canComment(postId)) return;
 
     const post = this.posts.find(p => p.id === postId);
-    if (post) {
-      const newComment: Comment = {
-        id: `comment-${Date.now()}`,
-        author: 'Tú', // En producción sería el usuario actual
-        content: content.trim(),
-        createdAt: new Date()
-      };
+    if (!post) return;
 
-      post.comments.push(newComment);
-      this.commentTexts[postId] = '';
+    // Implementar aquí la llamada al servicio para agregar comentario
+    // this.postService.addComment(postId, content.trim()).subscribe({
+    //   next: (newComment) => {
+    //     post.comments.push(newComment);
+    //     this.commentTexts[postId] = '';
+    //   },
+    //   error: (error) => {
+    //     console.error('Error adding comment:', error);
+    //     this.handleCommentError();
+    //   }
+    // });
+
+    // Placeholder temporal - crear comentario local
+    const newComment: Comment = {
+      id: `temp-comment-${Date.now()}`,
+      author: 'Usuario Actual', // Obtener del servicio de autenticación
+      content: content.trim(),
+      createdAt: new Date()
+    };
+
+    post.comments.push(newComment);
+    this.commentTexts[postId] = '';
+
+    console.log('Adding comment - implement service call here:', newComment);
+  }
+
+  // Métodos para manejar datos desde servicios externos
+  setPosts(posts: Post[]): void {
+    this.posts = posts;
+  }
+
+  addPosts(posts: Post[]): void {
+    this.posts = [...this.posts, ...posts];
+  }
+
+  addPost(post: Post): void {
+    this.posts.unshift(post); // Agregar al inicio
+  }
+
+  updatePost(updatedPost: Post): void {
+    const index = this.posts.findIndex(p => p.id === updatedPost.id);
+    if (index !== -1) {
+      this.posts[index] = updatedPost;
     }
   }
 
+  removePost(postId: string): void {
+    this.posts = this.posts.filter(p => p.id !== postId);
+  }
+
+  // Métodos de utilidad
   getTimeAgo(date: Date): string {
     const now = new Date();
     const diffInMs = now.getTime() - date.getTime();
@@ -156,5 +175,35 @@ export class FeedComponent implements OnInit {
     if (diffInDays < 7) return `${diffInDays}d`;
 
     return date.toLocaleDateString();
+  }
+
+  // Métodos para manejar errores
+  private handleLoadError(): void {
+    // Implementar manejo de errores para carga de posts
+    // Mostrar toast, mensaje de error, etc.
+    console.error('Error loading posts');
+  }
+
+  private handleCommentError(): void {
+    // Implementar manejo de errores para comentarios
+    // Mostrar toast, mensaje de error, etc.
+    console.error('Error adding comment');
+  }
+
+  // Métodos para refresh y recarga
+  refreshFeed(): void {
+    this.posts = [];
+    this.page = 1;
+    this.hasMorePosts = true;
+    this.loadInitialPosts();
+  }
+
+  // Getters para el template
+  get hasPosts(): boolean {
+    return this.posts.length > 0;
+  }
+
+  get showNoPostsMessage(): boolean {
+    return !this.hasPosts && !this.isLoading;
   }
 }

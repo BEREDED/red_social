@@ -7,6 +7,7 @@
 
   <!-- Posts Feed -->
   <div class="posts-container">
+    <!-- Posts List -->
     <app-post-card
       *ngFor="let post of posts"
       [post]="post"
@@ -15,6 +16,14 @@
       (addComment)="onComment(post.id)">
     </app-post-card>
 
+    <!-- No Posts Message -->
+    <div *ngIf="showNoPostsMessage" class="no-posts-message">
+      <p>No hay publicaciones que mostrar</p>
+      <button (click)="refreshFeed()" class="refresh-button">
+        Actualizar
+      </button>
+    </div>
+
     <!-- Loading indicator -->
     <div *ngIf="isLoading" class="loading-container">
       <div class="loading-spinner"></div>
@@ -22,7 +31,7 @@
     </div>
 
     <!-- No more posts message -->
-    <div *ngIf="!hasMorePosts && !isLoading" class="no-more-posts">
+    <div *ngIf="!hasMorePosts && !isLoading && hasPosts" class="no-more-posts">
       <p>No hay más publicaciones que mostrar</p>
     </div>
   </div>
