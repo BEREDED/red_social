@@ -4,10 +4,11 @@ import { foros, Usuario, Usuario_ini, Usuario_rec, Post } from '../modelos/model
 import { Usu_actulizar } from '../modelos/us_actulizar';
 import { getdata } from '../modelos/getdata.interface';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
-  api_http_rout = 'http://localhost:3000/';
+  api_http_rout = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
   getForos() {
