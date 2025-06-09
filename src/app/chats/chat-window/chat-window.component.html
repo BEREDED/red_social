@@ -1,16 +1,13 @@
-<div class="chat-window">
+<div class="chat-window" *ngIf="hasParticipant">
   <!-- Header del chat
 
-  <span class="participant-status">
-    {{ participant.isOnline ? 'En línea' : 'Desconectado' }}
-  </span>
 -->
   <div class="chat-header">
     <div class="participant-info">
       <div class="participant-avatar">
-        <img *ngIf="participant.avatar; else initialsAvatar"
-             [src]="participant.avatar"
-             [alt]="participant.name"
+        <img *ngIf="participantAvatar; else initialsAvatar"
+             [src]="participantAvatar"
+             [alt]="participantName"
              class="avatar-image">
 
         <ng-template #initialsAvatar>
@@ -22,7 +19,7 @@
       </div>
 
       <div class="participant-details">
-        <h3 class="participant-name">{{ participant.name }}</h3>
+        <h3 class="participant-name">{{ participantName }}</h3>
 
       </div>
     </div>

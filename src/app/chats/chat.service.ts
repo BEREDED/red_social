@@ -30,91 +30,11 @@ export interface ChatConversation {
   providedIn: 'root'
 })
 export class ChatService {
-  private currentUserId = 'user1'; // Usuario actual
+  private currentUserId: string = '';
   private conversationsSubject = new BehaviorSubject<ChatConversation[]>([]);
   private selectedChatSubject = new BehaviorSubject<string | null>(null);
 
-  // Mock data
-  private mockUsers: User[] = [
-    { id: 'user2', name: 'Ana García', avatar: '', isOnline: true },
-    { id: 'user3', name: 'Carlos López', avatar: '', isOnline: false },
-    { id: 'user4', name: 'María Rodríguez', avatar: '', isOnline: true },
-    { id: 'user5', name: 'Juan Pérez', avatar: '', isOnline: false },
-    { id: 'user6', name: 'Sofia Martínez', avatar: '', isOnline: true }
-  ];
-
-  private mockMessages: ChatMessage[] = [
-    {
-      id: 'msg1',
-      senderId: 'user2',
-      receiverId: 'user1',
-      content: '¡Hola! ¿Cómo estás?',
-      timestamp: new Date(Date.now() - 300000),
-      isFromCurrentUser: false
-    },
-    {
-      id: 'msg2',
-      senderId: 'user1',
-      receiverId: 'user2',
-      content: '¡Hola Ana! Todo bien, ¿y tú?',
-      timestamp: new Date(Date.now() - 240000),
-      isFromCurrentUser: true
-    },
-    {
-      id: 'msg3',
-      senderId: 'user2',
-      receiverId: 'user1',
-      content: 'Muy bien también. ¿Nos vemos mañana para el proyecto?',
-      timestamp: new Date(Date.now() - 180000),
-      isFromCurrentUser: false
-    },
-    {
-      id: 'msg4',
-      senderId: 'user3',
-      receiverId: 'user1',
-      content: 'Hey, ¿tienes un momento para revisar el código?',
-      timestamp: new Date(Date.now() - 120000),
-      isFromCurrentUser: false
-    },
-    {
-      id: 'msg5',
-      senderId: 'user4',
-      receiverId: 'user1',
-      content: '¡Perfecto! Nos vemos en la reunión',
-      timestamp: new Date(Date.now() - 60000),
-      isFromCurrentUser: false
-    }
-  ];
-
-  constructor() {
-    this.initializeConversations();
-  }
-
-  private initializeConversations(): void {
-    const conversations: ChatConversation[] = this.mockUsers.map(user => {
-      const userMessages = this.mockMessages.filter(
-        msg => msg.senderId === user.id || msg.receiverId === user.id
-      );
-
-      const lastMessage = userMessages.length > 0
-        ? userMessages[userMessages.length - 1]
-        : undefined;
-
-      const unreadCount = userMessages.filter(
-        msg => msg.senderId === user.id && !msg.isFromCurrentUser
-      ).length;
-
-      return {
-        id: `chat_${user.id}`,
-        participant: user,
-        messages: userMessages,
-        lastMessage,
-        unreadCount
-      };
-    });
-
-    this.conversationsSubject.next(conversations);
-  }
+  constructor() { }
 
   // Observables públicos
   getConversations(): Observable<ChatConversation[]> {
@@ -125,10 +45,36 @@ export class ChatService {
     return this.selectedChatSubject.asObservable();
   }
 
-  // Métodos públicos
+  // Métodos de configuración
+  setCurrentUserId(userId: string): void {
+    this.currentUserId = userId;
+  }
+
+  getCurrentUserId(): string {
+    return this.currentUserId;
+  }
+
+  // Métodos para manejar conversaciones
+  setConversations(conversations: ChatConversation[]): void {
+    this.conversationsSubject.next(conversations);
+  }
+
+  updateConversation(conversation: ChatConversation): void {
+    const conversations = this.conversationsSubject.value;
+    const index = conversations.findIndex(conv => conv.id === conversation.id);
+
+    if (index !== -1) {
+      conversations[index] = conversation;
+      this.conversationsSubject.next([...conversations]);
+    } else {
+      conversations.push(conversation);
+      this.conversationsSubject.next([...conversations]);
+    }
+  }
+
+  // Métodos para manejar chat seleccionado
   selectChat(chatId: string): void {
     this.selectedChatSubject.next(chatId);
-    // Marcar mensajes como leídos
     this.markMessagesAsRead(chatId);
   }
 
@@ -137,13 +83,14 @@ export class ChatService {
     return conversations.find(conv => conv.id === chatId);
   }
 
+  // Métodos para manejar mensajes
   sendMessage(chatId: string, content: string): void {
     const conversations = this.conversationsSubject.value;
     const chatIndex = conversations.findIndex(conv => conv.id === chatId);
 
-    if (chatIndex !== -1) {
+    if (chatIndex !== -1 && this.currentUserId) {
       const newMessage: ChatMessage = {
-        id: `msg_${Date.now()}`,
+        id: this.generateMessageId(),
         senderId: this.currentUserId,
         receiverId: conversations[chatIndex].participant.id,
         content: content.trim(),
@@ -155,20 +102,69 @@ export class ChatService {
       conversations[chatIndex].lastMessage = newMessage;
 
       this.conversationsSubject.next([...conversations]);
+
+      // Aquí puedes emitir el evento para enviar el mensaje al servidor
+      this.onMessageSent(newMessage, chatId);
     }
   }
 
-  private markMessagesAsRead(chatId: string): void {
+  addMessage(chatId: string, message: ChatMessage): void {
     const conversations = this.conversationsSubject.value;
     const chatIndex = conversations.findIndex(conv => conv.id === chatId);
 
     if (chatIndex !== -1) {
-      conversations[chatIndex].unreadCount = 0;
+      // Verificar si el mensaje es del usuario actual
+      message.isFromCurrentUser = message.senderId === this.currentUserId;
+
+      conversations[chatIndex].messages.push(message);
+      conversations[chatIndex].lastMessage = message;
+
+      // Si no es del usuario actual, incrementar contador de no leídos
+      if (!message.isFromCurrentUser) {
+        conversations[chatIndex].unreadCount++;
+      }
+
       this.conversationsSubject.next([...conversations]);
     }
   }
 
-  getCurrentUserId(): string {
-    return this.currentUserId;
+  markMessagesAsRead(chatId: string): void {
+    const conversations = this.conversationsSubject.value;
+    const chatIndex = conversations.findIndex(conv => conv.id === chatId);
+
+    if (chatIndex !== -1 && conversations[chatIndex].unreadCount > 0) {
+      conversations[chatIndex].unreadCount = 0;
+      this.conversationsSubject.next([...conversations]);
+
+      // Aquí puedes emitir el evento para marcar como leído en el servidor
+      this.onMessagesMarkedAsRead(chatId);
+    }
+  }
+
+  // Métodos privados y utilidades
+  private generateMessageId(): string {
+    return `msg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  // Hooks para integración con servicios externos
+  private onMessageSent(message: ChatMessage, chatId: string): void {
+    // Implementar aquí la lógica para enviar el mensaje al servidor
+    // Por ejemplo: this.websocketService.sendMessage(message);
+    console.log('Message sent:', message, 'in chat:', chatId);
+  }
+
+  private onMessagesMarkedAsRead(chatId: string): void {
+    // Implementar aquí la lógica para marcar mensajes como leídos en el servidor
+    // Por ejemplo: this.apiService.markAsRead(chatId);
+    console.log('Messages marked as read for chat:', chatId);
+  }
+
+  // Métodos para limpiar datos
+  clearConversations(): void {
+    this.conversationsSubject.next([]);
+  }
+
+  clearSelectedChat(): void {
+    this.selectedChatSubject.next(null);
   }
 }

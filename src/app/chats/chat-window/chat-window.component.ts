@@ -1,4 +1,6 @@
-import { Component, Input, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ChatService, ChatConversation, ChatMessage, User } from '../chat.service';
 
 @Component({
   selector: 'app-chat-window',
@@ -6,149 +8,29 @@ import { Component, Input, OnInit, AfterViewChecked, ViewChild, ElementRef } fro
   styleUrls: ['./chat-window.component.scss'],
   standalone: false
 })
-export class ChatWindowComponent implements OnInit, AfterViewChecked {
+export class ChatWindowComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Input() chatId!: string;
   @ViewChild('messagesContainer') messagesContainer!: ElementRef;
 
-  // Datos mock para pruebas
-  participant = {
-    id: '2',
-    name: 'Juan Pérez',
-    avatar: '',
-    isOnline: true
-  };
-
-  messages = [
-    {
-      id: '1',
-      senderId: '2',
-      receiverId: '1',
-      content: 'Hola! ¿Cómo estás?',
-      timestamp: new Date(Date.now() - 1000 * 60 * 30), // 30 min ago
-      isFromCurrentUser: false
-    },
-    {
-      id: '2',
-      senderId: '1',
-      receiverId: '2',
-      content: '¡Hola! Todo bien por aquí, ¿y tú?',
-      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
-      isFromCurrentUser: true
-    },
-    {
-      id: '3',
-      senderId: '2',
-      receiverId: '1',
-      content: 'Excelente! Quería preguntarte sobre el proyecto que estamos desarrollando',
-      timestamp: new Date(Date.now() - 1000 * 60 * 20), // 20 min ago
-      isFromCurrentUser: false
-    },
-    {
-      id: '4',
-      senderId: '1',
-      receiverId: '2',
-      content: 'Claro, dime qué necesitas saber',
-      timestamp: new Date(Date.now() - 1000 * 60 * 15), // 15 min ago
-      isFromCurrentUser: true
-    },
-    {
-      id: '5',
-      senderId: '2',
-      receiverId: '1',
-      content: '¿Podemos revisar los componentes de Angular que estamos creando? Tengo algunas dudas sobre la estructura',
-      timestamp: new Date(Date.now() - 1000 * 60 * 10), // 10 min ago
-      isFromCurrentUser: false
-    },
-    {
-      id: '5',
-      senderId: '2',
-      receiverId: '1',
-      content: '¿Podemos revisar los componentes de Angular que estamos creando? Tengo algunas dudas sobre la estructura',
-      timestamp: new Date(Date.now() - 1000 * 60 * 10), // 10 min ago
-      isFromCurrentUser: false
-    },
-    {
-      id: '5',
-      senderId: '2',
-      receiverId: '1',
-      content: '¿Podemos revisar los componentes de Angular que estamos creando? Tengo algunas dudas sobre la estructura',
-      timestamp: new Date(Date.now() - 1000 * 60 * 10), // 10 min ago
-      isFromCurrentUser: false
-    },
-    {
-      id: '5',
-      senderId: '2',
-      receiverId: '1',
-      content: '¿Podemos revisar los componentes de Angular que estamos creando? Tengo algunas dudas sobre la estructura',
-      timestamp: new Date(Date.now() - 1000 * 60 * 10), // 10 min ago
-      isFromCurrentUser: false
-    },
-    {
-      id: '5',
-      senderId: '2',
-      receiverId: '1',
-      content: '¿Podemos revisar los componentes de Angular que estamos creando? Tengo algunas dudas sobre la estructura',
-      timestamp: new Date(Date.now() - 1000 * 60 * 10), // 10 min ago
-      isFromCurrentUser: false
-    },
-    {
-      id: '2',
-      senderId: '1',
-      receiverId: '2',
-      content: '¡Hola! Todo bien por aquí, ¿y tú?',
-      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
-      isFromCurrentUser: true
-    },
-    {
-      id: '2',
-      senderId: '1',
-      receiverId: '2',
-      content: '¡Hola! Todo bien por aquí, ¿y tú?',
-      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
-      isFromCurrentUser: true
-    },
-    {
-      id: '2',
-      senderId: '1',
-      receiverId: '2',
-      content: '¡Hola! Todo bien por aquí, ¿y tú?',
-      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
-      isFromCurrentUser: true
-    },
-    {
-      id: '2',
-      senderId: '1',
-      receiverId: '2',
-      content: '¡Hola! Todo bien por aquí, ¿y tú?',
-      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
-      isFromCurrentUser: true
-    },
-    {
-      id: '2',
-      senderId: '1',
-      receiverId: '2',
-      content: '¡Hola! Todo bien por aquí, ¿y tú?',
-      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
-      isFromCurrentUser: true
-    },
-    {
-      id: '2',
-      senderId: '1',
-      receiverId: '2',
-      content: '¡Hola! Todo bien por aquí, ¿y tú?',
-      timestamp: new Date(Date.now() - 1000 * 60 * 25), // 25 min ago
-      isFromCurrentUser: true
-    },
-  ];
-
+  participant: User | null = null;
+  messages: ChatMessage[] = [];
   newMessage: string = '';
-  private shouldScrollToBottom = true;
+  isLoading: boolean = true;
 
-  constructor() { }
+  private shouldScrollToBottom = true;
+  private subscriptions: Subscription[] = [];
+
+  constructor(private chatService: ChatService) { }
 
   ngOnInit(): void {
-    // Aquí cargarías los mensajes del chat específico
-    this.loadChatMessages();
+    if (this.chatId) {
+      this.loadChatData();
+      this.subscribeToConversationUpdates();
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   ngAfterViewChecked(): void {
@@ -157,33 +39,44 @@ export class ChatWindowComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  loadChatMessages() {
-    // Aquí harías la llamada al servicio para cargar los mensajes
-    // Por ahora usamos datos mock
-    console.log('Loading messages for chat:', this.chatId);
-  }
+  private loadChatData(): void {
+    this.isLoading = true;
 
-  onSendMessage() {
-    if (this.newMessage.trim()) {
-      const message = {
-        id: Date.now().toString(),
-        senderId: '1', // ID del usuario actual
-        receiverId: this.participant.id,
-        content: this.newMessage.trim(),
-        timestamp: new Date(),
-        isFromCurrentUser: true
-      };
-
-      this.messages.push(message);
-      this.newMessage = '';
+    const conversation = this.chatService.getChatById(this.chatId);
+    if (conversation) {
+      this.participant = conversation.participant;
+      this.messages = conversation.messages;
+      this.isLoading = false;
       this.shouldScrollToBottom = true;
-
-      // Aquí enviarías el mensaje al servicio
-      console.log('Sending message:', message);
     }
   }
 
-  onKeyPress(event: KeyboardEvent) {
+  private subscribeToConversationUpdates(): void {
+    const conversationSub = this.chatService.getConversations().subscribe(conversations => {
+      const currentConversation = conversations.find(conv => conv.id === this.chatId);
+      if (currentConversation) {
+        const previousMessageCount = this.messages.length;
+        this.messages = currentConversation.messages;
+
+        // Solo hacer scroll si hay nuevos mensajes
+        if (this.messages.length > previousMessageCount) {
+          this.shouldScrollToBottom = true;
+        }
+      }
+    });
+
+    this.subscriptions.push(conversationSub);
+  }
+
+  onSendMessage(): void {
+    if (this.newMessage.trim() && this.chatId) {
+      this.chatService.sendMessage(this.chatId, this.newMessage.trim());
+      this.newMessage = '';
+      this.shouldScrollToBottom = true;
+    }
+  }
+
+  onKeyPress(event: KeyboardEvent): void {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
       this.onSendMessage();
@@ -192,9 +85,11 @@ export class ChatWindowComponent implements OnInit, AfterViewChecked {
 
   private scrollToBottom(): void {
     try {
-      const container = this.messagesContainer.nativeElement;
-      container.scrollTop = container.scrollHeight;
-      this.shouldScrollToBottom = false;
+      if (this.messagesContainer?.nativeElement) {
+        const container = this.messagesContainer.nativeElement;
+        container.scrollTop = container.scrollHeight;
+        this.shouldScrollToBottom = false;
+      }
     } catch (err) {
       console.error('Error scrolling to bottom:', err);
     }
@@ -208,11 +103,33 @@ export class ChatWindowComponent implements OnInit, AfterViewChecked {
   }
 
   getInitials(): string {
+    if (!this.participant?.name) return '';
+
     return this.participant.name
       .split(' ')
       .map(word => word.charAt(0))
       .join('')
       .toUpperCase()
       .substring(0, 2);
+  }
+
+  get hasParticipant(): boolean {
+    return this.participant !== null && this.participant !== undefined;
+  }
+
+  get participantName(): string {
+    return this.participant?.name || '';
+  }
+
+  get participantAvatar(): string {
+    return this.participant?.avatar || '';
+  }
+
+  get participantIsOnline(): boolean {
+    return this.participant?.isOnline || false;
+  }
+
+  get hasMessages(): boolean {
+    return this.messages.length > 0;
   }
 }
