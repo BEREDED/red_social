@@ -37,24 +37,10 @@ export class ListaComponent implements OnInit {
   }
 
   onChatClick(chatId: string): void {
-    console.log(this.conversations)
+    this.chatSelected.emit(chatId)
   }
 
-  getTimeAgo(date: Date): string {
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffMinutes = Math.floor(diffMs / 60000);
-    const diffHours = Math.floor(diffMinutes / 60);
-    const diffDays = Math.floor(diffHours / 24);
 
-    if (diffMinutes < 1) return 'Ahora';
-    if (diffMinutes < 60) return `${diffMinutes}m`;
-    if (diffHours < 24) return `${diffHours}h`;
-    if (diffDays === 1) return 'Ayer';
-    if (diffDays < 7) return `${diffDays}d`;
-
-    return date.toLocaleDateString();
-  }
 
   getInitials(name: string): string {
     return name

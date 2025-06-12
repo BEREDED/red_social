@@ -5,21 +5,22 @@
   <div class="chat-header">
     <div class="participant-info">
       <div class="participant-avatar">
-        <img *ngIf="participantAvatar; else initialsAvatar"
-             [src]="participantAvatar"
-             [alt]="participantName"
+        <img
              class="avatar-image">
-
+/**ngIf="participantAvatar; else initialsAvatar"
+             [src]="participantAvatar"
+             [alt]="participantName"*/
         <ng-template #initialsAvatar>
           <div class="avatar-initials">
-            {{ getInitials() }}
+            ae
           </div>
+          /*{{ getInitials() }}*/
         </ng-template>
 
       </div>
 
       <div class="participant-details">
-        <h3 class="participant-name">{{ participantName }}</h3>
+        <h3 class="participant-name">/*{{ participantName }}*/</h3>
 
       </div>
     </div>

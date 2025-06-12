@@ -43,6 +43,6 @@ export const routes: Routes = [
   {
     path: '',
     redirectTo: 'inicio_sesion',
-    pathMatch: 'full',
+    pathMatch:'prefix',
   },
 ];

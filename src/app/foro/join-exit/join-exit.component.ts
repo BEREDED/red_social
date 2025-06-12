@@ -55,6 +55,14 @@ export class JoinExitComponent {
 
   private leaveCommunity() {
     console.log(`Saliendo de la comunidad: ${this.communityId}`);
-    // Aquí podrías hacer una llamada similar para eliminar al usuario del foro
+    this.usuariosService.postDesinscribirForo(this.communityId, String(localStorage.getItem('correoGlobal'))).subscribe({
+      next: (response) => {
+        console.log(response.Mensaje);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+      });
   }
 }
+
