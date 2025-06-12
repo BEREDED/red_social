@@ -13,6 +13,7 @@ export class PostCardComponent {
   @Input() commentText: string = '';
   @Output() commentTextChange = new EventEmitter<string>();
   @Output() addComment = new EventEmitter<string>();
+  @Input() idPost!: number;
 
   onCommentTextChange(value: string): void {
     this.commentTextChange.emit(value);
@@ -28,18 +29,19 @@ export class PostCardComponent {
     return this.commentText.trim().length > 0 && this.commentText.length <= 300;
   }
 
-  getTimeAgo(date: Date): string {
-    const now = new Date();
-    const diffInMs = now.getTime() - date.getTime();
-    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
-    const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
-    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+  getTimeAgo(fecha: string | Date): string {
+  const date = new Date(fecha);
+  if (isNaN(date.getTime())) return 'Fecha inválida';
 
-    if (diffInMinutes < 1) return 'Ahora';
-    if (diffInMinutes < 60) return `${diffInMinutes}m`;
-    if (diffInHours < 24) return `${diffInHours}h`;
-    if (diffInDays < 7) return `${diffInDays}d`;
+  const opciones: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  };
 
-    return date.toLocaleDateString();
-  }
+  return date.toLocaleString('es-MX', opciones).replace(',', '');
+}
 }

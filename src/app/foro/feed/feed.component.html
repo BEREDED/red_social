@@ -1,12 +1,12 @@
 <div class="feed-container">
   <!-- Publicar nuevo contenido -->
   <div class="publishing-section">
-    <app-publishing [Titulo_foro]="Titulo_foro"></app-publishing>
+    <app-publishing [Titulo_foro]="Titulo_foro" (nuevoPost)="refreshFeed()"></app-publishing>
   </div>
 
   <!-- Lista de publicaciones -->
   <div *ngFor="let post of posts">
-    <app-post-card [post]="post"></app-post-card>
+    <app-post-card [post]="post" [idPost]="post.id_post_out"></app-post-card>
   </div>
 
 

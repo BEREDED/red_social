@@ -1,6 +1,6 @@
-// comments-section.component.ts
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-
+import { Component, Input, OnInit } from '@angular/core';
+import { Comentario } from 'src/app/modelos/comentario.interface';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
   selector: 'app-comments-section',
@@ -8,38 +8,80 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./comments-section.component.scss'],
   standalone: false
 })
-export class CommentsSectionComponent {
-  @Input() comments: Comment[] = [];
-  @Input() postId: string = '';
+export class CommentsSectionComponent implements OnInit {
   commentText: string = '';
-  @Output() commentTextChange = new EventEmitter<string>();
-  @Output() addComment = new EventEmitter<void>();
+  comments: any[] = [];
+  @Input() idPost!: number;
+
+  coment_env: Comentario = {
+    Id_Publicacion: 0,
+    Correo_creador: '',
+    Contenido: '',
+    Fecha_Comentario: ''
+  };
+
+  constructor(private usuariosService: UsuariosService) {}
+
+  ngOnInit(): void {
+    this.obtenerComentariosPost();
+  }
 
   onCommentTextChange(event: Event): void {
     const target = event.target as HTMLTextAreaElement;
-    this.commentTextChange.emit(target.value);
+    this.commentText = target.value;
   }
 
   onAddComment(): void {
-    this.addComment.emit();
+    const fecha = new Date();
+    this.coment_env = {
+      Id_Publicacion: this.idPost,
+      Correo_creador: String(localStorage.getItem('correoGlobal')),
+      Contenido: this.commentText,
+      Fecha_Comentario: fecha.toISOString().slice(0, 16).replace('T', ' ')
+    };
+
+    this.usuariosService.crearComentario(this.coment_env).subscribe({
+      next: (response) => {
+        console.log(response.message);
+        this.commentText = '';
+        this.obtenerComentariosPost();
+      },
+      error: (error) => {
+        console.error(error.message);
+      }
+    });
   }
 
   canComment(): boolean {
     return this.commentText.trim().length > 0 && this.commentText.length <= 300;
   }
 
-  getTimeAgo(date: Date): string {
-    const now = new Date();
-    const diffInMs = now.getTime() - date.getTime();
-    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
-    const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
-    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+getTimeAgo(fecha: string): string {
+  const date = new Date(fecha);
+  if (isNaN(date.getTime())) return 'Fecha inválida';
 
-    if (diffInMinutes < 1) return 'Ahora';
-    if (diffInMinutes < 60) return `${diffInMinutes}m`;
-    if (diffInHours < 24) return `${diffInHours}h`;
-    if (diffInDays < 7) return `${diffInDays}d`;
+  const opciones: Intl.DateTimeFormatOptions = {
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  };
 
-    return date.toLocaleDateString();
+  return date.toLocaleString('es-MX', opciones).replace(',', '');
+}
+  obtenerComentariosPost() {
+    console.log("id que se manda:", this.idPost);
+    this.usuariosService.getComents(this.idPost).subscribe({
+      next: (res) => {
+        this.comments = res.Coments;
+        console.log(this)
+        console.log("Comentarios recibidos:", this.comments);
+      },
+      error: (err) => {
+        console.error("Error al obtener comentarios:", err);
+      }
+    });
   }
 }

@@ -1,15 +1,16 @@
 <!-- comments-section.component.html -->
 <!-- Comments Section -->
-<div class="comments-section" >
+<div class="comments-section">
   <div class="comments-list">
-    <div  class="comment">
+    <div class="comment" *ngFor="let comment of comments">
       <div class="comment-avatar">
-        ls
+        {{ comment.Usuario_creador.charAt(0).toUpperCase() }}{{ comment.Usuario_creador.charAt(1).toUpperCase() }}
       </div>
       <div class="comment-content">
-        <span class="comment-author">pene2</span>
-        <p class="comment-text">esto es pára ver como se mostraran los comentarios</p>
-        <span class="comment-time"></span>
+        <span class="comment-author">{{ comment.Usuario_creador }}</span>
+        <p class="comment-text">{{ comment.Contenido }}</p>
+        <div class="comment-time">{{ getTimeAgo(comment.Fecha_Comentario) }}</div>
+
       </div>
     </div>
   </div>
@@ -38,9 +39,3 @@
     {{ commentText.length }}/300
   </div>
 </div>
-<!--
-{{ comment.author.charAt(0).toUpperCase() }}
- {{ comment.author }}
-{{ comment.content }}
- {{ getTimeAgo(comment.createdAt) }}
--->

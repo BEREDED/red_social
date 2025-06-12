@@ -7,7 +7,7 @@
       </div>
       <div class="author-details">
         <h4 class="author-name">{{ post.Usuario_creador }}</h4>
-        <span class="post-time">{{ post.Fecha_Publicacion | date: 'short' }}</span>
+        <span class="post-time">{{ getTimeAgo((post.Fecha_Publicacion))}}</span>
       </div>
     </div>
   </div>
@@ -18,5 +18,5 @@
   </div>
 
   <!-- Comments Section -->
-  <app-comments-section></app-comments-section>
+  <app-comments-section [idPost]="idPost" ></app-comments-section>
 </div>

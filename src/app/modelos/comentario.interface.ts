@@ -1,6 +1,6 @@
 export interface Comentario{
-  id_post:number,
-  id_usuario:number,
-  texto:string,
-  fecha:Date
+  Id_Publicacion:number,
+  Correo_creador:string,
+  Contenido:string,
+  Fecha_Comentario:string
   }

@@ -37,6 +37,7 @@ export class InputComponent implements AfterViewInit {
   }
 
   sendMessage(): void {
+    //creacion de mensaje en db
     const trimmedMessage = this.message.trim();
     if (trimmedMessage && !this.disabled) {
       this.messageSent.emit(trimmedMessage);

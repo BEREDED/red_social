@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Post } from 'src/app/modelos/post.interface';
 
@@ -9,6 +9,7 @@ import { Post } from 'src/app/modelos/post.interface';
   standalone: false,
 })
 export class PublishingComponent {
+  @Output() nuevoPost = new EventEmitter<void>();
   @Input() Titulo_foro: string = '';
   postContent=''
   postcreate:Post={
@@ -16,7 +17,8 @@ export class PublishingComponent {
     correo_Usuario:'',
     Contenido:'',
     Fecha_Publicacion:new Date(),
-    Usuario_creador: ''
+    Usuario_creador: '',
+    id_post_out: 0
   }
 
   constructor( private usuariosService: UsuariosService) { }
@@ -44,6 +46,7 @@ export class PublishingComponent {
       this.usuariosService.postCrearPost(this.postcreate).subscribe({
         next: (response) =>{
           console.log(response.Mensaje)
+          this.nuevoPost.emit();
         },
         error: (error) =>{
           console.error(error)

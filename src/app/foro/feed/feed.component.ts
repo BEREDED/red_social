@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, HostListener, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener, Input, Output, EventEmitter } from '@angular/core';
 import { Post } from '../../modelos/post.interface';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -10,11 +10,11 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class FeedComponent implements OnInit, OnDestroy {
   @Input() Titulo_foro: string = '';
+  @Output() idPostSeleccionado = new EventEmitter<number>();
   posts: Post[] = [];
   isLoading = false;
   page = 1;
   hasMorePosts = true;
-
   commentTexts: { [postId: string]: string } = {};
 
   constructor(private usuariosService: UsuariosService) {}
@@ -25,6 +25,7 @@ export class FeedComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
+
   loadInitialPosts(): void {
     if (this.isLoading) return;
 
@@ -33,15 +34,18 @@ export class FeedComponent implements OnInit, OnDestroy {
 
     this.usuariosService.recuperarpsots(this.Titulo_foro).subscribe({
       next: (response) => {
+
         console.log("post recibidos:", response.posts);
-        const correoUsuario = localStorage.getItem('correoGlobal') || '';
         this.posts = response.posts.map(post => ({
-          Titulo_foro: this.Titulo_foro,
-          correo_Usuario: correoUsuario,
-          Contenido: post.Contenido,
-          Fecha_Publicacion:new Date( post.Fecha_Publicacion ) ,
-          Usuario_creador: post.Usuario_creador
-        }));
+        Titulo_foro: this.Titulo_foro,
+        correo_Usuario: '',
+        Contenido: post.Contenido,
+        Fecha_Publicacion: new Date(post.Fecha_Publicacion),
+        Usuario_creador: post.Usuario_creador,
+        id_post_out: Number(post.Id_Publicacion)
+}))
+.sort((a, b) => b.Fecha_Publicacion.getTime() - a.Fecha_Publicacion.getTime());
+
         this.isLoading = false;
       },
       error: (error) => {
@@ -50,7 +54,9 @@ export class FeedComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  emitirIdPost(id: number): void {
+  this.idPostSeleccionado.emit(id);
+}
   loadMorePosts(): void {
     if (this.isLoading || !this.hasMorePosts) return;
 
@@ -114,21 +120,12 @@ export class FeedComponent implements OnInit, OnDestroy {
     return new Date(date).toLocaleDateString();
   }
 
-  private handleLoadError(): void {
-    console.error('Error loading posts');
-  }
-
-  private handleCommentError(): void {
-    console.error('Error adding comment');
-  }
-
-  refreshFeed(): void {
-    this.posts = [];
-    this.page = 1;
-    this.hasMorePosts = true;
-    this.loadInitialPosts();
-  }
-
+ refreshFeed(): void {
+  this.posts = [];
+  this.page = 1;
+  this.hasMorePosts = true;
+  this.loadInitialPosts(); // ✅ recarga los posts
+}
   get hasPosts(): boolean {
     return this.posts.length > 0;
   }

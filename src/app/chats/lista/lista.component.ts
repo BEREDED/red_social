@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ChatService, ChatConversation } from '../chat.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+
 
 @Component({
   selector: 'app-lista',
@@ -8,12 +10,14 @@ import { ChatService, ChatConversation } from '../chat.service';
   standalone: false,
 })
 export class ListaComponent implements OnInit {
+  //llamado de ids tanto de log como con quien hablar
+  //id tanto usuario envio y el usuario de recibo
   @Output() chatSelected = new EventEmitter<string>();
-
-  conversations: ChatConversation[] = [];
+  //variable que nos diga elchat
+  conversations: any[] = [];
   selectedChatId: string | null = null;
 
-  constructor(private chatService: ChatService) {}
+  constructor( private usuarioservice: UsuariosService) { }
 
   ngOnInit(): void {
     this.loadConversations();
@@ -21,26 +25,19 @@ export class ListaComponent implements OnInit {
   }
 
   private loadConversations(): void {
-    this.chatService.getConversations().subscribe(conversations => {
-      this.conversations = conversations.sort((a, b) => {
-        if (!a.lastMessage && !b.lastMessage) return 0;
-        if (!a.lastMessage) return 1;
-        if (!b.lastMessage) return -1;
-
-        return b.lastMessage.timestamp.getTime() - a.lastMessage.timestamp.getTime();
-      });
-    });
+    this.usuarioservice.getUsuarios_Chats(String(localStorage.getItem('correoGlobal'))).subscribe({
+      next: (response) =>{
+        this.conversations=response.Usuarios_list
+        console.log(this.conversations)
+      }
+    })
   }
 
   private subscribeToSelectedChat(): void {
-    this.chatService.getSelectedChat().subscribe(chatId => {
-      this.selectedChatId = chatId;
-    });
   }
 
   onChatClick(chatId: string): void {
-    this.chatService.selectChat(chatId);
-    this.chatSelected.emit(chatId);
+    console.log(this.conversations)
   }
 
   getTimeAgo(date: Date): string {

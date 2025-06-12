@@ -1,18 +1,22 @@
-<!-- search-bar.component.html -->
 <div class="search-container">
   <input
-    type="text"
     [(ngModel)]="searchTerm"
-    (input)="filterUsuarios()"
-    placeholder="Buscar usuario por correo..."
+    (ngModelChange)="filterItems()"
+    placeholder="Buscar usuario o foro..."
     class="search-input"
+    type="text"
   />
-  <button class="search-button" (click)="onSearch()">🔍</button>
+  <button class="search-button" (click)="onSearch()">
+    🔍
+  </button>
 
-  <!-- Lista desplegable -->
-  <ul class="suggestions-list" *ngIf="filteredUsuarios.length > 0">
-    <li *ngFor="let usuario of filteredUsuarios" (click)="selectUsuario(usuario)">
-      {{ usuario.Correo }}
+  <ul *ngIf="filteredItems.length > 0" class="suggestions-list">
+    <li
+      *ngFor="let item of filteredItems"
+      (click)="selectItem(item)"
+    >
+      <span *ngIf="item.tipo === 'usuario'">👤 {{ item.valor }}</span>
+      <span *ngIf="item.tipo === 'foro'">📁 {{ item.valor }}</span>
     </li>
   </ul>
 </div>

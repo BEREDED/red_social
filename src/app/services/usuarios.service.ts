@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { foros, Usuario, Usuario_ini, Usuario_rec, Post } from '../modelos/modelosinfo.models';
+import { foros, Usuario, Usuario_ini, Usuario_rec, Post, Comentario } from '../modelos/modelosinfo.models';
 import { Usu_actulizar } from '../modelos/us_actulizar';
 import { getdata } from '../modelos/getdata.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Mensajes } from '../modelos/mensajes.interface';
 //environment.apiUrl
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
-  api_http_rout = "http://localhost:3000/";
-
+  //api_http_rout = "http://localhost:3000/";
+  api_http_rout= "https://x7s5xqc9-3000.usw3.devtunnels.ms/"
   constructor(private http: HttpClient) {}
   getForos() {
     return this.http.get(`${this.api_http_rout}usuarios`);
@@ -56,13 +57,38 @@ export class UsuariosService {
   postCrearPost(post:Post){
     return this.http.post<{Mensaje:string}>(`${this.api_http_rout}foro/Crear_post`, post)
   }
-  recuperarpsots(nombreForo: string): Observable<{ posts: { Fecha_Publicacion: string, Contenido: string, Usuario_creador: string }[] }> {
-  return this.http.post<{ posts: { Fecha_Publicacion: string, Contenido: string, Usuario_creador: string }[] }>(
+  recuperarpsots(nombreForo: string): Observable<{ posts: { Fecha_Publicacion: string, Contenido: string, Usuario_creador: string, Id_Publicacion:number  }[] }> {
+  return this.http.post<{ posts: { Fecha_Publicacion: string, Contenido: string, Usuario_creador: string ,Id_Publicacion:number}[] }>(
     `${this.api_http_rout}foro/recuperar_posts`,
     { nombreForo }
   );
   }
-  getallUsers(activated:boolean):Observable<{usuario:{correo:string}[]}>{
-    return this.http.post<{usuario:{correo:string}[]}>(`${this.api_http_rout}usuarios/getallusers`,{activated});
+  getallUsers_foros(activated: boolean): Observable<{ usuarios: any[], foros: any[] }> {
+  return this.http.post<{ usuarios: any[], foros: any[] }>(`${this.api_http_rout}usuarios/getallusers`,{activated});
+}
+
+ getComents(Id_Publicacion: number): Observable<{ Coments: { Contenido: string, Usuario_creador: string, Fecha_Comentario: string }[] }> {
+  return this.http.post<{ Coments: { Contenido: string, Usuario_creador: string, Fecha_Comentario: string }[] }>(
+    `${this.api_http_rout}foro/ObtenerComentarios`,
+    { Id_Publicacion }
+  );
   }
+
+  crearComentario(comentario:Comentario){
+    return this.http.post<{message:string}>(`${this.api_http_rout}foro/CrearComentario`,comentario)
+  }
+  nuevoChat(correoLog: string, correoRem: string, creadoEn: string): Observable<{ Id_Chat: number }> {
+  return this.http.post<{ Id_Chat: number }>(`${this.api_http_rout}chats/nuevo`, {
+    Correo_log: correoLog,
+    Correo_rem: correoRem,
+    Creado_en: creadoEn
+  });
+  }
+  getUsuarios_Chats(Correo_log: string): Observable<{ Usuarios_list: { Nombre: string, Apellido_Pat: string, UltimoMensaje: string | null, FechaUltimoMensaje: string | null }[] }> {
+  return this.http.post<{ Usuarios_list: { Nombre: string, Apellido_Pat: string, UltimoMensaje: string | null, FechaUltimoMensaje: string | null }[] }>(
+    `${this.api_http_rout}chats/participantes`,
+    { Correo_log }
+  );
+}
+
 }

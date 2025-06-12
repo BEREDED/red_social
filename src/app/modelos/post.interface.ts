@@ -4,4 +4,5 @@ export interface Post {
   Contenido:string;
   Fecha_Publicacion:Date;
   Usuario_creador: string;
+  id_post_out: number;
 }

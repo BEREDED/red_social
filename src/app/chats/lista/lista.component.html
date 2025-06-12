@@ -1,30 +1,29 @@
 <div class="chat-list">
   <div *ngFor="let conversation of conversations"
        class="chat-item"
-       [class.active]="selectedChatId === conversation.id"
-       (click)="onChatClick(conversation.id)">
+       [class.active]="selectedChatId === conversation.Id_Chat"
+       (click)="onChatClick(conversation.Id_Chat)">
 
     <div class="chat-avatar">
-      {{ getInitials(conversation.participant.name) }}
+      {{ getInitials(conversation.Nombre + ' ' + conversation.Apellido_Pat) }}
     </div>
 
     <div class="chat-info">
-      <div class="chat-name">{{ conversation.participant.name }}</div>
-      <div class="chat-last-message" *ngIf="conversation.lastMessage">
-        {{ conversation.lastMessage.content }}
+      <div class="chat-name">{{ conversation.Nombre }} {{ conversation.Apellido_Pat }}</div>
+
+      <div class="chat-last-message" *ngIf="conversation.UltimoMensaje">
+        {{ conversation.UltimoMensaje }}
       </div>
-      <div class="chat-last-message" *ngIf="!conversation.lastMessage">
+      <div class="chat-last-message" *ngIf="!conversation.UltimoMensaje">
         Sin mensajes
       </div>
     </div>
 
-    <div class="chat-meta" *ngIf="conversation.lastMessage">
+    <div class="chat-meta" *ngIf="conversation.FechaUltimoMensaje">
       <div class="chat-time">
-        {{ getTimeAgo(conversation.lastMessage.timestamp) }}
-      </div>
-      <div class="unread-badge" *ngIf="conversation.unreadCount > 0">
-        {{ conversation.unreadCount }}
+        {{ getTimeAgo(conversation.FechaUltimoMensaje) }}
       </div>
     </div>
   </div>
 </div>
+
