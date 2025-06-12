@@ -10,6 +10,7 @@ import { ChatService } from '../chat.service';
 export class MainChatComponent implements OnInit {
 // cambia a number si es un número
   selectedChatId: number | null = null;
+  selectedName: string | null =null;
 
   abrirChat(idChat: number): void {
     this.selectedChatId = idChat;  // <-- se actualiza el chat actual

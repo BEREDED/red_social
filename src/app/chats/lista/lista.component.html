@@ -2,7 +2,8 @@
   <div *ngFor="let conversation of conversations"
        class="chat-item"
        [class.active]="selectedChatId === conversation.Id_Chat"
-       (click)="onChatClick(conversation.Id_Chat)">
+       [class.active]="selectedName === conversation.Nombre +' ' +conversation.Apellido_Pat"
+       (click)="onChatClick(conversation.Id_Chat,conversation.Nombre,conversation.Apellido_Pat )">
 
     <div class="chat-avatar">
       {{ getInitials(conversation.Nombre + ' ' + conversation.Apellido_Pat) }}

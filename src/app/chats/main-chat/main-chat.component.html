@@ -9,7 +9,7 @@
     <!-- Área principal de chat -->
     <div class="chat-area">
       <div *ngIf="selectedChatId; else noSelection" class="chat-window-wrapper">
-        <app-chat-window [chatId]="selectedChatId"></app-chat-window>
+        <app-chat-window [chatId]="selectedChatId" ></app-chat-window>
       </div>
 
       <ng-template #noSelection>

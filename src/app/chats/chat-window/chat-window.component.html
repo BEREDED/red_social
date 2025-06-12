@@ -1,4 +1,4 @@
-<div class="chat-window" *ngIf="hasParticipant">
+<div class="chat-window">
   <!-- Header del chat
 
 -->
@@ -12,16 +12,14 @@
              [alt]="participantName"*/-->
         <ng-template #initialsAvatar>
           <div class="avatar-initials">
-            ae
+            {{getInitials( participantFullName)}}
           </div>
-          In
         </ng-template>
 
       </div>
 
       <div class="participant-details">
-        <h3 class="participant-name">aqui va el nombre de a quien se el eenvia el mensaje</h3>
-
+       <h3 class="participant-name">{{ participantFullName }}</h3>
       </div>
     </div>
 
@@ -37,23 +35,25 @@
   </div>
 
   <!-- Área de mensajes -->
-  <div class="messages-container" #messagesContainer >
+  <div class="messages-container">
     <div class="messages-list">
-      <!--*ngFor="let message of messages"
-           class="message-wrapper"
-           [class.own-message]="message.isFromCurrentUser"
-           [class.other-message]="!message.isFromCurrentUser"-->
-      <div >
+      <div *ngFor="let msg of Mensajes"
+        class="message-wrapper"
+        [class.own-message]="msg.isFromCurrentUser"
+        [class.other-message]="!msg.isFromCurrentUser">
 
-        <div class="message-bubble">
-          <div class="message-content">
-           <!--{{ message.content }}  -->
-          </div>
-
+          <div class="message-bubble">
+            <div class="message-meta">
+              <strong>{{ msg.Nombre }}</strong> — <span>{{ msg.Fecha_Envio }}</span>
         </div>
+          <div class="message-content">
+            {{ msg.Contenido }}
+          </div>
       </div>
     </div>
   </div>
+
+</div>
 
   <!-- Input para escribir mensajes -->
 

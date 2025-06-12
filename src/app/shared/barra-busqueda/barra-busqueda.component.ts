@@ -60,7 +60,7 @@ export class BarraBusquedaComponent implements OnInit {
       next: (res) => {
         const idChat = res.Id_Chat;
         console.log('ID del chat obtenido o creado:', idChat);
-        this.router.navigate(['/chats', this.searchTerm]);
+        this.router.navigate(['/chats']);
       },
       error: (err) => {
         console.error('Error al iniciar o obtener el chat:', err);

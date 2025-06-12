@@ -8,9 +8,11 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   standalone:false
 })
 export class ListaComponent implements OnInit {
-  @Output() chatSelected = new EventEmitter<number>();  // <-- número, no string
+  @Output() chatSelected = new EventEmitter<number>();
+  @Output() NombreUs= new EventEmitter<string>();
   conversations: any[] = [];
   selectedChatId: number | null = null;
+  selectedName: string|null=null;
 
   constructor(private usuariosService: UsuariosService) {}
 
@@ -18,13 +20,19 @@ export class ListaComponent implements OnInit {
     this.usuariosService.getUsuarios_Chats(String(localStorage.getItem('correoGlobal'))).subscribe({
       next: (response) => {
         this.conversations = response.Usuarios_list;
+        console.log(this.conversations)
+        const nambe_header=(this.conversations + ' ' + this.conversations)
+        console.log(this.conversations)
       },
     });
   }
 
-  onChatClick(chatId: number): void {
+  onChatClick(chatId: number, nombre:string, apellido:string): void {
     this.selectedChatId = chatId;
-    this.chatSelected.emit(chatId);  // <-- emitir al padre
+    this.chatSelected.emit(chatId);
+    this.selectedName =nombre +' ' + apellido // <-- emitir al padre
+    this.NombreUs.emit(this.selectedName)
+    console.log(this.selectedName)
   }
 
   getInitials(name: string): string {

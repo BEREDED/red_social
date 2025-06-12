@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy, AfterViewChecked, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, AfterViewChecked, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Mensajes } from '../../modelos/mensajes.interface';
 
@@ -10,15 +10,17 @@ import { Mensajes } from '../../modelos/mensajes.interface';
 })
 export class ChatWindowComponent implements OnInit{
   @Input() chatId!: number;
+  participantFullName: string = '';
   Mensajes:any[]=[]
-  ngOnChanges(): void {
-    if (this.chatId) {
-    console.log("Id desde el window",this.chatId);
-    this.loadChatData(this.chatId);
-  }
+  conversations: any[] = [];
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['chatId'] && !changes['chatId'].firstChange) {
+      this.loadChatData(this.chatId);
+    }
   }
 
   @ViewChild('messagesContainer') messagesContainer!: ElementRef;
+
 
 
   isLoading: boolean = true;
@@ -33,61 +35,65 @@ export class ChatWindowComponent implements OnInit{
 
   ngOnDestroy(): void {
   }
+private loadChatData(idChat: number): void {
+  this.isLoading = true;
+  const correoActual = localStorage.getItem('correoGlobal');
 
-  ngAfterViewChecked(): void {
-    if (this.shouldScrollToBottom) {
-      this.scrollToBottom();
+  this.usuariosService.getmensajes(idChat).subscribe({
+    next: (response) => {
+      this.Mensajes = response.Mensajes.map((msg: any) => ({
+        ...msg,
+        isFromCurrentUser: msg.Correo_emit === correoActual
+      }));
+
+      this.isLoading = false;
+      console.log('Mensajes cargados:', this.Mensajes);
+    },
+    error: () => {
+      this.isLoading = false;
+      console.error('Error al cargar mensajes.');
     }
+  });
+}
+
+    getInitials(name: string): string {
+    return name
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase())
+      .join('')
+      .substring(0, 2);
   }
 
-  private loadChatData(Id_chat_env:number): void {
-    this.isLoading = true;
-    console.log(Id_chat_env)
-    this.usuariosService.getmensajes(Id_chat_env).subscribe({
-      next: (response) =>{
-        this.Mensajes=response.Mensajes
-        console.log(this.Mensajes)
-        this.isLoading = false;
-      }
-    })}
-
-
-
-  onSendMessage(): void {
-    //mandar mnesaje?
-  }
 
   onKeyPress(event: KeyboardEvent): void {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault();
-      this.onSendMessage();
     }
   }
 
-  private scrollToBottom(): void {
-  }
-
-  getMessageTime(timestamp: Date) {
-
-  }
-
-  getInitials() {
-
-  }
-
-hasParticipant(){}
-
- participantName() {
-
-  }
-
-participantAvatar() {
-  }
-
-participantIsOnline(){
-
-  }
 
 hasMessages() {
+  }
+  private cargarConversaciones(): void {
+    const correo = localStorage.getItem('correoGlobal');
+    if (!correo) return;
+
+    this.usuariosService.getUsuarios_Chats(correo).subscribe({
+      next: (response) => {
+        this.conversations = response.Usuarios_list;
+
+        const chat = this.conversations.find(conv => conv.Id_Chat === this.chatId);
+        if (chat) {
+          this.participantFullName = `${chat.Nombre} ${chat.Apellido_Pat}`;
+        } else {
+          this.participantFullName = 'Desconocido';
+        }
+
+        console.log("Nombre del participante:", this.participantFullName);
+      },
+      error: (err) => {
+        console.error('Error al cargar conversaciones:', err);
+      }
+    });
   }
 }
