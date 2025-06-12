@@ -9,14 +9,15 @@ import { Location } from '@angular/common';
   standalone: false,
 })
 export class SidePanelComponent {
-  @Output() chatSelected = new EventEmitter<string>();
   constructor(private _location: Location) {}
 
   goBack(){
     this._location.back();
   }
-  
-  onChatSelected(chatId: string): void {
-    this.chatSelected.emit(chatId);
+  @Output() chatSeleccionado = new EventEmitter<number>();
+
+  onChatSelected(chatId: number): void {
+    this.chatSeleccionado.emit(chatId);
   }
+
 }

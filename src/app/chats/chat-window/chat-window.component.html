@@ -7,20 +7,20 @@
       <div class="participant-avatar">
         <img
              class="avatar-image">
-/**ngIf="participantAvatar; else initialsAvatar"
+<!--ngIf="participantAvatar; else initialsAvatar"
              [src]="participantAvatar"
-             [alt]="participantName"*/
+             [alt]="participantName"*/-->
         <ng-template #initialsAvatar>
           <div class="avatar-initials">
             ae
           </div>
-          /*{{ getInitials() }}*/
+          In
         </ng-template>
 
       </div>
 
       <div class="participant-details">
-        <h3 class="participant-name">/*{{ participantName }}*/</h3>
+        <h3 class="participant-name">aqui va el nombre de a quien se el eenvia el mensaje</h3>
 
       </div>
     </div>
@@ -39,14 +39,15 @@
   <!-- Área de mensajes -->
   <div class="messages-container" #messagesContainer >
     <div class="messages-list">
-      <div *ngFor="let message of messages"
+      <!--*ngFor="let message of messages"
            class="message-wrapper"
            [class.own-message]="message.isFromCurrentUser"
-           [class.other-message]="!message.isFromCurrentUser">
+           [class.other-message]="!message.isFromCurrentUser"-->
+      <div >
 
         <div class="message-bubble">
           <div class="message-content">
-            {{ message.content }}
+           <!--{{ message.content }}  -->
           </div>
 
         </div>
@@ -56,6 +57,6 @@
 
   <!-- Input para escribir mensajes -->
 
-    <app-input></app-input>
+    <app-input [chatId]="chatId"></app-input>
 
 </div>

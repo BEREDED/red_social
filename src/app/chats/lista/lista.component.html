@@ -10,20 +10,9 @@
 
     <div class="chat-info">
       <div class="chat-name">{{ conversation.Nombre }} {{ conversation.Apellido_Pat }}</div>
-
-      <div class="chat-last-message" *ngIf="conversation.UltimoMensaje">
-        {{ conversation.UltimoMensaje }}
-      </div>
-      <div class="chat-last-message" *ngIf="!conversation.UltimoMensaje">
-        Sin mensajes
-      </div>
-    </div>
-
-    <div class="chat-meta" *ngIf="conversation.FechaUltimoMensaje">
-      <div class="chat-time">
-        {{ conversation.FechaUltimoMensaje }}
+      <div class="chat-last-message">
+        {{ conversation.UltimoMensaje || 'Sin mensajes' }}
       </div>
     </div>
   </div>
 </div>
-

@@ -8,22 +8,15 @@ import { ChatService } from '../chat.service';
   standalone: false,
 })
 export class MainChatComponent implements OnInit {
-  selectedChatId: string | null = null;
+// cambia a number si es un número
+  selectedChatId: number | null = null;
 
+  abrirChat(idChat: number): void {
+    this.selectedChatId = idChat;  // <-- se actualiza el chat actual
+  }
   constructor(private chatService: ChatService) {}
 
   ngOnInit(): void {
-    this.subscribeToSelectedChat();
   }
 
-  private subscribeToSelectedChat(): void {
-    this.chatService.getSelectedChat().subscribe(chatId => {
-      this.selectedChatId = chatId;
-    });
-  }
-
-  onChatSelected(chatId: string): void {
-    this.selectedChatId = chatId;
-    this.chatService.selectChat(chatId);
-  }
 }

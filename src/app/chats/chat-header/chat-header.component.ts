@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { User } from '../chat.service';
 
 @Component({
   selector: 'app-chat-header',
@@ -8,26 +7,19 @@ import { User } from '../chat.service';
   standalone: false,
 })
 export class ChatHeaderComponent {
-  @Input() participant!: User;
+
   @Input() isTyping: boolean = false;
   @Output() menuAction = new EventEmitter<string>();
   @Output() backClicked = new EventEmitter<void>();
 
   showMenu: boolean = false;
 
-  getInitials(): string {
-    if (!this.participant?.name) return '';
-    return this.participant.name
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase())
-      .join('')
-      .substring(0, 2);
+  getInitials() {
+
   }
 
-  getStatusText(): string {
-    if (this.isTyping) return 'Escribiendo...';
-    if (this.participant?.isOnline) return 'En línea';
-    return 'Desconectado';
+  getStatusText() {
+
   }
 
   toggleMenu(): void {

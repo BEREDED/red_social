@@ -9,8 +9,8 @@ import { Mensajes } from '../modelos/mensajes.interface';
 //environment.apiUrl
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
-  //api_http_rout = "http://localhost:3000/";
-  api_http_rout= "https://dpb2zz9s-3000.usw3.devtunnels.ms/"
+  api_http_rout = "http://localhost:3000/";
+  //api_http_rout= "https://dpb2zz9s-3000.usw3.devtunnels.ms/"
   constructor(private http: HttpClient) {}
   getForos() {
     return this.http.get(`${this.api_http_rout}usuarios`);
@@ -89,6 +89,11 @@ export class UsuariosService {
     `${this.api_http_rout}chats/participantes`,
     { Correo_log }
   );
-}
-
+  }
+  PostNuevoMensaje(Id_Chat:number, Contenido:string, Correo_log:string, Fecha_Envio:string){
+    return this.http.post<{ Mensaje: "Mensaje enviado con exito" }>(`${this.api_http_rout}chats/mesagge`,{Id_Chat, Contenido, Correo_log, Fecha_Envio})
+  }
+  getmensajes(Id_Chat:number):Observable<{Mensajes:{Correo_emit:string, Contenido:string,Fecha_envio:string,nombre:string}[]}>{
+    return this.http.post<{Mensajes:{Correo_emit:string, Contenido:string,Fecha_envio:string,nombre:string}[]}>(`${this.api_http_rout}chats/get_msj_chat`,{Id_Chat})
+  }
 }

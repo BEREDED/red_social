@@ -1,4 +1,6 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+
 
 @Component({
   selector: 'app-input',
@@ -6,24 +8,31 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, AfterVie
   styleUrls: ['./input.component.scss'],
   standalone: false,
 })
-export class InputComponent implements AfterViewInit {
+export class InputComponent implements OnInit{
+  @Input() chatId!: number;
   @Input() disabled: boolean = false;
   @Input() placeholder: string = 'Escribe un mensaje...';
   @Output() messageSent = new EventEmitter<string>();
 
   @ViewChild('messageInput', { static: true }) messageInput!: ElementRef<HTMLTextAreaElement>;
-
+  @Input()
   message: string = '';
   isTyping: boolean = false;
+  constructor(private usuarioservice: UsuariosService) { }
+  ngOnInit(): void {
+  // Aquí puedes inicializar lo que necesites
+  console.log("InputComponent inicializado con chatId:", this.chatId);
+  }
 
-  ngAfterViewInit(): void {
-    this.adjustTextareaHeight();
+  ngOnChanges(): void {
+    if (this.chatId) {
+    console.log("Id desde el window",this.chatId);
+  }
   }
 
   onInput(event: Event): void {
     const target = event.target as HTMLTextAreaElement;
     this.message = target.value;
-    this.adjustTextareaHeight();
 
     // Simular indicador de escritura
     this.isTyping = this.message.trim().length > 0;
@@ -37,33 +46,17 @@ export class InputComponent implements AfterViewInit {
   }
 
   sendMessage(): void {
-    //creacion de mensaje en db
-    const trimmedMessage = this.message.trim();
-    if (trimmedMessage && !this.disabled) {
-      this.messageSent.emit(trimmedMessage);
-      this.message = '';
-      this.resetTextarea();
-      this.isTyping = false;
-    }
+     const fecha=new Date()
+      const fechaFormateada = fecha.toISOString().slice(0, 16).replace('T', ' ');
+      this.usuarioservice.PostNuevoMensaje(
+      this.chatId,
+      this.message,
+      String(localStorage.getItem('correoGlobal')),
+      fechaFormateada,).subscribe({
+        next: (response) =>{
+          console.log(response.Mensaje)
+        }
+      })
   }
 
-  private adjustTextareaHeight(): void {
-    const textarea = this.messageInput.nativeElement;
-    textarea.style.height = 'auto';
-    const scrollHeight = Math.min(textarea.scrollHeight, 120); // Máximo 120px
-    textarea.style.height = scrollHeight + 'px';
-  }
-
-  private resetTextarea(): void {
-    const textarea = this.messageInput.nativeElement;
-    textarea.style.height = 'auto';
-    textarea.focus();
-  }
-
-  // Métodos para emojis (opcional)
-  addEmoji(emoji: string): void {
-    this.message += emoji;
-    this.adjustTextareaHeight();
-    this.messageInput.nativeElement.focus();
-  }
 }
