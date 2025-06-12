@@ -12,7 +12,7 @@ left: 50%;
 background-color:#f8fafc;
 padding: 3em;
 border-radius: 5%;
-height: 500px;
+height: auto;
 width: 450px;
   h2{
     font-size: 25px;
@@ -55,7 +55,7 @@ width: auto;
   cursor: pointer;
   transition: background-color 0.2s ease;
   margin-inline: auto;
-  margin-top: 3vh;
+  margin-top: 2vh;
   &:hover {
     background-color: #0056b3;
   }
@@ -73,3 +73,22 @@ width: auto;
 .posconfcontr{
   width: 100%;
 }
+
+
+  .return {
+    background: none;
+    border: none;
+    padding: 3px;
+    text-align: left;
+    margin-bottom: 3vh;
+
+    a {
+      color: black;
+      font-size: 0.85rem;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
