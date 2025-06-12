@@ -9,8 +9,8 @@ import { Mensajes } from '../modelos/mensajes.interface';
 //environment.apiUrl
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
-  api_http_rout = "http://localhost:3000/";
-  //api_http_rout= "https://dpb2zz9s-3000.usw3.devtunnels.ms/"
+  //api_http_rout = "http://localhost:3000/";
+  api_http_rout= "https://dpb2zz9s-3000.usw3.devtunnels.ms/"
   constructor(private http: HttpClient) {}
   getForos() {
     return this.http.get(`${this.api_http_rout}usuarios`);
