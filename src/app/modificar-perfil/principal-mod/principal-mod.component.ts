@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Location } from '@angular/common';
 import { Usu_actulizar } from '../../modelos/us_actulizar';
 import { NombreComponent } from 'src/app/shared/nombre/nombre.component';
+
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { getdata } from 'src/app/modelos/getdata.interface';
 

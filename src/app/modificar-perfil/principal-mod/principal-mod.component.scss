@@ -136,3 +136,28 @@ body {
   top: 80%;
   left: 50%;
 }
+
+.campo-solo-lectura {
+  opacity: 0.6;
+  pointer-events: none; /* Evita que se pueda hacer clic */
+
+  position: relative;
+
+  /* Deshabilita todos los inputs, selects, y botones dentro */
+  input, select, button, textarea {
+    pointer-events: none !important;
+    background-color: #f5f5f5 !important;
+    color: #666 !important;
+    cursor: not-allowed !important;
+  }
+
+  /* Estilo visual para indicar que no es editable */
+  /*   &::after {
+    content: "🔒";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
+    color: #666;
+  } */
+}

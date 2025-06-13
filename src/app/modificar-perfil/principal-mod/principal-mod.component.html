@@ -9,8 +9,21 @@
           </div>
           <div class="div-derecha">
             <div [class.disabled]="!isEditing" class="distribuir">
-              <app-nombre [Nombre]="nombreCompleto"></app-nombre>
-            </div>
+              <!-- Nombre: siempre editable cuando isEditing = true -->
+                            <div [class.disabled]="!isEditing">
+                              <app-nombre [Nombre]="nombreCompleto"></app-nombre>
+                            </div>
+
+                            <!-- Correo: NUNCA editable, solo lectura -->
+                            <div class="campo-solo-lectura">
+                              <app-correo ></app-correo>
+                            </div>
+
+                            <!-- Fecha: NUNCA editable, solo lectura -->
+                            <div class="campo-solo-lectura">
+                              <app-fecha-nacimiento></app-fecha-nacimiento>
+                            </div>
+                          </div>
             <div *ngIf="isEditing" class="oculto">
               <app-contrasena></app-contrasena>
               <app-confirmar-contrasena></app-confirmar-contrasena>
