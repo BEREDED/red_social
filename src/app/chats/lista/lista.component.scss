@@ -2,8 +2,9 @@
   position: relative;
   padding: 0;
   margin: 0;
-  height: 70vh;
+  height: auto;
   overflow-y: auto;
+  //max-height: 80;
 }
 
 .chat-item {

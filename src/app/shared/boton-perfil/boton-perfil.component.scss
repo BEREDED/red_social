@@ -1,15 +1,18 @@
 .perfil{
-  background-color: #f0f0f0;
-  color: #0f172a;
-  padding: 0.001em;
-  border: none;
-  outline: none;
   cursor: pointer;
-  display: inline-flex;
+  transition: filter 0.3s ease;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
   align-items: center;
   justify-content: center;
-  transition: filter 0.3s ease;
-  border-radius: 50%;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  margin-right: 12px;
+  flex-shrink: 0;
 }
 
 .perfil:hover {

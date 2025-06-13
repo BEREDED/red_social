@@ -1,14 +1,34 @@
 <div class="message-input-container">
-  <div class="message-input-wrapper">
+  <div class="message-input-wrapper" [class.sending]="isSending">
     <textarea
+      #messageInput
       [(ngModel)]="message"
+      (input)="onInput($event)"
       (keydown)="onKeyDown($event)"
-      placeholder="Escribe un mensaje..."
+      [placeholder]="placeholder"
+      [disabled]="isDisabled"
       class="message-input"
-      rows="1"></textarea>
+      rows="1">
+    </textarea>
 
-    <button (click)="sendMessage()" [disabled]="!message.trim()" class="send-button">
-      <!-- Icono Enviar -->
+    <button
+      (click)="sendMessage()"
+      [disabled]="isButtonDisabled"
+      class="send-button"
+      [class.sending]="isSending"
+      [title]="isSending ? 'Enviando...' : 'Enviar mensaje'">
+
+      <!-- Spinner de carga cuando está enviando -->
+      <div *ngIf="isSending" class="loading-spinner"></div>
+
+      <!-- Icono de enviar cuando no está enviando -->
+      <svg *ngIf="!isSending" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="22" y1="2" x2="11" y2="13"></line>
+        <polygon points="22,2 15,22 11,13 2,9"></polygon>
+      </svg>
     </button>
   </div>
+
+  <!-- Indicador de escritura (opcional) -->
+
 </div>
