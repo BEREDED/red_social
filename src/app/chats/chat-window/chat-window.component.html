@@ -1,25 +1,25 @@
 <div class="chat-window">
   <!-- Header del chat -->
-  <div class="chat-header">
-    <div class="participant-info">
-      <div class="participant-avatar">
+  <div class="chat-window__header">
+    <div class="chat-window__participant">
+      <div class="chat-window__participant-avatar">
         <img
           *ngIf="false"
-          class="avatar-image"
+          class="avatar avatar--image"
           [src]="''"
           [alt]="participantFullName">
-        <div class="avatar-initials" *ngIf="!false">
+        <div class="avatar avatar--initials" *ngIf="!false">
           {{getInitials(participantFullName)}}
         </div>
       </div>
 
-      <div class="participant-details">
-        <h3 class="participant-name">{{ participantFullName }}</h3>
+      <div class="chat-window__participant-details">
+        <h3 class="chat-window__participant-name">{{ participantFullName }}</h3>
       </div>
     </div>
 
-    <div class="chat-actions">
-      <button class="action-btn" title="Más opciones">
+    <div class="chat-window__actions">
+      <button class="chat-window__action-btn" title="Más opciones">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="1"></circle>
           <circle cx="12" cy="5" r="1"></circle>
@@ -30,34 +30,34 @@
   </div>
 
   <!-- Área de mensajes -->
-  <div class="messages-container" #messagesContainer>
-    <div class="messages-list" *ngIf="!isLoading && hasMessages()">
+  <div class="chat-window__messages" #messagesContainer>
+    <div class="chat-window__messages-list" *ngIf="!isLoading && hasMessages()">
       <div *ngFor="let msg of Mensajes"
-        class="message-wrapper"
-        [class.own-message]="msg.isFromCurrentUser"
-        [class.other-message]="!msg.isFromCurrentUser">
+        class="message"
+        [class.message--own]="msg.isFromCurrentUser"
+        [class.message--other]="!msg.isFromCurrentUser">
 
-        <div class="message-bubble" [class.pending]="msg.isPending">
-          <div class="message-content">
+        <div class="message__bubble" [class.message__bubble--pending]="msg.isPending">
+          <div class="message__content">
             {{ msg.Contenido }}
           </div>
-          <div class="message-meta">
-            <span class="message-author">{{ msg.Nombre }}</span>
-            <span class="message-time">{{ formatearFecha(msg.Fecha_Envio) }}</span>
+          <div class="message__meta">
+            <span class="message__author">{{ msg.Nombre }}</span>
+            <span class="message__time">{{ formatearFecha(msg.Fecha_Envio) }}</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Estado de carga -->
-    <div class="loading-state" *ngIf="isLoading">
-      <div class="loading-spinner"></div>
+    <div class="chat-window__state" *ngIf="isLoading">
+      <div class="spinner"></div>
       <p>Cargando mensajes...</p>
     </div>
 
     <!-- Estado vacío -->
-    <div class="empty-state" *ngIf="!isLoading && !hasMessages()">
-      <div class="empty-icon">💬</div>
+    <div class="chat-window__state" *ngIf="!isLoading && !hasMessages()">
+      <div class="chat-window__state-icon">💬</div>
       <p>No hay mensajes aún</p>
       <small>Inicia la conversación enviando un mensaje</small>
     </div>
