@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../chat.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-main-chat',
@@ -15,9 +16,14 @@ export class MainChatComponent implements OnInit {
   abrirChat(idChat: number): void {
     this.selectedChatId = idChat;  // <-- se actualiza el chat actual
   }
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService,private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-  }
-
+  this.route.queryParams.subscribe(params => {
+    const id = params['chatId'];
+    if (id) {
+      this.selectedChatId = +id; // convierte a número
+    }
+  });
+}
 }

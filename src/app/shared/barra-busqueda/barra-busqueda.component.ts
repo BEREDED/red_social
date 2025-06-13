@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
   standalone: false
 })
 export class BarraBusquedaComponent implements OnInit {
+  @Output() chatSelected = new EventEmitter<number>();
   idChat:number=0;
   searchTerm: string = '';
   UsuariosRegistrados: any[] = [];
@@ -27,7 +28,6 @@ export class BarraBusquedaComponent implements OnInit {
       next: (response) => {
         const usuarios = response.usuarios || [];
         const foros = response.foros || [];
-        // Unificamos en un solo arreglo de objetos con tipo
         this.UsuariosRegistrados = [
           ...usuarios.map((u: any) => ({ tipo: 'usuario', valor: u.Correo })),
           ...foros.map((f: any) => ({ tipo: 'foro', valor: f.Titulo_foro }))
@@ -52,7 +52,7 @@ export class BarraBusquedaComponent implements OnInit {
 
     if (item.tipo === 'usuario') {
       if (item.valor !== localStorage.getItem('correoGlobal')) {
-        this.router.navigate(['/chats', item.valor]);
+        this.router.navigate(['/chats']);
         const fecha=new Date();
         const Creado_en=fecha.toISOString().slice(0, 16).replace('T', ' ');
         console.log(String(localStorage.getItem('correoGlobal')),"a",this.searchTerm)
@@ -60,7 +60,9 @@ export class BarraBusquedaComponent implements OnInit {
       next: (res) => {
         const idChat = res.Id_Chat;
         console.log('ID del chat obtenido o creado:', idChat);
-        this.router.navigate(['/chats']);
+        this.chatSelected.emit(idChat)
+        this.router.navigate(['/chats'], {
+         queryParams: { chatId: idChat }  });
       },
       error: (err) => {
         console.error('Error al iniciar o obtener el chat:', err);

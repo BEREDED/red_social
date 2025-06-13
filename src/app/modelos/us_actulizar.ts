@@ -4,4 +4,5 @@ export interface Usu_actulizar {
   Apellido_pat:string;
   Apellido_mat:string;
   Contraseña:string;
+  Fch_Nacimiento:string;
 }

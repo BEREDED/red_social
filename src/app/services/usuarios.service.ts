@@ -43,7 +43,7 @@ export class UsuariosService {
     return this.http.post(`${this.api_http_rout}usuarios/actualizar`, usu_act)
   }
   Postsoldata(correo:getdata) {
-  return this.http.post<{namedb:string}>(`${this.api_http_rout}usuarios/get_data`,correo);
+  return this.http.post<{namedb:string,Correo:string, fecha_nac:string}>(`${this.api_http_rout}usuarios/get_data`,correo);
   }
   postissuscribed(Titulo_foro:string,correo_Usuario:string){
     return this.http.post<{issus:boolean}>(`${this.api_http_rout}foro/issuscribed`,{Titulo_foro,correo_Usuario})
@@ -95,5 +95,8 @@ export class UsuariosService {
   }
   getmensajes(Id_Chat:number):Observable<{Mensajes:{Correo_emit:string, Contenido:string,Fecha_envio:string,nombre:string}[]}>{
     return this.http.post<{Mensajes:{Correo_emit:string, Contenido:string,Fecha_envio:string,nombre:string}[]}>(`${this.api_http_rout}chats/get_msj_chat`,{Id_Chat})
+  }
+  getUsuariosEnforo(Titulo_foro:string): Observable<{inscritos:{correo:string}[]}>{
+    return this.http.post<{inscritos:{correo:string}[]}>( `${this.api_http_rout}foro/inscritos_foro`,{Titulo_foro})
   }
 }

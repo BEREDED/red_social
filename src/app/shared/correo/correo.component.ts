@@ -1,15 +1,18 @@
-import { Component, OnInit, Output, EventEmitter, output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
+import { PrincipalModComponent } from 'src/app/modificar-perfil/principal-mod/principal-mod.component';
 
 @Component({
   selector: 'app-correo',
   templateUrl: './correo.component.html',
   styleUrls: ['./correo.component.scss'],
   standalone:false,
+  template: `<input type="text" [(ngModel)]="Correo" />`,
 })
 export class CorreoComponent  implements OnInit {
-  Correo: string = '';
-  isValidCorreo: boolean = true;
+  @Input() Correo: string = '';
 
+  isValidCorreo: boolean = true;
+  @ViewChild(PrincipalModComponent)prinmod!:PrincipalModComponent
   @Output() correoChange = new EventEmitter<string>();
   @Output() correoValid = new EventEmitter<boolean>();
   @Output() correoVacio = new EventEmitter<boolean>();

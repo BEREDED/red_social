@@ -1,6 +1,6 @@
-import { Component, Input, OnInit, OnDestroy, AfterViewChecked, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, SimpleChanges } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { Mensajes } from '../../modelos/mensajes.interface';
+
 
 @Component({
   selector: 'app-chat-window',

@@ -16,12 +16,12 @@
 
                             <!-- Correo: NUNCA editable, solo lectura -->
                             <div class="campo-solo-lectura">
-                              <app-correo ></app-correo>
+                              <app-correo [Correo]="Correo_front" ></app-correo>
                             </div>
 
                             <!-- Fecha: NUNCA editable, solo lectura -->
                             <div class="campo-solo-lectura">
-                              <app-fecha-nacimiento></app-fecha-nacimiento>
+                              <app-fecha-nacimiento [Fecha_Nacimiento_string]="fch_nac_front.split('T')[0]"></app-fecha-nacimiento>
                             </div>
                           </div>
             <div *ngIf="isEditing" class="oculto">

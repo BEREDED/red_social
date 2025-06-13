@@ -6,6 +6,8 @@ import { NombreComponent } from 'src/app/shared/nombre/nombre.component';
 
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { getdata } from 'src/app/modelos/getdata.interface';
+import { CorreoComponent } from 'src/app/shared/correo/correo.component';
+import { FechaNacimientoComponent } from 'src/app/shared/fecha-nacimiento/fecha-nacimiento.component';
 
 
 @Component({
@@ -20,15 +22,20 @@ export class PrincipalModComponent implements OnInit {
     Nombre: '',
     Apellido_pat: '',
     Apellido_mat: '',
-    Contraseña: ''
+    Contraseña: '',
+    Fch_Nacimiento:''
   }
   getData:getdata={
     Correo:''
   }
   @ViewChild(NombreComponent) Nomcomp!: NombreComponent;
+  @ViewChild(ContrasenaComponent)Contracomp!:ContrasenaComponent;
+  @ViewChild(CorreoComponent)Correocomp!: CorreoComponent;
+  @ViewChild(FechaNacimientoComponent)FechNac!: FechaNacimientoComponent;
 
   nombreCompleto: string = '';
-  @ViewChild(ContrasenaComponent)Contracomp!:ContrasenaComponent
+  Correo_front:string='';
+  fch_nac_front:string =''
 
   isEditing: boolean = false;
   usuario: any;
@@ -45,11 +52,24 @@ export class PrincipalModComponent implements OnInit {
     this.getData.Correo=coerroenstring
     this.usuarioservice.Postsoldata(this.getData).subscribe({
       next: (res) => {
+        console.log(res.Correo,res.fecha_nac,res.namedb)
         this.nombreCompleto = res.namedb;
-        this.Nomcomp.Nombre=this.nombreCompleto
+        this.Correo_front= res.Correo;
+        this.fch_nac_front=res.fecha_nac;
+        this.Nomcomp.Nombre=this.nombreCompleto;
+        this.Correocomp.Correo=this.Correo_front;
+        this.FechNac.Fecha_Nacimiento_string=this.fch_nac_front;
       },
       error: (e) => console.error('Error al obtener nombre:', e),
     });
+  }
+  cambiartipodate(facha_camb:string){
+    const parts = facha_camb.split('-');
+    const year = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // monthIndex starts at 0
+    const day = parseInt(parts[2], 10);
+    return( new Date(year, month, day))
+
   }
   toggleEdit() {
     this.isEditing = !this.isEditing;
