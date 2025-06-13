@@ -58,7 +58,7 @@ export class PrincipalModComponent implements OnInit {
         this.fch_nac_front=res.fecha_nac;
         this.Nomcomp.Nombre=this.nombreCompleto;
         this.Correocomp.Correo=this.Correo_front;
-        this.FechNac.Fecha_Nacimiento_string=this.fch_nac_front;
+        this.FechNac.Fecha_Nacimiento_string=this.fch_nac_front[0-9];
       },
       error: (e) => console.error('Error al obtener nombre:', e),
     });
