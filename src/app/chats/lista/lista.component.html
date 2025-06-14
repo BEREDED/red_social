@@ -1,19 +1,22 @@
-<div class="chat-list">
-  <div *ngFor="let conversation of conversations"
-       class="chat-item"
-       [class.active]="selectedChatId === conversation.Id_Chat"
-       [class.active]="selectedName === conversation.Nombre +' ' +conversation.Apellido_Pat"
-       (click)="onChatClick(conversation.Id_Chat,conversation.Nombre,conversation.Apellido_Pat )">
+<div class="wrapper">
+  <div class="chat-list">
+    <div *ngFor="let conversation of conversations"
+         class="chat-item"
+         [class.active]="selectedChatId === conversation.Id_Chat"
+         [class.active]="selectedName === conversation.Nombre +' ' +conversation.Apellido_Pat"
+         (click)="onChatClick(conversation.Id_Chat,conversation.Nombre,conversation.Apellido_Pat )">
 
-    <div class="chat-avatar">
-      {{ getInitials(conversation.Nombre + ' ' + conversation.Apellido_Pat) }}
-    </div>
+      <div class="chat-avatar">
+        {{ getInitials(conversation.Nombre + ' ' + conversation.Apellido_Pat) }}
+      </div>
 
-    <div class="chat-info">
-      <div class="chat-name">{{ conversation.Nombre }} {{ conversation.Apellido_Pat }}</div>
-      <div class="chat-last-message">
-        {{ conversation.UltimoMensaje || 'Sin mensajes' }}
+      <div class="chat-info">
+        <div class="chat-name">{{ conversation.Nombre }} {{ conversation.Apellido_Pat }}</div>
+        <div class="chat-last-message">
+          {{ conversation.UltimoMensaje || 'Sin mensajes' }}
+        </div>
       </div>
     </div>
   </div>
+
 </div>

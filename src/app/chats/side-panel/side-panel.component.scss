@@ -12,8 +12,8 @@
   border-bottom: 1px solid gray;
   //border-top: 1px solid black;
   padding: 1em;
-  flex-shrink: 0; /* No se encoge */
-
+  //flex-shrink: 0; /* No se encoge */
+  height: auto;
   h1 {
     text-align: center;
     font-size: 30px;
