@@ -5,7 +5,6 @@
   flex-direction: column;
   position: relative;
 }
-
 .mobile-toggle {
   display: none;
   align-items: center;
@@ -13,21 +12,17 @@
   background-color: #2575fc;
   color: white;
   border: none;
-  cursor: pointer;
   border-radius: 0 12px 12px 0;
   width: 32px;
   height: 80px;
-  transition: all 0.2s ease;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   position: fixed;
   top: 50%;
-  left: 0;
   transform: translateY(-50%);
   z-index: 1002;
 
   ion-icon {
     font-size: 18px;
-    transition: transform 0.2s ease;
   }
 
   &:hover {
@@ -58,28 +53,13 @@
 
   .return {
     background: none;
-    border: none;
-
-
-    a {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 0.85rem;
-      text-decoration: none;
-      transition: color 0.2s ease;
-
-      &:hover {
-        color: white;
-        text-decoration: underline;
-      }
-    }
+    color: white;
+    //text-decoration: none;
   }
 
   .title {
     text-align: center;
-    margin-top: 20px;
-
     h2 {
-      margin: 1.5ch;
       font-size: 2rem;
       font-weight: 700;
     }
@@ -92,37 +72,26 @@
 
   .accordion .accordion-header {
     cursor: pointer;
-    border: 1px solid #e5e7eb;
+    border: 1px solid gray;
     border-radius: 8px;
     padding: 1ch;
-    transition: all 0.2s ease;
-    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-
     &:hover {
-      border-color: #94a3b8;
-      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+    background-color: #DEE4FF;
+    transform: translateY(-1px);
     }
 
     ion-item {
       --background: transparent;
-      --min-height: 44px;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 600;
       color: #374151;
-    }
-
-    ion-icon {
-      font-size: 1.2rem;
-      color: #6b7280;
     }
   }
 
   .accordion .accordion-content {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease;
+    transition: max-height 0.5s ease;
 
     &.expanded {
       max-height: 500px;
@@ -136,35 +105,27 @@
 
       ion-item {
         --background: #fafbfc;
-        --color: #374151;
-        border-bottom: 1px solid #f1f5f9;
-        font-size: 1.4rem;
+        --color: gray;
         cursor: pointer;
-        transition: all 0.25s ease;
-        border-left: 3px solid transparent;
 
         &:hover {
-          --background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-          --color: #1d4ed8;
+          --color: black;
           transform: translateX(4px);
-          border-left-color: #60a5fa;
+
         }
 
         &.active-forum {
-          --background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-          --color: #1e40af;
+          --background:#9ED6FF;
+          --color: #4C49A8;
           border-left: 4px solid #3b82f6;
           font-weight: 600;
 
           &:hover {
-            --background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
-            transform: translateX(2px);
+
+            transform: translateX(1px);
           }
         }
 
-        &:last-child {
-          border-bottom: none;
-        }
       }
     }
   }
@@ -176,6 +137,11 @@
 
 @media (max-width: 768px) {
   .side-panel-container {
+    // Definimos las variables para el ancho del panel
+    --side-panel-width: 85vw;
+    --side-panel-max-width: 320px;
+    --final-width: clamp(0px, var(--side-panel-width), var(--side-panel-max-width));
+
     width: 100%;
     height: auto;
     position: relative;
@@ -190,31 +156,32 @@
   .mobile-toggle {
     display: flex;
     pointer-events: all;
-    transition: transform 0.3s ease;
+  }
+
+  // Regla para el botón cuando el panel está colapsado
+  .side-panel-container.mobile-collapsed .mobile-toggle {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  // Regla para el botón cuando el panel está visible
+  .side-panel-container:not(.mobile-collapsed) .mobile-toggle {
+    // Usamos la variable para que el movimiento sea exacto
+    transform: translateY(-50%) translateX(var(--final-width));
   }
 
   .side-panel-wrapper {
     position: fixed;
     top: 0;
     left: 0;
-    width: 85vw;
-    max-width: 320px;
+    // Usamos la variable para que el ancho sea consistente
+    width: var(--final-width);
     height: 100vh;
     transform: translateX(0);
-    transition: transform 0.3s ease;
     pointer-events: all;
     z-index: 1001;
     border-radius: 0 16px 16px 0;
-
-
-  &.mobile-collapsed .mobile-toggle {
-    transform: translateX(0);
   }
 
-  &:not(.mobile-collapsed) .mobile-toggle {
-    transform: translateX(85vw);
-  }
-}
   .mobile-overlay {
     display: block;
     position: fixed;
