@@ -68,6 +68,7 @@
   background-color: #285cb1;
 }
 .list{
+  border-top: 1px solid gray;
   display: flex;
   flex-direction: row;
   padding-left: 0;
@@ -93,4 +94,9 @@
 .distribuir{
   display: flex;
   align-items: center;
+}
+
+.correo {
+  font-size: 0.7em; /* o prueba con 12px si prefieres */
+  color: #666; /* opcional: color más tenue */
 }

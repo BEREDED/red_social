@@ -1,10 +1,11 @@
 .side-panel-container {
   width: 25vw;
-  height: calc(100vh - 96px);
+  height: 85vh;
   display: flex;
   flex-direction: column;
   position: relative;
 }
+
 .mobile-toggle {
   display: none;
   align-items: center;
@@ -21,17 +22,24 @@
   transform: translateY(-50%);
   z-index: 1002;
 
-  ion-icon {
-    font-size: 18px;
+  .chevron {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  .chevron-left {
+    border-width: 8px 10px 8px 0;
+    border-color: transparent white transparent transparent;
+  }
+  .chevron-right {
+    border-width: 8px 0 8px 10px;
+    border-color: transparent transparent transparent white;
   }
 
   &:hover {
     width: 36px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-
-    ion-icon {
-      transform: translateX(2px);
-    }
   }
 }
 
@@ -54,11 +62,14 @@
   .return {
     background: none;
     color: white;
-    //text-decoration: none;
+    border: none;
+    font-size: 1rem;
+    text-decoration: none;
   }
 
   .title {
     text-align: center;
+
     h2 {
       font-size: 2rem;
       font-weight: 700;
@@ -70,62 +81,77 @@
   flex: 1;
   padding: 1rem;
 
-  .accordion .accordion-header {
-    cursor: pointer;
-    border: 1px solid gray;
-    border-radius: 8px;
-    padding: 1ch;
-    &:hover {
-    background-color: #DEE4FF;
-    transform: translateY(-1px);
-    }
-
-    ion-item {
-      --background: transparent;
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #374151;
-    }
-  }
-
-  .accordion .accordion-content {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease;
-
-    &.expanded {
-      max-height: 500px;
-    }
-
-    ion-list {
-      margin: 8px 0 0 0;
-      padding: 0;
+  .accordion {
+    .accordion-header {
+      cursor: pointer;
+      border: 1px solid gray;
       border-radius: 8px;
-      overflow: hidden;
+      padding: 1ch;
+      margin-bottom: 0.5rem;
+      background-color: #f5f5f5;
 
-      ion-item {
-        --background: #fafbfc;
-        --color: gray;
+      .accordion-title {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #374151;
+      }
+
+      &:hover {
+        background-color: #dee4ff;
+        transform: translateY(-1px);
+      }
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+
+      &.expanded {
+        max-height: 500px;
+      }
+
+      .forum-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .forum-item {
+        background: #fafbfc;
+        color: gray;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
         cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
         &:hover {
-          --color: black;
+          color: black;
           transform: translateX(4px);
-
         }
 
         &.active-forum {
-          --background:#9ED6FF;
-          --color: #4C49A8;
+          background: #9ed6ff;
+          color: #4c49a8;
           border-left: 4px solid #3b82f6;
           font-weight: 600;
 
           &:hover {
-
             transform: translateX(1px);
           }
         }
 
+        .indicator {
+          font-size: 1.2rem;
+          color: #3b82f6;
+        }
       }
     }
   }
@@ -137,7 +163,6 @@
 
 @media (max-width: 768px) {
   .side-panel-container {
-    // Definimos las variables para el ancho del panel
     --side-panel-width: 85vw;
     --side-panel-max-width: 320px;
     --final-width: clamp(0px, var(--side-panel-width), var(--side-panel-max-width));
@@ -158,14 +183,11 @@
     pointer-events: all;
   }
 
-  // Regla para el botón cuando el panel está colapsado
   .side-panel-container.mobile-collapsed .mobile-toggle {
     transform: translateY(-50%) translateX(0);
   }
 
-  // Regla para el botón cuando el panel está visible
   .side-panel-container:not(.mobile-collapsed) .mobile-toggle {
-    // Usamos la variable para que el movimiento sea exacto
     transform: translateY(-50%) translateX(var(--final-width));
   }
 
@@ -173,7 +195,6 @@
     position: fixed;
     top: 0;
     left: 0;
-    // Usamos la variable para que el ancho sea consistente
     width: var(--final-width);
     height: 100vh;
     transform: translateX(0);

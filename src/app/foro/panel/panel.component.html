@@ -16,10 +16,12 @@
 
   <div class="list">
     <ul style="list-style: none; padding-left: 0;">
-  <li *ngFor="let user of inscritos">
-    {{ user.Nombre }} {{ user.Apellido_Pat }} ({{ user.Correo }})
-    <button class="Mensaje" (click)="clik_userforo(user.Correo)">Mensaje</button>
-  </li>
+      <li *ngFor="let user of inscritos">
+      {{ user.Nombre }} {{ user.Apellido_Pat }}
+      <span class="correo">({{ user.Correo }})</span>
+      <button class="Mensaje" (click)="clik_userforo(user.Correo)">Mensaje</button>
+    </li>
+
 </ul>
   </div>
 </div>
