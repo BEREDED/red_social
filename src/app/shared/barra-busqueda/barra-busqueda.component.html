@@ -10,7 +10,7 @@
     🔍
   </button>
 
-  <ul *ngIf="filteredItems.length > 0" class="suggestions-list" style="list-style: none;">
+  <ul *ngIf="filteredItems.length > 0" class="suggestions-list" style="list-style:none">
     <li
       *ngFor="let item of filteredItems"
       (click)="selectItem(item)"
