@@ -1,68 +1,62 @@
 <!-- side-panel.component.html -->
-<div class="side-panel-container">
-  <!-- Título del panel -->
-
-  <div class="side-panel-header">
-    <button class="return" name="return">
-      <a routerLink="/principal" class="return">◀ Regresar</a>
-    </button>
-    <div class="title">
-      <h2>{{ title }}</h2>
-    </div>
-
-  </div>
+<div class="side-panel-container" [class.mobile-collapsed]="!mobileExpanded">
+  <!-- Botón móvil para expandir/colapsar -->
+  <button class="mobile-toggle" (click)="toggleMobilePanel()" [attr.aria-expanded]="mobileExpanded">
+    <ion-icon [name]="mobileExpanded ? 'chevron-back' : 'chevron-forward'"></ion-icon>
+  </button>
 
   <!-- Contenido del panel -->
-  <div class="side-panel-content">
-    <div class="container">
-      <!-- Acordeón 1 -->
-      <div class="accordion">
-        <div class="accordion-header" (click)="toggleAccordion('one')">
-          <ion-item lines="none" detail="false">
-            <ion-label>Mis Foros</ion-label>
-            <ion-icon slot="end"
-                     [name]="accordionOneExpanded ? 'chevron-up' : 'chevron-down'"
-                     class="accordion-icon"></ion-icon>
-          </ion-item>
-        </div>
+  <div class="side-panel-wrapper" [class.mobile-expanded]="mobileExpanded">
+    <!-- Título del panel -->
+    <div class="side-panel-header">
+      <button class="return" name="return">
+        <a routerLink="/principal" class="return">◀ Regresar</a>
+      </button>
+      <div class="title">
+        <h2>{{ title }}</h2>
+      </div>
+    </div>
 
-        <div class="accordion-content" [class.expanded]="accordionOneExpanded">
-          <ion-list>
-            <ion-item *ngFor="let foro of forosInscritos"
-                      button
-                      detail="false"
-                      [routerLink]="['/foro', foro.Titulo_foro]">
-              <ion-label>{{ foro.Titulo_foro }}</ion-label>
+    <!-- Contenido del panel -->
+    <div class="side-panel-content">
+      <div class="container">
+        <!-- Acordeón 1 -->
+        <div class="accordion">
+          <div class="accordion-header" (click)="toggleAccordion('one')">
+            <ion-item lines="none" detail="false">
+              <ion-label>Mis Foros</ion-label>
+              <ion-icon slot="end"
+                       [name]="accordionOneExpanded ? 'chevron-up' : 'chevron-down'"
+                       class="accordion-icon"></ion-icon>
             </ion-item>
-          </ion-list>
+          </div>
+
+          <div class="accordion-content" [class.expanded]="accordionOneExpanded">
+            <ion-list>
+              <ion-item *ngFor="let foro of forosInscritos"
+                        button
+                        detail="false"
+                        tabindex="0"
+                        [class]="getForumItemClasses(foro)"
+                        [routerLink]="['/foro', foro.Titulo_foro]"
+                        routerLinkActive="router-active"
+                        (click)="navigateToForum(foro)">
+                <ion-label>{{ foro.Titulo_foro }}</ion-label>
+                <!-- Indicador visual opcional para el foro activo -->
+                <ion-icon *ngIf="isForumActive(foro.Titulo_foro)"
+                          name="chevron-forward"
+                          slot="end"
+                          style="color: #3b82f6;"></ion-icon>
+              </ion-item>
+            </ion-list>
+          </div>
         </div>
       </div>
-
-      <!-- Acordeón 2
-      <div class="accordion">
-        <div class="accordion-header" (click)="toggleAccordion('two')">
-          <ion-item lines="none" detail="false">
-            <ion-label>Mis Grupos</ion-label>
-            <ion-icon slot="end"
-                     [name]="accordionTwoExpanded ? 'chevron-up' : 'chevron-down'"
-                     class="accordion-icon"></ion-icon>
-          </ion-item>
-        </div>
-
-        <div class="accordion-content" [class.expanded]="accordionTwoExpanded">
-          <ion-list>
-            <ion-item *ngFor="let item of accordionTwoItems"
-                      button
-                      detail="false"
-                      [routerLink]="item.route"
-                      routerLinkActive="active-item">
-              <ion-icon [name]="item.icon" slot="start"></ion-icon>
-              <ion-label>{{ item.name }}</ion-label>
-            </ion-item>
-          </ion-list>
-        </div>
-    </div> -->
-
     </div>
   </div>
+
+  <!-- Overlay para cerrar en móvil -->
+  <div class="mobile-overlay"
+       [class.visible]="mobileExpanded"
+       (click)="closeMobilePanel()"></div>
 </div>
