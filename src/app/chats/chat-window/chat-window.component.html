@@ -56,7 +56,7 @@
     </div>
 
     <!-- Estado vacío -->
-    <div class="chat-window__state" *ngIf="!isLoading && !hasMessages()">
+    <div class="chat-window__state">
       <div class="chat-window__state-icon">💬</div>
       <p>No hay mensajes aún</p>
       <small>Inicia la conversación enviando un mensaje</small>
@@ -64,10 +64,6 @@
   </div>
 
   <!-- Input para escribir mensajes -->
-  <app-input
-    [chatId]="chatId"
-    [isDisabled]="isSendingMessage"
-    (messageSent)="onMessageSent($event)"
-    (refreshMessages)="refreshMessages()">
+  <app-input>
   </app-input>
 </div>
