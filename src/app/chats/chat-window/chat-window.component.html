@@ -4,13 +4,13 @@
     <div class="chat-window__participant">
       <div class="chat-window__participant-avatar">
         <img
-             class="avatar-image">
-        <ng-template #initialsAvatar>
-          <div class="avatar-initials">
-            {{getInitials( participantFullName)}}
-          </div>
-        </ng-template>
-
+          *ngIf="false"
+          class="avatar avatar--image"
+          [src]="''"
+          [alt]="participantFullName">
+        <div class="avatar avatar--initials" *ngIf="!false">
+          {{getInitials(participantFullName)}}
+        </div>
       </div>
 
       <div class="chat-window__participant-details">
@@ -18,16 +18,6 @@
       </div>
     </div>
 
-    <div class="chat-window__actions">
-      <button class="chat-window__action-btn" title="Recargar">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="23 4 23 10 17 10"></polyline>
-          <polyline points="1 20 1 14 7 14"></polyline>
-          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"></path>
-          <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"></path>
-        </svg>
-      </button>
-    </div>
 
   </div>
 
@@ -45,7 +35,6 @@
           </div>
           <div class="message__meta">
             <span class="message__author">{{ msg.Nombre }}</span>
-            <span class="message__time">{{ msg.Fecha_Envio }}</span>
           </div>
         </div>
       </div>
@@ -58,7 +47,7 @@
     </div>
 
     <!-- Estado vacío -->
-    <div class="chat-window__state">
+    <div class="chat-window__state" *ngIf="!isLoading && !hasMessages()">
       <div class="chat-window__state-icon">💬</div>
       <p>No hay mensajes aún</p>
       <small>Inicia la conversación enviando un mensaje</small>
@@ -66,6 +55,10 @@
   </div>
 
   <!-- Input para escribir mensajes -->
-  <app-input>
+  <app-input
+    [chatId]="chatId"
+    [isDisabled]="isSendingMessage"
+    (messageSent)="onMessageSent($event)"
+    (refreshMessages)="refreshMessages()">
   </app-input>
 </div>
