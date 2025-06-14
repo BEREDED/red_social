@@ -60,7 +60,6 @@ export class BarraBusquedaComponent implements OnInit {
       next: (res) => {
         const idChat = res.Id_Chat;
         console.log('ID del chat obtenido o creado:', idChat);
-        this.chatSelected.emit(idChat)
         this.router.navigate(['/chats'], {
          queryParams: { chatId: idChat }  });
       },
@@ -73,31 +72,38 @@ export class BarraBusquedaComponent implements OnInit {
       this.router.navigate(['/foro', item.valor]);
     }
   }
+onSearch(): void {
+  const term = this.searchTerm.trim();
 
-  onSearch(): void {
-    if (this.searchTerm.endsWith('@ipn.mx') || this.searchTerm.endsWith('@alumno.ipn.mx')) {
-      if (this.searchTerm !== localStorage.getItem('correoGlobal')) {
-        this.router.navigate(['/chats', this.searchTerm]);
-        const fecha=new Date();
-        const Creado_en=fecha.toISOString().slice(0, 16).replace('T', ' ');
-        console.log(String(localStorage.getItem('correoGlobal')),"a",this.searchTerm, Creado_en)
-        this.usuariosService.nuevoChat(String(localStorage.getItem('correoGlobal')), this.searchTerm, Creado_en).subscribe({
+  if (term === '') {
+    console.warn('El término de búsqueda está vacío');
+    return;
+  }
+
+  const esCorreoIPN = term.endsWith('@ipn.mx') || term.endsWith('@alumno.ipn.mx');
+
+  if (esCorreoIPN && term !== localStorage.getItem('correoGlobal')) {
+    const fecha = new Date().toISOString().slice(0, 16).replace('T', ' ');
+    this.usuariosService.nuevoChat(
+      String(localStorage.getItem('correoGlobal')),
+      term,
+      fecha
+    ).subscribe({
       next: (res) => {
         const idChat = res.Id_Chat;
-        console.log('ID del chat obtenido o creado:', idChat);
-        this.router.navigate(['/chats', this.searchTerm]);
+        console.log('ID del chat:', idChat);
+        this.router.navigate(['/chats'], {
+          queryParams: { chatId: idChat }
+        });
       },
       error: (err) => {
         console.error('Error al iniciar o obtener el chat:', err);
       }
     });
-      }
-    }
-    if (this.searchTerm=' '){
-      this._location;
-    }
-    else {
-      this.router.navigate(['/foro', this.searchTerm]);
-    }
+  } else {
+    // Si no es correo, lo tratamos como foro
+    this.router.navigate(['/foro', term]);
   }
+}
+
 }
