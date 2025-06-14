@@ -4,13 +4,13 @@
     <div class="chat-window__participant">
       <div class="chat-window__participant-avatar">
         <img
-          *ngIf="false"
-          class="avatar avatar--image"
-          [src]="''"
-          [alt]="participantFullName">
-        <div class="avatar avatar--initials" *ngIf="!false">
-          {{getInitials(participantFullName)}}
-        </div>
+             class="avatar-image">
+        <ng-template #initialsAvatar>
+          <div class="avatar-initials">
+            {{getInitials( participantFullName)}}
+          </div>
+        </ng-template>
+
       </div>
 
       <div class="chat-window__participant-details">
@@ -43,7 +43,7 @@
           </div>
           <div class="message__meta">
             <span class="message__author">{{ msg.Nombre }}</span>
-            <span class="message__time">{{ formatearFecha(msg.Fecha_Envio) }}</span>
+            <span class="message__time">{{ msg.Fecha_Envio }}</span>
           </div>
         </div>
       </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-lista',
@@ -14,7 +16,7 @@ export class ListaComponent implements OnInit {
   selectedChatId: number | null = null;
   selectedName: string|null=null;
 
-  constructor(private usuariosService: UsuariosService) {}
+  constructor(private usuariosService: UsuariosService, private router: Router) {}
 
   ngOnInit(): void {
     this.usuariosService.getUsuarios_Chats(String(localStorage.getItem('correoGlobal'))).subscribe({
@@ -32,6 +34,8 @@ export class ListaComponent implements OnInit {
     this.chatSelected.emit(chatId);
     this.selectedName =nombre +' ' + apellido // <-- emitir al padre
     this.NombreUs.emit(this.selectedName)
+    this.router.navigate(['/chats'], {
+         queryParams: { chatId: chatId }  });
     console.log(this.selectedName)
   }
 

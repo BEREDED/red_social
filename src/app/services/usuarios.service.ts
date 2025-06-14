@@ -5,7 +5,6 @@ import { Usu_actulizar } from '../modelos/us_actulizar';
 import { getdata } from '../modelos/getdata.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Mensajes } from '../modelos/mensajes.interface';
 //environment.apiUrl
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
@@ -65,8 +64,7 @@ export class UsuariosService {
   }
   getallUsers_foros(activated: boolean): Observable<{ usuarios: any[], foros: any[] }> {
   return this.http.post<{ usuarios: any[], foros: any[] }>(`${this.api_http_rout}usuarios/getallusers`,{activated});
-}
-
+  }
  getComents(Id_Publicacion: number): Observable<{ Coments: { Contenido: string, Usuario_creador: string, Fecha_Comentario: string }[] }> {
   return this.http.post<{ Coments: { Contenido: string, Usuario_creador: string, Fecha_Comentario: string }[] }>(
     `${this.api_http_rout}foro/ObtenerComentarios`,
