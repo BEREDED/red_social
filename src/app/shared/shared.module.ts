@@ -9,6 +9,7 @@ import { FooterComponent } from './footer/footer.component';
 import { BarraBusquedaComponent } from './barra-busqueda/barra-busqueda.component';
 import { BotonPerfilComponent } from './boton-perfil/boton-perfil.component';
 import { BotonCerrarComponent } from './boton-cerrar/boton-cerrar.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
 
 import { BotonChatsComponent } from './boton-chats/boton-chats.component';
 import { BotonTgfComponent } from './boton-tgf/boton-tgf.component';
@@ -33,7 +34,8 @@ import { ConfirmarContrasenaComponent } from './confirmar-contrasena/confirmar-c
     CorreoComponent,
     FechaNacimientoComponent,
     ConfirmarContrasenaComponent,
-    NombreComponent
+    NombreComponent,
+    SearchResultsComponent,
   ],
   imports: [
     CommonModule,
@@ -57,7 +59,8 @@ import { ConfirmarContrasenaComponent } from './confirmar-contrasena/confirmar-c
     CorreoComponent,
     NombreComponent,
     FechaNacimientoComponent,
-    ConfirmarContrasenaComponent
+    ConfirmarContrasenaComponent,
+    SearchResultsComponent,
   ]
 })
 export class SharedModule { }

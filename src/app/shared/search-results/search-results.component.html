@@ -1,0 +1,60 @@
+<div class="search-results-overlay" *ngIf="isVisible" (click)="onClose()">
+  <div class="search-results-container" (click)="$event.stopPropagation()">
+
+    <!-- Header con término de búsqueda y botón cerrar -->
+    <div class="results-header">
+      <h3>Resultados para: "{{ searchTerm }}"</h3>
+      <button class="close-btn" (click)="onClose()">✕</button>
+    </div>
+
+    <!-- Contenido de resultados con scroll -->
+    <div class="results-content">
+
+      <!-- Sección de Foros -->
+      <div class="results-section" *ngIf="forosResults.length > 0">
+        <h4 class="section-title">
+          📁 Foros ({{ forosResults.length }})
+        </h4>
+        <div class="results-grid">
+          <div
+            class="result-card foro-card"
+            *ngFor="let foro of forosResults"
+            (click)="onResultClick(foro)">
+            <div class="card-icon">📁</div>
+            <div class="card-content">
+              <p class="card-title">{{ foro.valor }}</p>
+              <span class="card-type">Foro</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección de Usuarios -->
+      <div class="results-section" *ngIf="usuariosResults.length > 0">
+        <h4 class="section-title">
+          👤 Usuarios ({{ usuariosResults.length }})
+        </h4>
+        <div class="results-grid">
+          <div
+            class="result-card usuario-card"
+            *ngFor="let usuario of usuariosResults"
+            (click)="onResultClick(usuario)">
+            <div class="card-icon">👤</div>
+            <div class="card-content">
+              <p class="card-title">{{ usuario.valor }}</p>
+              <span class="card-type">Usuario</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensaje cuando no hay resultados -->
+      <div class="no-results" *ngIf="searchResults.length === 0">
+        <div class="no-results-icon">🔍</div>
+        <p>No se encontraron resultados para "{{ searchTerm }}"</p>
+        <small>Intenta con otros términos de búsqueda</small>
+      </div>
+
+    </div>
+  </div>
+</div>

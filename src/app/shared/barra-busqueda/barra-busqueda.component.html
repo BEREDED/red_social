@@ -2,6 +2,7 @@
   <input
     [(ngModel)]="searchTerm"
     (ngModelChange)="filterItems()"
+    (keyup.enter)="onSearch()"
     placeholder="Buscar usuario o foro..."
     class="search-input"
     type="text"
@@ -10,7 +11,8 @@
     🔍
   </button>
 
-  <ul *ngIf="filteredItems.length > 0" class="suggestions-list" style="list-style:none">
+  <!-- Sugerencias dropdown (mantenemos la funcionalidad existente) -->
+  <ul *ngIf="filteredItems.length > 0 && !showSearchResults" class="suggestions-list" style="list-style:none">
     <li
       *ngFor="let item of filteredItems"
       (click)="selectItem(item)"
@@ -20,3 +22,12 @@
     </li>
   </ul>
 </div>
+
+<!-- Componente de resultados de búsqueda -->
+<app-search-results
+  [searchResults]="searchResults"
+  [searchTerm]="searchTerm"
+  [isVisible]="showSearchResults"
+  (resultSelected)="onResultSelected($event)"
+  (closeResults)="onCloseResults()">
+</app-search-results>
