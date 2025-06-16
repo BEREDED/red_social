@@ -6,12 +6,12 @@
     <button class="opcion" (click)="openCrearForoModal()">Crear foro</button>
 
   </div>
-
+<div  >
   <div class="modal" *ngIf="showCrearForoModal">
-    <div class="modal-content">
+    <div class="modal-content" (click)="$event.stopPropagation()">
       <h2>Crear Foro</h2>
       <input type="text" [(ngModel)]="foroName" (ngModelChange)="validateName()" placeholder="Nombre del foro" />
-      <div *ngIf="!isValidName" style="color: red; font-size: 0.9em; margin-bottom: 20px;">
+      <div *ngIf="!isValidName" style="color: red; font-size: 0.9em; margin-bottom: 10px;">
         El nombre del foro no puede terminar con &#64;ipn.mx o &#64;alumno.ipn.mx
       </div>
         <input type="text" rows = "3" [(ngModel)]="foroDesc" placeholder="Descripcion del foro" />
@@ -22,4 +22,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>
