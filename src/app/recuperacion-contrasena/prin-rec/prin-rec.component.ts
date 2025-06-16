@@ -21,6 +21,9 @@ export class PrinRecComponent  implements OnInit {
   }
 
   showPopup: boolean = false;
+  correoValido: boolean = true;
+  errorMessage: string = '';
+
 
   @ViewChild(CorreoComponent) correoComp!:CorreoComponent
   @ViewChild(FechaNacimientoComponent) fechaComp!:FechaNacimientoComponent
@@ -32,6 +35,17 @@ export class PrinRecComponent  implements OnInit {
   get isCorreoEmpty(): boolean {
     return !this.correoComp || !this.correoComp.Correo || this.correoComp.Correo.trim() === '' || !this.correoComp.isValidCorreo;
   }
+
+
+  get formularioValido(): boolean {
+  return (
+    !!this.correoComp?.Correo &&
+    !!this.fechaComp?.Fecha_Nacimiento_string &&
+    this.correoValido
+  );
+}
+
+
 
   openPopup() {
     this.showPopup = true;

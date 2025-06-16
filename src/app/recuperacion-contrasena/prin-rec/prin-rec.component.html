@@ -8,7 +8,10 @@
       <div class="container">
         <app-correo class="poscorreo"></app-correo>
         <app-fecha-nacimiento class="posfecha"></app-fecha-nacimiento>
-        <button (click)="openPopup()" [disabled]="isCorreoEmpty" class="botonclr">confirmar</button>
+        <button
+          (click)="openPopup()"
+          [disabled]="!formularioValido"
+          class="botonclr">confirmar</button>
       </div>
     </div>
   </div>

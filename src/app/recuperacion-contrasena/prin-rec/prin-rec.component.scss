@@ -32,7 +32,7 @@ width: 450px;
   flex-direction: column;
   margin: 2em;
   padding-left: 6vh;
-  /* Propiedades opcionales útiles */
+  width: 55%;
   gap: 50px; /* Espacio entre elementos */
 }
 
@@ -45,12 +45,26 @@ color: #0f172a;
 width: auto;
 }
 .botonclr{
-width: 6em;
-height: 3em;
-background-color: #0f172a;
-color: #f8fafc;
-align-items: center;
-transform: translate(69%,30%);
+  background-color: #0f172a; // color activo (puedes cambiarlo)
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin: auto;
+  margin-top: 2vh;
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  &:disabled {
+    background-color: #cccccc; // gris claro
+    color: #666666;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
 }
 .posfecha{
   width: auto;
