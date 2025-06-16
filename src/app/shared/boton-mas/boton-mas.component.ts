@@ -21,6 +21,7 @@ export class BotonMasComponent  implements OnInit {
   showCrearForoModal = false;
   foroName: string = '';
   foroDesc: string = '';
+  isValidName: boolean = true;
 
   constructor(private router: Router,private usuariosService: UsuariosService) { }
 
@@ -41,6 +42,12 @@ export class BotonMasComponent  implements OnInit {
     this.foroName = '';
     this.foroDesc='';
   }
+
+  validateName() {
+    const pattern = /@ipn\.mx$|@alumno\.ipn\.mx$/;
+    this.isValidName = !pattern.test(this.foroName);
+  }
+
 
   crearForo() {
     console.log('Crear foro:', this.foroName, this.foroDesc);

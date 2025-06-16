@@ -10,11 +10,14 @@
   <div class="modal" *ngIf="showCrearForoModal">
     <div class="modal-content">
       <h2>Crear Foro</h2>
-      <input type="text" [(ngModel)]="foroName" placeholder="Nombre del foro" />
+      <input type="text" [(ngModel)]="foroName" (ngModelChange)="validateName()" placeholder="Nombre del foro" />
+      <div *ngIf="!isValidName" style="color: red; font-size: 0.9em; margin-bottom: 20px;">
+        El nombre del foro no puede terminar con &#64;ipn.mx o &#64;alumno.ipn.mx
+      </div>
         <input type="text" rows = "3" [(ngModel)]="foroDesc" placeholder="Descripcion del foro" />
 
       <div class="modal-buttons">
-        <button (click)="crearForo()" class="botonpopup" >Crear</button>
+        <button (click)="crearForo()" class="botonpopup" [disabled]="!isValidName">Crear</button>
         <button (click)="closeCrearForoModal()" class="botonpopup">Cancelar</button>
       </div>
     </div>
