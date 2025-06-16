@@ -14,14 +14,29 @@
   </app-join-exit>
   </div>
 
-  <div class="list">
-    <ul style="list-style: none; padding-left: 0;">
-      <li *ngFor="let user of inscritos">
-      {{ user.Nombre }} {{ user.Apellido_Pat }}
-      <span class="correo">({{ user.Correo }})</span>
-      <button class="Mensaje" (click)="clik_userforo(user.Correo)">Mensaje</button>
-    </li>
+  <div class="accordion">
+    <!-- Acordeón encabezado -->
+    <div class="accordion-header"  (click)="toggleAccordion('one')" >
+      <div class="accordion-title">
+        <span>Integrantes</span>
+        <span class="chevron" [class.chevron-up]="accordionOneExpanded" [class.chevron-down]="!accordionOneExpanded"></span>
+      </div>
+    </div>
 
-</ul>
+    <!-- Contenido del acordeón -->
+    <div class="accordion-content" [class.expanded]="accordionOneExpanded">
+      <div class="list">
+        <ul style="list-style: none; padding-left: 0;">
+          <li *ngFor="let user of inscritos">
+            {{ user.Nombre }} {{ user.Apellido_Pat }}
+            <span class="correo">({{ user.Correo }})</span>
+            <button class="Mensaje" (click)="clik_userforo(user.Correo)">Mensaje</button>
+          </li>
+
+        </ul>
+      </div>
+    </div>
   </div>
+
+
 </div>

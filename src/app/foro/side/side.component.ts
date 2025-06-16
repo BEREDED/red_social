@@ -24,18 +24,7 @@ export class SideComponent implements OnInit {
   mobileExpanded: boolean = false;
 
   // Datos para acordeones (mantenidos para compatibilidad)
-  accordionOneItems = [
-    { name: 'Opción 1', selected: false },
-    { name: 'Opción 2', selected: false },
-    { name: 'Opción 3', selected: true },
-    { name: 'Opción 4', selected: false }
-  ];
 
-  accordionTwoItems = [
-    { name: 'Elemento A', icon: 'document-text', route: '/documents' },
-    { name: 'Elemento B', icon: 'analytics', route: '/statistics' },
-    { name: 'Elemento C', icon: 'settings', route: '/settings' }
-  ];
 
   forosInscritos: any[] = [];
 
@@ -86,13 +75,13 @@ export class SideComponent implements OnInit {
     this.mobileExpanded = false;
   }
 
-  // Método para seleccionar una opción del primer acordeón
+  /* Método para seleccionar una opción del primer acordeón
   selectOption(item: any) {
     this.accordionOneItems.forEach(option => {
       option.selected = (option === item);
     });
   }
-
+*/
   // Método para obtener los foros
   getForos(): void {
     const correo = localStorage.getItem('correoGlobal');

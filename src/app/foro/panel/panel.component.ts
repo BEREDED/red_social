@@ -14,6 +14,7 @@ export class PanelComponent  implements OnInit {
   @Input() description: string = '';
   @Input() isinscrito:boolean=false;
 
+  accordionOneExpanded: boolean = false;
   inscritos:any[]=[]
 
   constructor(private usuariosService: UsuariosService, private router: Router) { }
@@ -49,5 +50,12 @@ export class PanelComponent  implements OnInit {
       }
     });
       }
+  }
+
+  // Método para alternar el estado del acordeón
+  toggleAccordion(accordion: string) {
+    if (accordion === 'one') {
+      this.accordionOneExpanded = !this.accordionOneExpanded;
+    }
   }
 }
