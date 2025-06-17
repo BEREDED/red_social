@@ -10,7 +10,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class PrinPrinComponent  implements OnInit {
 
   forosInscritos: any[] = [];
-
+  gruposRegistrados:any[]=[];
   constructor(private usuarioservice: UsuariosService) {}
 
   ngOnInit(): void {
@@ -26,6 +26,13 @@ export class PrinPrinComponent  implements OnInit {
       next: (response: any) => {
         console.log("Foros recibidos:", response.foros_Inscritos);
         this.forosInscritos = response.foros_Inscritos;
+      },
+      error: (err) => console.error('Error al obtener foros:', err)
+    });
+    this.usuarioservice.getListadoGrps(correo).subscribe({
+      next: (response: any) => {
+        console.log("grupos recibidos:", response.grupos_Inscritos);
+        this.gruposRegistrados = response.grupos_Inscritos;
       },
       error: (err) => console.error('Error al obtener foros:', err)
     });

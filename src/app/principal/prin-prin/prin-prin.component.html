@@ -10,6 +10,9 @@
         *ngFor="let foro of forosInscritos"
         [titulo]="foro.Titulo_foro">
         </app-group-card>
+        <app-group-card *ngFor="let grupo of gruposRegistrados"
+        [titulo]="grupo.Nombre_Grupo"
+        ></app-group-card>
       </div>
     </div>
 

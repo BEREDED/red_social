@@ -5,11 +5,12 @@ import { Usu_actulizar } from '../modelos/us_actulizar';
 import { getdata } from '../modelos/getdata.interface';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
+import { Grupo } from '../modelos/grupos.interface';
 //environment.apiUrl
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
-  //api_http_rout = "http://localhost:3000/";
-  api_http_rout= "https://dpb2zz9s-3000.usw3.devtunnels.ms/"
+  api_http_rout = "http://localhost:3000/";
+  //api_http_rout= "https://dpb2zz9s-3000.usw3.devtunnels.ms/"
   constructor(private http: HttpClient) {}
   getForos() {
     return this.http.get(`${this.api_http_rout}usuarios`);
@@ -23,11 +24,18 @@ export class UsuariosService {
   getListadoForos(Correo: string): Observable<{ foros_Inscritos: { Titulo_foro: string }[] }> {
   return this.http.post<{ foros_Inscritos: { Titulo_foro: string }[] }>(`${this.api_http_rout}usuarios/listarForos`,{ Correo });
   }
+  getListadoGrps(Correo:string): Observable<{ grupos_Inscritos: { Nombre_Grupo: string }[] }>{
+    return this.http.post<{ grupos_Inscritos: { Nombre_Grupo: string }[] }>(`${this.api_http_rout}usuarios/listarGrupos`,{ Correo });
+  }
+
   getInfoForo(Titulo_foro:string){
     return this.http.post<{Descripcion:string}>(`${this.api_http_rout}foro/getdata`, { Titulo_foro } );
   }
   postCreacionForo(foro:foros){
     return this.http.post(`${this.api_http_rout}foro/create_foro`, foro);
+  }
+  postCreacionGrp(grupo:Grupo){
+    return this.http.post(`${this.api_http_rout}Grupos/Crear_grp`, grupo);
   }
   postCreacionPost(post:Post){
     return this.http.post(`${this.api_http_rout}posts`, post);
@@ -71,7 +79,6 @@ export class UsuariosService {
     { Id_Publicacion }
   );
   }
-
   crearComentario(comentario:Comentario){
     return this.http.post<{message:string}>(`${this.api_http_rout}foro/CrearComentario`,comentario)
   }
