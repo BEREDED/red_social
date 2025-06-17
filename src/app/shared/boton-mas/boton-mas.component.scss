@@ -38,17 +38,6 @@
   align-items: flex-end;
   gap: 7px;
   z-index: 1000;
-
-  // Media query único para móviles
-  @media (max-width: 768px) {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    margin: 0;
-    align-items: center;
-  }
 }
 
 .botones-desplegados {
@@ -56,11 +45,6 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 10px;
-
-  @media (max-width: 768px) {
-    align-items: center;
-    width: max-content;
-  }
 }
 
 .opcion {
@@ -88,30 +72,11 @@
   background-color: #1e293b;
   padding: 25px 30px;
   border-radius: 12px;
-  z-index: 9999; /* Z-index más alto para estar por encima de todo */
+  z-index: 2000;
   width: 320px;
-  min-width: 300px;
-  max-width: 90vw;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
   color: #f0f0f0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-  // Media query único para móviles - centrado más arriba
-  @media (max-width: 768px) {
-    width: 85vw;
-    max-width: 400px;
-    min-width: 280px;
-    padding: 20px 25px;
-    // Posicionar mucho más arriba en móviles
-    transform: translate(-50%, -61VH);
-
-
-    max-height: 70vh;
-    overflow-y: auto;
-    /* Forzar posicionamiento independiente del padre */
-    margin: 0;
-    position: fixed !important;
-  }
 }
 
 .modal h2 {
