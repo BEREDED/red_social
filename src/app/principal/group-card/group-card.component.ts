@@ -9,11 +9,17 @@ import { Router } from '@angular/router';
 })
 export class GroupCardComponent {
   @Input() titulo: string = '';
+  @Input() tipo: string = ''; // ← nuevo
   @Output() titulo_llamada:string= this.titulo;
   constructor(private router: Router) {}
   ngOnInit(): void {}
-  public send_name(titulo : string): void {
-    console.log(this.titulo);
-    this.router.navigate(['/foro', titulo]);
+  public redirigir(tipo : string, titulo:string): void {
+    console.log(this.tipo, this.titulo);
+    if (tipo === 'grupo') {
+      this.router.navigate(['/grupo', titulo]);
+    }
+    if( tipo === 'foro'){
+      this.router.navigate(['/foro',titulo]);
+    }
   }
 }

@@ -104,4 +104,15 @@ export class UsuariosService {
   getUsuariosEnforo(Titulo_foro:string): Observable<{inscritos:{correo:string}[]}>{
     return this.http.post<{inscritos:{correo:string}[]}>( `${this.api_http_rout}foro/inscritos_foro`,{Titulo_foro})
   }
+  postCrearPostgrp(post:Post){
+    return this.http.post<{Mensaje:string}>(`${this.api_http_rout}Grupos/crearpost`, post)
+  }
+  recuperarPostgrp(nombreForo: string): Observable<{ posts: { Fecha_Publicacion: string, Contenido: string, Usuario_creador: string, Id_Publicacion:number  }[] }> {
+  return this.http.post<{ posts: { Fecha_Publicacion: string, Contenido: string, Usuario_creador: string ,Id_Publicacion:number}[] }>(
+    `${this.api_http_rout}foro/recuperar_posts`,
+    { nombreForo }
+  );}
+  postUnirCodigo(Codigo:string, Correo: string){
+    return this.http.post(`${this.api_http_rout}Grupos/ingresar_cod`,{ Codigo, Correo })
+  }
 }

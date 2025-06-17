@@ -41,6 +41,10 @@ export const routes: Routes = [
     canActivate:[AuthGuard]
   },
   {
+    path:'grupo/:titulo',
+    loadChildren: () => import('./grupo/grupo.module').then((m) => m.ForoModule),
+  },
+  {
     path: '',
     redirectTo: 'inicio_sesion',
     pathMatch:'prefix',

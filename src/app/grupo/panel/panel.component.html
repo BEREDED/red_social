@@ -1,7 +1,7 @@
 <div class="panel-container">
   <!-- Título del panel -->
   <div class="panel-header">
-    <h2 class="Title">{{ Titulo_foro }}</h2>
+    <h2 class="Title">{{ Titulo_grupo }}</h2>
   </div>
   <div class="description">
     <p>{{ description }}</p>
@@ -9,7 +9,7 @@
 
   <div class="Boton">
     <app-join-exit
-  [communityId]="Titulo_foro"
+  [communityId]="Titulo_grupo"
   [isinscrito]="isinscrito">
   </app-join-exit>
   </div>

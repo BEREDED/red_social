@@ -10,7 +10,7 @@ import { Post } from 'src/app/modelos/post.interface';
 })
 export class PublishingComponent {
   @Output() nuevoPost = new EventEmitter<void>();
-  @Input() Titulo_foro: string = '';
+  @Input() Titulo_grupo: string = '';
   postContent=''
   postcreate:Post={
     Titulo_foro:'',
@@ -41,9 +41,9 @@ export class PublishingComponent {
       const fechaFormateada = fecha.toISOString().slice(0, 16).replace('T', ' ');
       this.postcreate.Contenido=this.postContent
       this.postcreate.correo_Usuario=String(localStorage.getItem('correoGlobal'))
-      this.postcreate.Titulo_foro=this.Titulo_foro
+      this.postcreate.Titulo_foro=this.Titulo_grupo
       this.postcreate.Fecha_Publicacion=new Date(fechaFormateada)
-      this.usuariosService.postCrearPost(this.postcreate).subscribe({
+      this.usuariosService.postCrearPostgrp(this.postcreate).subscribe({
         next: (response) =>{
           console.log(response.Mensaje)
           this.nuevoPost.emit();

@@ -3,22 +3,20 @@
 
   <main class="main-content">
 
-    <div class="contenedor-centrado">
-      <div class="grupos-container">
-
-        <app-group-card
-        *ngFor="let foro of forosInscritos"
-        [titulo]="foro.Titulo_foro">
-        </app-group-card>
-        <app-group-card *ngFor="let grupo of gruposRegistrados"
-        [titulo]="grupo.Nombre_Grupo"
-        ></app-group-card>
-      </div>
+  <div class="contenedor-centrado">
+    <div class="grupos-container">
+      <app-group-card
+        *ngFor="let item of Elementos"
+        [titulo]="item.nombre"
+        [tipo]="item.tipo"> <!-- Puedes pasarlo si lo necesitas -->
+      </app-group-card>
     </div>
+  </div>
+
 
           <div class="floating-buttons">
 
-          <app-boton-mas (foroCreado)="getForos()" ></app-boton-mas>
+          <app-boton-mas (foroCreado)="getForosYGrupos()" ></app-boton-mas>
 
           <app-boton-chats></app-boton-chats>
 
