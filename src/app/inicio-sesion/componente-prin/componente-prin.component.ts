@@ -31,9 +31,12 @@ export class ComponentePrinComponent  implements OnInit {
     this.userDataService.postLogin(this.usu_ini).subscribe({
       next: (response) => {
         if (response.autenticado && response.token) {
+          localStorage.clear();
           localStorage.setItem('token', response.token);
           console.log('Sesión iniciada con éxito');
-          this.router.navigate(['/principal']);
+          this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+          this.router.navigate(['/principal']);});
+
           localStorage.setItem('correoGlobal', this.correoComp.Correo);
         } else {
           console.log('No se pudo iniciar sesión');

@@ -15,12 +15,12 @@
                             </div>
 
                             <!-- Correo: NUNCA editable, solo lectura -->
-                            <div class="campo-solo-lectura">
+                            <div [class.disabled]="!isEditing">
                               <app-correo [Correo]="Correo_front" ></app-correo>
                             </div>
 
                             <!-- Fecha: NUNCA editable, solo lectura -->
-                            <div class="campo-solo-lectura">
+                            <div [class.disabled]="!isEditing">
                               <app-fecha-nacimiento [Fecha_Nacimiento_string]="fch_nac_front.split('T')[0]"></app-fecha-nacimiento>
                             </div>
                           </div>
@@ -29,8 +29,12 @@
               <app-confirmar-contrasena></app-confirmar-contrasena>
             </div>
           </div>
+
           <button class="botonclr" *ngIf="!isEditing" (click)="toggleEdit()">Editar perfil</button>
           <button class="botonclr" *ngIf="isEditing" (click)="acceptEdit()">Aceptar</button>
+          <div *ngIf="isEditing" class="oculto">
+            <button class="botonclr3" *ngIf="isEditing" (click)="toggleEdit()" >cancelar</button>
+          </div>
       </div>
     </div>
   </body>
