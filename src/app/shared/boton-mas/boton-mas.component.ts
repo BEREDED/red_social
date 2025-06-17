@@ -1,10 +1,15 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { foros } from 'src/app/modelos/foro.interface';
-import { Grupo } from 'src/app/modelos/grupos.interface';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 // Interfaz para grupos (igual que foro pero con código en vez de descripción)
+interface Grupo {
+  Correo_Creador: string;
+  Titulo_grupo: string;
+  Codigo: string;
+  Fecha_creacion: string;
+}
 
 @Component({
   selector: 'app-boton-mas',
@@ -26,8 +31,8 @@ export class BotonMasComponent implements OnInit {
   // Datos para grupos
   Grupo_send: Grupo = {
     Correo_Creador: '',
-    Nombre_Grupo: '',
-    Clave_Grupo: '',
+    Titulo_grupo: '',
+    Codigo: '',
     Fecha_creacion: ''
   }
 
@@ -152,20 +157,19 @@ export class BotonMasComponent implements OnInit {
   crearGrupo() {
     console.log('Crear grupo:', this.grupoName, this.codigoGrupo);
     this.Grupo_send.Correo_Creador = String(localStorage.getItem('correoGlobal'));
-    this.Grupo_send.Nombre_Grupo = this.grupoName;
+    this.Grupo_send.Nombre_Grupo = this.grupoName;Add commentMore actions
     this.Grupo_send.Clave_Grupo = this.codigoGrupo;
     console.log(this.Grupo_send);
     this.usuariosService.postCreacionGrp(this.Grupo_send).subscribe({
-      next: (response) => {
-        console.log(response);
-        this.closeCrearGrupoModal();
-        this.grupoCreado.emit();
-      },
-      error: (error) => {
-        console.log(error);
-      }
-    });
-
+       next: (response) => {
+         console.log(response);
+         this.closeCrearGrupoModal();
+         this.grupoCreado.emit();
+       },
+       error: (error) => {
+         console.log(error);
+       }
+     });
 
   }
 
