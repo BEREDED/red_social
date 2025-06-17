@@ -3,12 +3,23 @@
     [(ngModel)]="searchTerm"
     (ngModelChange)="filterItems()"
     (keyup.enter)="onSearch()"
+    (focus)="filterItems()"
     placeholder="Buscar usuario o foro..."
     class="search-input"
     type="text"
   />
   <button class="search-button" (click)="onSearch()">
     🔍
+  </button>
+
+  <!-- Botón para limpiar búsqueda (opcional) -->
+  <button
+    *ngIf="searchTerm.length > 0"
+    class="clear-button"
+    (click)="onClearSearch()"
+    type="button"
+    title="Limpiar búsqueda">
+    ✕
   </button>
 
   <!-- Sugerencias dropdown (mantenemos la funcionalidad existente) -->

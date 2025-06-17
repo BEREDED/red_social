@@ -2,8 +2,6 @@
 .search-container {
   display: flex;
   align-items: center;
-  width:0pt;
-  margin: 0 auto;
   padding: 5px;
   border-radius: 20px;
   position: relative; // Importante para que .suggestions-list se posicione respecto a este contenedor
@@ -11,23 +9,33 @@
   max-width: 400px;
   margin: 0 auto;
   color: #0f172a;
-  left: -5%;
+
+  &:focus{
+    width: 800px;
+  }
 }
 
 .search-input {
   flex: 1;
   padding: 4px 8px;
   border: none;
-  border-radius: 8px 0 0 8px;
+  border-radius: 8px ;
   font-size: 14px;
   outline: none;
   background: #f8fafc;
   width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+
+    &:focus{
+      width: 800px;
+
+    }
 
 }
 
 .search-button {
-  padding: 4px 8px;
+  padding: 8px 4px;
   border: none;
   background-color: #0f172a;
   color: #f8fafc;
@@ -37,8 +45,9 @@
   transition: background-color 0.3s;
   max-width: 10vw;
   position: absolute;
-  right: 10px;
-  top: 10px;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
 }
 
@@ -46,14 +55,30 @@
   background-color: #0f172a;
   color: #f0f0f0;
   filter: brightness(0.8);
-
 }
 
-.search-input {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
+/* Botón para limpiar búsqueda */
+.clear-button {
+  position: absolute;
+  right: 45px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  z-index: 10;
 }
+
+.clear-button:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
 .suggestion-group-label {
   background-color: #1e293b;
   color: #38bdf8;
@@ -61,7 +86,6 @@
   padding: 8px 10px;
   cursor: default;
 }
-
 
 .suggestions-list {
   position: absolute;
@@ -76,17 +100,20 @@
   max-height: 200px;
   overflow-y: auto;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
 }
 
 .suggestions-list li {
   padding: 10px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .suggestions-list li:hover {
   background-color: #f8fafc;
   color: #0f172a;
 }
+
 .suggestions-fixed {
   position: fixed;
   z-index: 9999;
@@ -106,4 +133,125 @@
 
 .suggestions-fixed li:hover {
   background-color: #eee;
+}
+
+/* Responsividad para el componente de búsqueda en el header */
+@media (max-width: 1024px) {
+  .search-container {
+    max-width: 350px;
+  }
+
+  .search-input {
+    font-size: 13px;
+    padding: 9px;
+  }
+
+  .search-button {
+    font-size: 13px;
+    right: 8px;
+  }
+
+  .clear-button {
+    right: 40px;
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-container {
+    max-width: 300px;
+  }
+
+  .search-input {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .search-button {
+    font-size: 12px;
+    right: 8px;
+  }
+
+  .clear-button {
+    right: 35px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .search-container {
+    max-width: 250px;
+  }
+
+  .search-input {
+    font-size: 11px;
+    padding: 7px;
+  }
+
+  .search-button {
+    font-size: 11px;
+    right: 5px;
+
+  }
+
+  .clear-button {
+    right: 30px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container {
+    max-width: 200px;
+    &:focus{
+      width: 100%;
+    }
+  }
+
+  .search-input {
+    font-size: 10px;
+    padding: 6px;
+    &:focus{
+      width: 100%;
+    }
+  }
+
+  .search-button {
+    font-size: 10px;
+    right: 4px;
+
+  }
+
+  .clear-button {
+    right: 25px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .search-container {
+    max-width: 160px;
+    &:focus{
+      width: 100%;
+    }
+  }
+
+  .search-input {
+    font-size: 9px;
+    padding: 5px;
+    &:focus{
+      width: 100%;
+    }
+  }
+
+  .search-button {
+    font-size: 9px;
+    right: 3px;
+
+  }
+
+  .clear-button {
+    right: 20px;
+    font-size: 11px;
+  }
 }

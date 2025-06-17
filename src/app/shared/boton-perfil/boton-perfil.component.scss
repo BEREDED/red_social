@@ -1,4 +1,4 @@
-.perfil{
+.perfil {
   cursor: pointer;
   transition: filter 0.3s ease;
   width: 50px;
@@ -13,6 +13,8 @@
   font-size: 16px;
   margin-right: 12px;
   flex-shrink: 0;
+  border: none;
+  text-decoration: none;
 }
 
 .perfil:hover {
@@ -24,4 +26,87 @@
   height: 30px;
   border-radius: 50%;
   display: block;
+}
+
+.perfil h3 {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Media queries para responsividad */
+
+/* Tablets grandes (768px - 1024px) */
+@media (max-width: 1024px) {
+  .perfil {
+    width: 48px;
+    height: 48px;
+    font-size: 15px;
+    margin-right: 10px;
+  }
+
+  .perfil img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Tablets (600px - 768px) */
+@media (max-width: 768px) {
+  .perfil {
+    width: 45px;
+    height: 45px;
+    font-size: 14px;
+    margin-right: 8px;
+  }
+
+  .perfil img {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+/* Móviles grandes (480px - 600px) */
+@media (max-width: 600px) {
+  .perfil {
+    width: 42px;
+    height: 42px;
+    font-size: 13px;
+    margin-right: 6px;
+  }
+
+  .perfil img {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+/* Móviles pequeños (hasta 480px) */
+@media (max-width: 480px) {
+  .perfil {
+    width: 38px;
+    height: 38px;
+    font-size: 12px;
+    margin-right: 4px;
+  }
+
+  .perfil img {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Móviles muy pequeños (hasta 360px) */
+@media (max-width: 360px) {
+  .perfil {
+    width: 35px;
+    height: 35px;
+    font-size: 11px;
+    margin-right: 2px;
+  }
+
+  .perfil img {
+    width: 20px;
+    height: 20px;
+  }
 }

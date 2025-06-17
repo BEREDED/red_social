@@ -1,12 +1,75 @@
-.cerrar_sesion{
+.cerrar_sesion {
   background-color: #f0f0f0;
   color: #0f172a;
-  padding: 1%;
-  width: 70px;
-  height: 35PX;
-  border-radius: 10%;
+  padding: 8px 12px;
+  min-width: 70px;
+  height: 35px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: filter 0.3s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.cerrar_sesion:hover{
-  filter: brightness(0.8);
 
+.cerrar_sesion:hover {
+  filter: brightness(0.8);
+}
+
+/* Media queries para responsividad */
+
+/* Tablets grandes (768px - 1024px) */
+@media (max-width: 1024px) {
+  .cerrar_sesion {
+    font-size: 13px;
+    padding: 7px 11px;
+    min-width: 68px;
+    height: 34px;
+  }
+}
+
+/* Tablets (600px - 768px) */
+@media (max-width: 768px) {
+  .cerrar_sesion {
+    font-size: 12px;
+    padding: 6px 10px;
+    min-width: 65px;
+    height: 32px;
+  }
+}
+
+/* Móviles grandes (480px - 600px) */
+@media (max-width: 600px) {
+  .cerrar_sesion {
+    font-size: 11px;
+    padding: 5px 8px;
+    min-width: 60px;
+    height: 30px;
+  }
+}
+
+/* Móviles pequeños (hasta 480px) */
+@media (max-width: 480px) {
+  .cerrar_sesion {
+    font-size: 10px;
+    padding: 4px 6px;
+    min-width: 55px;
+    height: 28px;
+    border-radius: 6px;
+  }
+}
+
+/* Móviles muy pequeños (hasta 360px) */
+@media (max-width: 360px) {
+  .cerrar_sesion {
+    font-size: 9px;
+    padding: 3px 5px;
+    min-width: 50px;
+    height: 26px;
+    border-radius: 5px;
+  }
 }

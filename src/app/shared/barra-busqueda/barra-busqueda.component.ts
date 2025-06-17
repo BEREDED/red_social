@@ -1,7 +1,9 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, OnDestroy, HostListener, ElementRef } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-barra-busqueda',
@@ -9,7 +11,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./barra-busqueda.component.scss'],
   standalone: false
 })
-export class BarraBusquedaComponent implements OnInit {
+export class BarraBusquedaComponent implements OnInit, OnDestroy {
   @Output() chatSelected = new EventEmitter<number>();
   idChat: number = 0;
   searchTerm: string = '';
@@ -20,14 +22,63 @@ export class BarraBusquedaComponent implements OnInit {
   showSearchResults: boolean = false;
   searchResults: { tipo: string; valor: string }[] = [];
 
+  // Subscription para el router
+  private routerSubscription: Subscription = new Subscription();
+
   constructor(
     private usuariosService: UsuariosService,
     private router: Router,
-    private _location: Location
+    private _location: Location,
+    private elementRef: ElementRef
   ) {}
 
   ngOnInit() {
     this.getAllUsuariosYForos();
+    this.setupRouterListener();
+  }
+
+  ngOnDestroy() {
+    // Limpiar subscripciones
+    this.routerSubscription.unsubscribe();
+  }
+
+  // Escuchar cambios de ruta para limpiar el estado
+  private setupRouterListener(): void {
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.clearSearchState();
+      });
+  }
+
+  // Escuchar clicks fuera del componente
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const target = event.target as HTMLElement;
+
+    // Si el click no fue dentro del componente de búsqueda, limpiar estado
+    if (!this.elementRef.nativeElement.contains(target)) {
+      this.clearSearchState();
+    }
+  }
+
+  // Escuchar la tecla Escape para cerrar
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapePress(event: KeyboardEvent): void {
+    this.clearSearchState();
+  }
+
+  // Limpiar el estado de búsqueda
+  private clearSearchState(): void {
+    this.filteredItems = [];
+    this.showSearchResults = false;
+    this.searchResults = [];
+  }
+
+  // Limpiar completamente incluyendo el término de búsqueda
+  private clearCompleteState(): void {
+    this.searchTerm = '';
+    this.clearSearchState();
   }
 
   getAllUsuariosYForos() {
@@ -48,6 +99,12 @@ export class BarraBusquedaComponent implements OnInit {
 
   filterItems(): void {
     const term = this.searchTerm.toLowerCase();
+
+    if (term.trim() === '') {
+      this.filteredItems = [];
+      return;
+    }
+
     this.filteredItems = this.UsuariosRegistrados.filter(item =>
       item.valor.toLowerCase().includes(term)
     );
@@ -55,7 +112,7 @@ export class BarraBusquedaComponent implements OnInit {
 
   selectItem(item: any): void {
     this.searchTerm = item.valor;
-    this.filteredItems = [];
+    this.clearSearchState(); // Limpiar estado al seleccionar
     this.navigateToItem(item);
   }
 
@@ -65,6 +122,7 @@ export class BarraBusquedaComponent implements OnInit {
 
     if (term === '') {
       console.warn('El término de búsqueda está vacío');
+      this.clearSearchState();
       return;
     }
 
@@ -73,20 +131,26 @@ export class BarraBusquedaComponent implements OnInit {
       item.valor.toLowerCase().includes(term.toLowerCase())
     );
 
-    // Mostrar el modal de resultados
+    // Limpiar sugerencias y mostrar resultados
+    this.filteredItems = [];
     this.showSearchResults = true;
   }
 
   // Función para manejar la selección desde el modal
   onResultSelected(result: { tipo: string; valor: string }): void {
     this.searchTerm = result.valor;
-    this.showSearchResults = false;
+    this.clearSearchState(); // Limpiar estado al seleccionar
     this.navigateToItem(result);
   }
 
   // Función para cerrar el modal
   onCloseResults(): void {
-    this.showSearchResults = false;
+    this.clearSearchState();
+  }
+
+  // Función para limpiar búsqueda (opcional, para botón de limpiar)
+  onClearSearch(): void {
+    this.clearCompleteState();
   }
 
   // Función auxiliar para la navegación
