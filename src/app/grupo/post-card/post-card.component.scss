@@ -1,0 +1,92 @@
+.post-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.post-header {
+  padding: 16px 16px 8px 16px;
+
+  .author-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #0f172a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .author-details {
+    flex: 1;
+  }
+
+  .author-name {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2937;
+    line-height: 1.2;
+  }
+
+  .post-time {
+    font-size: 13px;
+    color: #6b7280;
+  }
+}
+
+.post-content {
+  padding: 0 16px 16px 16px;
+
+  p {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: #374151;
+    word-wrap: break-word;
+  }
+}
+
+
+// Responsive design
+@media (max-width: 768px) {
+  .feed-container {
+    padding: 16px 8px;
+
+    .post-card {
+      margin: 0 4px;
+    }
+  }
+
+  .post-header {
+    padding: 12px 12px 8px 12px;
+  }
+
+  .post-content {
+    padding: 0 12px 12px 12px;
+  }
+
+  .comments-section {
+    padding: 8px 12px 0 12px;
+  }
+
+  .add-comment {
+    padding: 8px 12px 12px 12px;
+  }
+}

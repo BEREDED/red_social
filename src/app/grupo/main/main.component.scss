@@ -1,0 +1,26 @@
+.body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: black;
+//  background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+  background-color: #ECECEC	;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  //gap: 16px;
+//  padding: 0 4px;
+  height: calc(100vh - 80px); /* Altura fija para el contenedor */
+//  background-color: #F4F6F8	;
+}
+
+app-feed {
+  flex: 1;
+}
+
+app-side,
+app-panel {
+  flex-shrink: 0;
+  height: 100%; /* Ocupar toda la altura del contenedor */
+}

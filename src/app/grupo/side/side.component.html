@@ -1,0 +1,48 @@
+<div class="side-panel-container" [class.mobile-collapsed]="!mobileExpanded">
+  <!-- Botón móvil -->
+  <button class="mobile-toggle" (click)="toggleMobilePanel()" [attr.aria-expanded]="mobileExpanded">
+    <span [class]="mobileExpanded ? 'chevron chevron-left' : 'chevron chevron-right'"></span>
+  </button>
+
+  <!-- Panel lateral -->
+  <div class="side-panel-wrapper">
+    <div class="side-panel-header">
+      <button class="return">
+        <a routerLink="/principal" class="return">◀ Regresar</a>
+      </button>
+      <div class="title">
+        <h2>{{ title }}</h2>
+      </div>
+    </div>
+
+    <div class="side-panel-content">
+      <div class="accordion">
+        <!-- Acordeón encabezado -->
+        <div class="accordion-header" (click)="toggleAccordion('one')">
+          <div class="accordion-title">
+            <span>Mis Foros</span>
+            <span class="chevron" [class.chevron-up]="accordionOneExpanded" [class.chevron-down]="!accordionOneExpanded"></span>
+          </div>
+        </div>
+
+        <!-- Contenido del acordeón -->
+        <div class="accordion-content" [class.expanded]="accordionOneExpanded">
+          <div class="forum-list">
+            <div
+              *ngFor="let foro of forosInscritos"
+              (click)="navigateToForum(foro)"
+              [class.active-forum]="isForumActive(foro.Titulo_foro)"
+              class="forum-item"
+            >
+              <span class="forum-title">{{ foro.Titulo_foro }}</span>
+              <span *ngIf="isForumActive(foro.Titulo_foro)" class="indicator">›</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay móvil -->
+  <div class="mobile-overlay" [class.visible]="mobileExpanded" (click)="closeMobilePanel()"></div>
+</div>

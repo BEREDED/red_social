@@ -1,0 +1,239 @@
+.side-panel-container {
+  width: 25vw;
+  height: 85vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.mobile-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: #2575fc;
+  color: white;
+  border: none;
+  border-radius: 0 12px 12px 0;
+  width: 32px;
+  height: 80px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1002;
+
+  .chevron {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+  .chevron-left {
+    border-width: 8px 10px 8px 0;
+    border-color: transparent white transparent transparent;
+  }
+  .chevron-right {
+    border-width: 8px 0 8px 10px;
+    border-color: transparent transparent transparent white;
+  }
+
+  &:hover {
+    width: 36px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+}
+
+.side-panel-wrapper {
+  flex: 1;
+  background: white;
+  border-radius: 0 0 16px 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.side-panel-header {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  padding: 1rem;
+  height: 15vh;
+
+  .return {
+    background: none;
+    color: white;
+    border: none;
+    font-size: 1rem;
+    text-decoration: none;
+  }
+
+  .title {
+    text-align: center;
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+  }
+}
+
+.side-panel-content {
+  flex: 1;
+  padding: 1rem;
+
+  .accordion {
+    .accordion-header {
+      cursor: pointer;
+      border: 1px solid gray;
+      border-radius: 8px;
+      padding: 1ch;
+      margin-bottom: 0.5rem;
+      background-color: #f5f5f5;
+
+      .accordion-title {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #374151;
+      }
+
+      &:hover {
+        background-color: #dee4ff;
+        transform: translateY(-1px);
+      }
+    }
+
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+
+      &.expanded {
+        max-height: 500px;
+      }
+
+      .forum-list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 8px;
+      }
+
+      .forum-item {
+        background: #fafbfc;
+        color: gray;
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &:hover {
+          color: black;
+          transform: translateX(4px);
+        }
+
+        &.active-forum {
+          background: #9ed6ff;
+          color: #4c49a8;
+          border-left: 4px solid #3b82f6;
+          font-weight: 600;
+
+          &:hover {
+            transform: translateX(1px);
+          }
+        }
+
+        .indicator {
+          font-size: 1.2rem;
+          color: #3b82f6;
+        }
+      }
+    }
+  }
+}
+
+.mobile-overlay {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .side-panel-container {
+    --side-panel-width: 85vw;
+    --side-panel-max-width: 320px;
+    --final-width: clamp(0px, var(--side-panel-width), var(--side-panel-max-width));
+
+    width: 100%;
+    height: auto;
+    position: relative;
+    pointer-events: none;
+
+    &.mobile-collapsed .side-panel-wrapper {
+      transform: translateX(-100%);
+      pointer-events: none;
+    }
+  }
+
+  .mobile-toggle {
+    display: flex;
+    pointer-events: all;
+  }
+
+  .side-panel-container.mobile-collapsed .mobile-toggle {
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .side-panel-container:not(.mobile-collapsed) .mobile-toggle {
+    transform: translateY(-50%) translateX(var(--final-width));
+  }
+
+  .side-panel-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--final-width);
+    height: 100vh;
+    transform: translateX(0);
+    pointer-events: all;
+    z-index: 1001;
+    border-radius: 0 16px 16px 0;
+  }
+
+  .mobile-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: all;
+    }
+  }
+
+  .side-panel-header {
+    height: 12vh;
+    padding: 0.8rem;
+
+    .title h2 {
+      font-size: 1.5rem;
+      margin: 1ch;
+    }
+  }
+
+  .side-panel-content {
+    padding: 0.8rem;
+  }
+}

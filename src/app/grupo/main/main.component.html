@@ -1,0 +1,17 @@
+<body class="body">
+  <app-header></app-header>
+
+  <div class="container">
+    <app-side></app-side>
+    <app-feed [Titulo_foro]="Titulo_foro"></app-feed>
+    <app-panel [Titulo_foro]="Titulo_foro" [description]="description" [isinscrito]="isinscrito"></app-panel>
+  </div>
+
+  <div class="floating-buttons">
+    <div class="container2">
+      <app-boton-chats></app-boton-chats>
+    </div>
+  </div>
+
+  <app-footer></app-footer>
+</body>

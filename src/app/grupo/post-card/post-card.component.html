@@ -1,0 +1,22 @@
+<div class="post-card">
+  <!-- Post Header -->
+  <div class="post-header">
+    <div class="author-info">
+      <div class="author-avatar">
+        {{post.Usuario_creador[0] }}{{post.Usuario_creador[1]}}
+      </div>
+      <div class="author-details">
+        <h4 class="author-name">{{ post.Usuario_creador }}</h4>
+        <span class="post-time">{{ getTimeAgo((post.Fecha_Publicacion))}}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post Content -->
+  <div class="post-content">
+    <p>{{ post.Contenido }}</p>
+  </div>
+
+  <!-- Comments Section -->
+  <app-comments-section [idPost]="idPost" ></app-comments-section>
+</div>

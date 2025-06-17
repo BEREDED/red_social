@@ -1,0 +1,31 @@
+<div class="feed-container">
+  <!-- Publicar nuevo contenido -->
+  <div class="publishing-section">
+    <app-publishing [Titulo_foro]="Titulo_foro" (nuevoPost)="refreshFeed()"></app-publishing>
+  </div>
+
+  <!-- Lista de publicaciones -->
+  <div *ngFor="let post of posts">
+    <app-post-card [post]="post" [idPost]="post.id_post_out"></app-post-card>
+  </div>
+
+
+    <!-- Mensaje si no hay publicaciones -->
+    <div *ngIf="showNoPostsMessage" class="no-posts-message">
+      <p>No hay publicaciones que mostrar.</p>
+      <button (click)="refreshFeed()" class="refresh-button">
+        Actualizar
+      </button>
+    </div>
+
+    <!-- Indicador de carga -->
+    <div *ngIf="isLoading" class="loading-container">
+      <div class="loading-spinner"></div>
+      <p>Cargando publicaciones...</p>
+    </div>
+
+    <!-- Fin de publicaciones -->
+    <div *ngIf="!hasMorePosts && !isLoading && hasPosts" class="no-more-posts">
+      <p>No hay más publicaciones.</p>
+    </div>
+  </div>

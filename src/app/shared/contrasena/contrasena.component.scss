@@ -3,3 +3,6 @@
   background-color: #f8fafc;
   color: #0f172a;
 }
+input:focus::placeholder {
+  color: transparent;
+}
