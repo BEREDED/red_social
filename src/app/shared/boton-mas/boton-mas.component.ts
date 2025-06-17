@@ -1,5 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { Console, error } from 'console';
+import { response } from 'express';
 import { foros } from 'src/app/modelos/foro.interface';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -177,6 +179,14 @@ export class BotonMasComponent implements OnInit {
   unirseGrupo() {
     if (this.codigoUnirse.length !== 5) {
       this.errorUnirse = 'El código debe tener exactamente 5 caracteres';
+      this.usuariosService.postUnirCodigo(this.codigoUnirse,String(localStorage.getItem('correoGlobal'))).subscribe({
+        next: (response)=>{
+          console.log("Te uniste de manera correcta");
+        },
+        error: (error)=>{
+          console.log("no te uniste a ningun grupo")
+        }
+      })
       return;
     }
 

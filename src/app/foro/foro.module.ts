@@ -35,7 +35,7 @@ import { SharedModule } from '../shared/shared.module';
     ForoRoutingModule,
     SharedModule,
     IonicModule,
-  //  Post,
+    //  Post,
     //Comment,
   ]
 

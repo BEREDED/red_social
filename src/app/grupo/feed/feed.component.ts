@@ -9,7 +9,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   standalone: false,
 })
 export class FeedComponent implements OnInit, OnDestroy {
-  @Input() Titulo_foro: string = '';
+  @Input() Titulo_grupo: string = '';
   @Output() idPostSeleccionado = new EventEmitter<number>();
   posts: Post[] = [];
   isLoading = false;
@@ -32,12 +32,12 @@ export class FeedComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     this.page = 1;
 
-    this.usuariosService.recuperarpsots(this.Titulo_foro).subscribe({
+    this.usuariosService.recuperarPostgrp(this.Titulo_grupo).subscribe({
       next: (response) => {
 
         console.log("post recibidos:", response.posts);
         this.posts = response.posts.map(post => ({
-        Titulo_foro: this.Titulo_foro,
+        Titulo_foro: this.Titulo_grupo,
         correo_Usuario: '',
         Contenido: post.Contenido,
         Fecha_Publicacion: new Date(post.Fecha_Publicacion),
