@@ -10,7 +10,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
   standalone:false
 })
 export class PanelComponent  implements OnInit {
-  @Input() Titulo_foro: string = '';
+  @Input() Titulo_grupo: string = '';
   @Input() description: string = '';
   @Input() isinscrito:boolean=false;
 
@@ -20,13 +20,13 @@ export class PanelComponent  implements OnInit {
   constructor(private usuariosService: UsuariosService, private router: Router) { }
 
   ngOnInit() {
-  this.getUsuer(this.Titulo_foro); // ← Aquí se hace la llamada al cargar el componente
+  this.getUsuer(this.Titulo_grupo); // ← Aquí se hace la llamada al cargar el componente
   }
   getUsuer(titulo_foro:string){
     console.log(titulo_foro)
-    this.usuariosService.getUsuariosEnforo(this.Titulo_foro).subscribe({
+    this.usuariosService.getUsuariosEnforo(this.Titulo_grupo).subscribe({
       next: (response) =>{
-        console.log("aaaaaa",response.inscritos);
+      
         this.inscritos=response.inscritos
       }
     })

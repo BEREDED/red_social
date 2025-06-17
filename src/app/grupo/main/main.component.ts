@@ -12,20 +12,20 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class MainComponent  implements OnInit {
 
-  Titulo_foro: string = '';
+  Titulo_grupo: string = '';
   description:string='';
-  isinscrito:boolean=false;
+  isinscrito:boolean=true;
 
   constructor(private route: ActivatedRoute,private usuariosService: UsuariosService) { }
 
   ngOnInit() {
-    this.Titulo_foro = this.route.snapshot.paramMap.get('titulo') || '';
-    console.log("Foro recibido:", this.Titulo_foro);
-    this.ConseguirData(this.Titulo_foro )
-    this.isUsersuscribed(this.Titulo_foro,String(localStorage.getItem("correoGlobal")))
+    this.Titulo_grupo = this.route.snapshot.paramMap.get('titulo') || '';
+    console.log("Foro recibido:", this.Titulo_grupo);
+    this.ConseguirData(this.Titulo_grupo )
+    this.isUsersuscribed(this.Titulo_grupo,String(localStorage.getItem("correoGlobal")))
   }
-  public isUsersuscribed(Titulo_foro: string, correo: string) {
-  this.usuariosService.postissuscribed(Titulo_foro, correo).subscribe({
+  public isUsersuscribed(Titulo_grupo: string, correo: string) {
+  this.usuariosService.postissuscribed(Titulo_grupo, correo).subscribe({
     next: (response) => {
       console.log('✅ Usuario suscrito:', response);
       this.isinscrito = true;
@@ -37,8 +37,8 @@ export class MainComponent  implements OnInit {
   });
 }
 
-  public ConseguirData(Titulo_foro: string) {
-  this.usuariosService.getInfoForo(Titulo_foro).subscribe({
+  public ConseguirData(Titulo_grupo: string) {
+  this.usuariosService.getInfoForo(Titulo_grupo).subscribe({
     next: (response) => {
       this.description = response.Descripcion;
       console.log('📘 Descripción:', this.description);

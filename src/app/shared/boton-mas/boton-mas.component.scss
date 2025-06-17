@@ -38,6 +38,17 @@
   align-items: flex-end;
   gap: 7px;
   z-index: 1000;
+
+  // Estilos para vista móvil
+  @media (max-width: 768px) {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    margin: 0;
+    align-items: center;
+  }
 }
 
 .botones-desplegados {
@@ -45,6 +56,12 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 10px;
+
+  // Estilos para vista móvil
+  @media (max-width: 768px) {
+    align-items: center;
+    width: max-content;
+  }
 }
 
 .opcion {
@@ -64,16 +81,6 @@
   color: #0f172a;
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(15, 23, 42, 0.7);
-  z-index: 1999;
-}
-
 .modal {
   position: fixed;
   top: 50%;
@@ -87,6 +94,21 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
   color: #f0f0f0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  // Estilos para vista móvil
+  @media (max-width: 768px) {
+    width: 90%;
+    max-width: 350px;
+    padding: 20px;
+    margin: 0 20px;
+  }
+
+  // Para pantallas muy pequeñas
+  @media (max-width: 480px) {
+    width: 95%;
+    padding: 15px;
+    margin: 0 10px;
+  }
 }
 
 .modal h2 {
@@ -108,33 +130,73 @@
   font-size: 1rem;
   margin-bottom: 20px;
   transition: border-color 0.3s;
-  resize: vertical; /* permite cambiar el tamaño verticalmente */
-
+  box-sizing: border-box;
 }
 
 .modal input[type="text"]:focus {
   outline: none;
   border-color: #3b82f6;
-  box-shadow: 0 0 8px #3b82f6;
-}
-.modal input[type="text2"] {
-  width: 100%;
-  height: 400px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid #64748b;
-  background-color: #0f172a;
-  color: #f0f0f0;
-  font-size: 1rem;
-  margin-bottom: 20px;
-  transition: border-color 0.3s;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
 }
 
-.modal input[type="text2"]:focus {
-  outline: none;
-  border-color: #3b82f6;
-  box-shadow: 0 0 8px #3b82f6;
+// Estilos específicos para el código del grupo
+.codigo-container {
+  margin-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #e0e7ff;
+    font-size: 0.9rem;
+  }
+
+  .codigo-readonly {
+    background-color: #374151 !important;
+    color: #f0f0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    cursor: default;
+  }
+
+  .btn-regenerar {
+    background-color: #6b7280;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: block;
+    margin: 0 auto;
+
+    &:hover {
+      background-color: #4b5563;
+    }
+  }
 }
+
+// Mensajes de error e información
+.error-message {
+  color: #ef4444;
+  font-size: 0.9em;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+
+.info-message {
+  color: #94a3b8;
+  font-size: 0.85rem;
+  text-align: center;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
 .modal-buttons {
   display: flex;
   justify-content: space-between;
@@ -152,12 +214,17 @@
   transition: background-color 0.3s;
 }
 
+.modal-buttons button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .modal-buttons button:first-child {
   background-color: #3b82f6;
   color: white;
 }
 
-.modal-buttons button:first-child:hover {
+.modal-buttons button:first-child:hover:not(:disabled) {
   background-color: #2563eb;
 }
 

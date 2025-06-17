@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular'; // Importar IonicModule
 
-import { ForoRoutingModule } from './foro-routing.module';
+import { GrupoRoutingModule } from './grupo-routing.module';
 import { MainComponent } from './main/main.component';
 import { SideComponent } from './side/side.component';
 import { PanelComponent } from './panel/panel.component';
@@ -32,7 +32,7 @@ import { SharedModule } from '../shared/shared.module';
   imports: [
     CommonModule,
     FormsModule,
-    ForoRoutingModule,
+    GrupoRoutingModule,
     SharedModule,
     IonicModule,
   //  Post,

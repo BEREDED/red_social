@@ -1,26 +1,104 @@
 <div class="boton-mas-container">
-
-  <button class="mas" (click)="toggleDesplegado()" [disabled]="showCrearForoModal"><img src="assets/recursos de imagenes base/pngwing.com (2).png" alt=""></button>
+  <button class="mas" (click)="toggleDesplegado()" [disabled]="showCrearForoModal || showCrearGrupoModal || showUnirseGrupoModal">
+    <img src="assets/recursos de imagenes base/pngwing.com (2).png" alt="">
+  </button>
 
   <div class="botones-desplegados" *ngIf="desplegado">
-    <button class="opcion" (click)="openCrearForoModal()">Crear foro</button>
+    <!-- Solo profesores pueden crear grupos -->
+    <button class="opcion" (click)="openCrearGrupoModal()" *ngIf="isProfe">Crear Grupo</button>
 
+    <!-- Todos pueden unirse a grupos -->
+    <button class="opcion" (click)="openUnirseGrupoModal()">Unirse a Grupo</button>
+
+    <!-- Crear foro disponible para todos -->
+    <button class="opcion" (click)="openCrearForoModal()">Crear Foro</button>
   </div>
-<div  >
+
+  <!-- Modal para crear foro -->
   <div class="modal" *ngIf="showCrearForoModal">
     <div class="modal-content" (click)="$event.stopPropagation()">
       <h2>Crear Foro</h2>
-      <input type="text" [(ngModel)]="foroName" (ngModelChange)="validateName()" placeholder="Nombre del foro" />
-      <div *ngIf="!isValidName" style="color: red; font-size: 0.9em; margin-bottom: 10px;">
+      <input
+        type="text"
+        [(ngModel)]="foroName"
+        (ngModelChange)="validateName()"
+        placeholder="Nombre del foro"
+      />
+      <div *ngIf="!isValidName" class="error-message">
         El nombre del foro no puede terminar con &#64;ipn.mx o &#64;alumno.ipn.mx
       </div>
-        <input type="text" rows = "3" [(ngModel)]="foroDesc" placeholder="Descripcion del foro" />
-
+      <input
+        type="text"
+        [(ngModel)]="foroDesc"
+        placeholder="Descripción del foro"
+      />
       <div class="modal-buttons">
         <button (click)="crearForo()" class="botonpopup" [disabled]="!isValidName">Crear</button>
         <button (click)="closeCrearForoModal()" class="botonpopup">Cancelar</button>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Modal para crear grupo -->
+  <div class="modal" *ngIf="showCrearGrupoModal">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Crear Grupo</h2>
+      <input
+        type="text"
+        [(ngModel)]="grupoName"
+        (ngModelChange)="validateGrupoName()"
+        placeholder="Nombre del grupo"
+      />
+      <div *ngIf="!isValidGrupoName" class="error-message">
+        El nombre del grupo no puede terminar con &#64;ipn.mx o &#64;alumno.ipn.mx
+      </div>
+
+      <!-- Campo de código autogenerado (solo lectura) -->
+      <div class="codigo-container">
+        <label for="codigoGrupo">Código del grupo:</label>
+        <input
+          type="text"
+          id="codigoGrupo"
+          [(ngModel)]="codigoGrupo"
+          readonly
+          class="codigo-readonly"
+          placeholder="Código generado automáticamente"
+        />
+        <button type="button" (click)="generarCodigoGrupo()" class="btn-regenerar">
+          🔄 Regenerar
+        </button>
+      </div>
+
+      <div class="modal-buttons">
+        <button (click)="crearGrupo()" class="botonpopup" [disabled]="!isValidGrupoName || !codigoGrupo">Crear</button>
+        <button (click)="closeCrearGrupoModal()" class="botonpopup">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para unirse a grupo -->
+  <div class="modal" *ngIf="showUnirseGrupoModal">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Unirse a Grupo</h2>
+      <input
+        type="text"
+        [(ngModel)]="codigoUnirse"
+        placeholder="Ingresa el código del grupo"
+        maxlength="5"
+        (input)="errorUnirse = ''"
+        style="text-transform: uppercase;"
+      />
+      <div *ngIf="errorUnirse" class="error-message">
+        {{ errorUnirse }}
+      </div>
+      <div class="info-message" *ngIf="!errorUnirse">
+        Solicita el código de 5 caracteres al creador del grupo
+      </div>
+
+      <div class="modal-buttons">
+        <button (click)="unirseGrupo()" class="botonpopup" [disabled]="!codigoUnirse || codigoUnirse.length !== 5">Unirse</button>
+        <button (click)="closeUnirseGrupoModal()" class="botonpopup">Cancelar</button>
+      </div>
+    </div>
+  </div>
 </div>
