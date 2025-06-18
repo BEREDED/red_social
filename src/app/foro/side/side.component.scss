@@ -117,12 +117,11 @@
       .forum-list {
         display: flex;
         flex-direction: column;
-        gap: 8px;
-        margin-top: 8px;
+        margin-bottom: 10px;
       }
 
       .forum-item {
-        margin-left: 0.5rem;
+        margin-left: 1rem;
         background: #fafbfc;
         color: gray;
         padding: 0.5rem 1rem;
