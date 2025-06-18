@@ -28,7 +28,7 @@
 }
 
 .description {
-  text-align: justify;
+  text-align: center;
   margin: 1rem 2rem; // Cambié margin-inline por margin completo
   color: gray;
   font-size: 14px; // Corregí "math" por un tamaño específico
@@ -46,7 +46,7 @@
 }
 
 .accordion {
-  
+
   .accordion-header {
     cursor: pointer;
     border: 1px solid gray;

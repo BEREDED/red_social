@@ -13,7 +13,8 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 export class MainComponent  implements OnInit {
 
   Titulo_grupo: string = '';
-  description:string='';
+  Codigo_grupo: string='';
+
   isinscrito:boolean=true;
 
   constructor(private route: ActivatedRoute,private usuariosService: UsuariosService) { }
@@ -38,10 +39,11 @@ export class MainComponent  implements OnInit {
 }
 
   public ConseguirData(Titulo_grupo: string) {
-  this.usuariosService.getInfoForo(Titulo_grupo).subscribe({
+  console.log(Titulo_grupo)
+  this.usuariosService.getInfogrp(Titulo_grupo).subscribe({
     next: (response) => {
-      this.description = response.Descripcion;
-      console.log('📘 Descripción:', this.description);
+      this.Codigo_grupo = response.Clave_Grupo;
+      console.log(this.Codigo_grupo);
     },
     error: (error) => {
       console.error('❌ Error al obtener descripción:', error);

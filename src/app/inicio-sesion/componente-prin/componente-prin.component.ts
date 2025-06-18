@@ -26,10 +26,13 @@ export class ComponentePrinComponent  implements OnInit {
   ngOnInit() {}
 
  revisardatosdb() {
+  console.log("click")
     this.usu_ini.Correo=this.correoComp.Correo;
     this.usu_ini.Contraseña=this.contrasenaComp.contrasena;
+    console.log("click")
     this.userDataService.postLogin(this.usu_ini).subscribe({
       next: (response) => {
+
         if (response.autenticado && response.token) {
           localStorage.clear();
           localStorage.setItem('token', response.token);

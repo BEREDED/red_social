@@ -115,4 +115,7 @@ export class UsuariosService {
   postUnirCodigo(Codigo:string, Correo: string){
     return this.http.post(`${this.api_http_rout}Grupos/ingresar_cod`,{ Codigo, Correo })
   }
+  getInfogrp(Nombre_Grupo: string) {
+  return this.http.post<{ Clave_Grupo:string}>(`${this.api_http_rout}Grupos/data_gpr`,{ Nombre_Grupo });
+  }
 }

@@ -11,7 +11,8 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class PanelComponent  implements OnInit {
   @Input() Titulo_grupo: string = '';
-  @Input() description: string = '';
+
+  @Input() Codigo_grupo: string = '';
   @Input() isinscrito:boolean=false;
 
   accordionOneExpanded: boolean = false;
@@ -26,7 +27,7 @@ export class PanelComponent  implements OnInit {
     console.log(titulo_foro)
     this.usuariosService.getUsuariosEnforo(this.Titulo_grupo).subscribe({
       next: (response) =>{
-      
+
         this.inscritos=response.inscritos
       }
     })

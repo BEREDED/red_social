@@ -97,6 +97,7 @@ export class PrincipalModComponent implements OnInit {
     this.usu_actulizar.Apellido_pat=nameparts.apellido_pat
     this.usu_actulizar.Apellido_mat=nameparts.apellido_mat
     this.usu_actulizar.Contraseña=this.Contracomp.contrasena
+    this.usu_actulizar.Fch_Nacimiento= this.FechNac.Fecha_Nacimiento_string
     console.log(this.usu_actulizar)
     this.isEditing = false;
     this.usuarioservice.postActualizardata(this.usu_actulizar).subscribe({
