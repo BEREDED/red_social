@@ -65,11 +65,11 @@ export class PrinPrinComponent implements OnInit {
     });
   }
 
-  combinarYMostrar() {
-    if (this.forosListos && this.gruposListos) {
-      console.log("Elementos combinados:", this.Elementos);
-    }
+combinarYMostrar() {
+  if (this.forosListos && this.gruposListos) {
+    this.aplicarFiltro();
   }
+}
 
   crearForo() {
     const foroData = {
@@ -79,4 +79,20 @@ export class PrinPrinComponent implements OnInit {
       Correo_creador: localStorage.getItem('correoGlobal')
     };
   }
+  filtroActual: string = 'todo';
+ElementosFiltrados: any[] = [];
+
+actualizarFiltro(tipo: string) {
+  this.filtroActual = tipo;
+  this.aplicarFiltro();
+}
+
+aplicarFiltro() {
+  if (this.filtroActual === 'todo') {
+    this.ElementosFiltrados = [...this.Elementos];
+  } else {
+    this.ElementosFiltrados = this.Elementos.filter(item => item.tipo === this.filtroActual);
+  }
+}
+
 }

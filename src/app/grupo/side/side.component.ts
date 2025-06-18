@@ -25,7 +25,7 @@ export class SideComponent implements OnInit {
 
   // Datos para acordeones (mantenidos para compatibilidad)
 
-
+  gruposInscritos:any[]=[];
   forosInscritos: any[] = [];
 
   constructor(
@@ -44,6 +44,7 @@ export class SideComponent implements OnInit {
 
   ngOnInit() {
     this.getForos();
+    this.getGrupos();
     this.updateCurrentForum(this.router.url);
   }
 
@@ -96,7 +97,16 @@ export class SideComponent implements OnInit {
       error: (err) => console.error('Error al obtener foros:', err)
     });
   }
-
+getGrupos():void{
+    const correo = localStorage.getItem('correoGlobal');
+    if (!correo) return;
+    this.usuariosService.getListadoGrps(correo).subscribe({
+      next: (response: any) =>{
+        console.log("Grupos recibidos:", response.grupos_Inscritos);
+        this.gruposInscritos = response.grupos_Inscritos;
+      }
+    })
+  }
   // Método para actualizar el foro activo basado en la URL
   private updateCurrentForum(url: string): void {
     const foroMatch = url.match(/\/foro\/(.+)$/);
@@ -118,7 +128,10 @@ export class SideComponent implements OnInit {
     // Cerrar panel móvil después de navegar
     this.mobileExpanded = false;
   }
-
+  navigateToGrupo(grupo:any){
+    this.router.navigate(['/grupo',grupo.Titulo_grupo]);
+    this.mobileExpanded = false;
+  }
   // Método para obtener clases CSS dinámicas
   getForumItemClasses(foro: any): string {
     const baseClasses = 'forum-item';

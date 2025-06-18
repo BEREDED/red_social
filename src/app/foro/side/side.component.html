@@ -51,13 +51,13 @@
         <div class="accordion-content" [class.expanded]="accordionTwoExpanded">
           <div class="forum-list">
             <div
-              *ngFor="let foro of forosInscritos"
-              (click)="navigateToForum(foro)"
-              [class.active-forum]="isForumActive(foro.Titulo_foro)"
+              *ngFor="let grupos of gruposInscritos"
+              (click)="navigateToGrupo(grupos)"
+              [class.active-forum]="isForumActive(grupos.Nombre_Grupo)"
               class="forum-item"
             >
-              <span class="forum-title">{{ foro.Titulo_foro }}</span>
-              <span *ngIf="isForumActive(foro.Titulo_foro)" class="indicator">›</span>
+              <span class="forum-title">{{ grupos.Nombre_Grupo }}</span>
+              <span *ngIf="isForumActive(grupos.Nombre_Grupo)" class="indicator">›</span>
             </div>
           </div>
         </div>

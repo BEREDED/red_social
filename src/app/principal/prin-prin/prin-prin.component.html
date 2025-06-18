@@ -3,16 +3,17 @@
 
   <main class="main-content">
     <div class="container">
-      <app-boton-tgf></app-boton-tgf>
+     <app-boton-tgf (filtroSeleccionado)="actualizarFiltro($event)"></app-boton-tgf>
     </div>
   <div class="contenedor-centrado">
     <div class="grupos-container">
 
       <app-group-card
-        *ngFor="let item of Elementos"
-        [titulo]="item.nombre"
-        [tipo]="item.tipo"> <!-- Puedes pasarlo si lo necesitas -->
-      </app-group-card>
+    *ngFor="let item of ElementosFiltrados"
+    [titulo]="item.nombre"
+    [tipo]="item.tipo">
+    </app-group-card>
+
     </div>
   </div>
 

@@ -1,5 +1,5 @@
 <div class="container">
-  <button [routerLink]="['']" class="tgf">Todo</button>
-  <button [routerLink]="['']" class="tgf">Grupos</button>
-  <button [routerLink]="['']" class="tgf">Foros</button>
+  <button class="tgf" (click)="seleccionarFiltro('todo')">Todo</button>
+  <button class="tgf" (click)="seleccionarFiltro('grupo')">Grupos</button>
+  <button class="tgf" (click)="seleccionarFiltro('foro')">Foros</button>
 </div>

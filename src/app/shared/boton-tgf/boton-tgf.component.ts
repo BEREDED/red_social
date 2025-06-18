@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-boton-tgf',
   templateUrl: './boton-tgf.component.html',
   styleUrls: ['./boton-tgf.component.scss'],
-  standalone:false
+  standalone: false
 })
-export class BotonTgfComponent  implements OnInit {
+export class BotonTgfComponent {
+  @Output() filtroSeleccionado = new EventEmitter<string>();
 
-  constructor() { }
-
-  ngOnInit() {}
-
+  seleccionarFiltro(tipo: string) {
+    this.filtroSeleccionado.emit(tipo); // Emite 'todo', 'grupo' o 'foro'
+  }
 }
