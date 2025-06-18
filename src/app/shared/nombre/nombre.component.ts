@@ -8,11 +8,16 @@ import { PrincipalModComponent } from 'src/app/modificar-perfil/principal-mod/pr
   standalone:false,
   template: `<input type="text" [(ngModel)]="Nombre" />`,
 })
-export class NombreComponent  implements OnInit {
+export class NombreComponent implements OnInit {
   @Input() Nombre: string = '';
-  @ViewChild(PrincipalModComponent)prinmod!:PrincipalModComponent
 
-  constructor() { }
+  onNombreChange(value: string) {
+    if (value.length <= 50) {
+      this.Nombre = value;
+    } else {
+      this.Nombre = value.slice(0, 50); // Cortar si se excede
+    }
+  }
 
   ngOnInit() {}
 }
