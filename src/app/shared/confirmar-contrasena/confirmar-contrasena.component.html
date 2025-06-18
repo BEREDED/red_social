@@ -1,1 +1,15 @@
-<input type="password" placeholder="confirmar contraseña" class="panel" [(ngModel)]="confirmPassword" (input)="onConfirmPasswordInput()">
+<div class="password-container">
+  <input
+    [type]="showConfirmPassword ? 'text' : 'password'"
+    placeholder="Confirmar contraseña"
+    class="panel"
+    [(ngModel)]="confirmPassword"
+    (input)="onConfirmPasswordInput()">
+  <button
+    type="button"
+    class="toggle-button"
+    (click)="toggleConfirmPasswordVisibility()"
+    [attr.aria-label]="showConfirmPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'">
+    <span class="eye-icon">{{ showConfirmPassword ? '👁️‍🗨️' : '👁️‍🗨️' }}</span>
+  </button>
+</div>

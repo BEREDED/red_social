@@ -1,8 +1,55 @@
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 .panel {
   font-size: 16px;
   background-color: #f8fafc;
   color: #0f172a;
+  flex: 1;
+  padding-right: 45px; // Espacio para el botón
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 10px 45px 10px 12px;
 }
+
+.panel:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
 input:focus::placeholder {
   color: transparent;
+}
+
+.toggle-button {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  z-index: 1;
+}
+
+.toggle-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.toggle-button:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.eye-icon {
+  font-size: 18px;
+  user-select: none;
 }

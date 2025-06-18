@@ -1,29 +1,37 @@
-.n[type="text"]{
-  color:#0f172a;
-  background-color: #f8fafc;
-  width: auto;
-}
-
-.n[type="date"] {
-  color: #0f172a;
-  background-color: #f8fafc;
-  width: 88%;
-}
-
-.n[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(18%) sepia(88%) saturate(749%) hue-rotate(180deg) brightness(90%) contrast(85%);
-  cursor: pointer;
-}
-.dispfecha{
+.date-container {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  width:215px ;
-  height: 50px;
+  width: 215px;
 }
-.pos{
-  width: 160px;
 
-  color:#0f172a;
+.date-label {
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
 
+.panel {
+  font-size: 16px;
+  background-color: #f8fafc;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 10px 12px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.panel:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.panel::-webkit-calendar-picker-indicator {
+  filter: invert(18%) sepia(88%) saturate(749%) hue-rotate(180deg) brightness(90%) contrast(85%);
+  cursor: pointer;
+  padding: 2px;
 }

@@ -4,10 +4,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   selector: 'app-confirmar-contrasena',
   templateUrl: './confirmar-contrasena.component.html',
   styleUrls: ['./confirmar-contrasena.component.scss'],
-  standalone:false,
+  standalone: false,
 })
-export class ConfirmarContrasenaComponent  implements OnInit {
+export class ConfirmarContrasenaComponent implements OnInit {
   confirmPassword: string = '';
+  showConfirmPassword: boolean = false;
 
   @Output() confirmPasswordChange = new EventEmitter<string>();
 
@@ -17,5 +18,9 @@ export class ConfirmarContrasenaComponent  implements OnInit {
 
   onConfirmPasswordInput() {
     this.confirmPasswordChange.emit(this.confirmPassword);
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 }

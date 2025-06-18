@@ -32,9 +32,11 @@ width: 450px;
   flex-direction: column;
   margin: 2em;
   padding-left: 2.5vw;
+  transform: translate(0%);
+
   /* Propiedades opcionales útiles */
   gap: 15px; /* Espacio entre elementos */
-  width: 65%;
+  //width: 65%;
 }
 
 .poscontrasena{

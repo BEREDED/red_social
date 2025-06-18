@@ -1,14 +1,11 @@
-<div class="dispfecha">
-    <label for="start" class="pos">Fecha de nacimiento:</label>
-
-    <input type="text"
-      id="start"
-      class="n"
-      type="date"
-      name="trip-start"
-      value="2018-01-01"
-      min="2000-01-01"
-      max="2025-01-01"
-      [(ngModel)]="Fecha_Nacimiento_string"/>
-
+<div class="date-container">
+  <label for="fecha-nacimiento" class="date-label">Fecha de nacimiento:</label>
+  <input
+    type="date"
+    id="fecha-nacimiento"
+    class="panel"
+    name="fecha-nacimiento"
+    min="2000-01-01"
+    max="2025-01-01"
+    [(ngModel)]="Fecha_Nacimiento_string">
 </div>

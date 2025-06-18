@@ -4,10 +4,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   selector: 'app-contrasena',
   templateUrl: './contrasena.component.html',
   styleUrls: ['./contrasena.component.scss'],
-  standalone:false,
+  standalone: false,
 })
-export class ContrasenaComponent  implements OnInit {
+export class ContrasenaComponent implements OnInit {
   contrasena: string = '';
+  showPassword: boolean = false;
 
   @Output() contrasenaChange = new EventEmitter<string>();
 
@@ -17,5 +18,9 @@ export class ContrasenaComponent  implements OnInit {
 
   onContrasenaInput() {
     this.contrasenaChange.emit(this.contrasena);
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }
