@@ -1,15 +1,14 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Console, error } from 'console';
-import { response } from 'express';
+
 import { foros } from 'src/app/modelos/foro.interface';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 // Interfaz para grupos (igual que foro pero con código en vez de descripción)
 interface Grupo {
   Correo_Creador: string;
-  Titulo_grupo: string;
-  Codigo: string;
+  Nombre_Grupo: string;
+  Clave_Grupo: string;
   Fecha_creacion: string;
 }
 
@@ -33,9 +32,9 @@ export class BotonMasComponent implements OnInit {
   // Datos para grupos
   Grupo_send: Grupo = {
     Correo_Creador: '',
-    Titulo_grupo: '',
-    Codigo: '',
-    Fecha_creacion: ''
+    Nombre_Grupo: '',
+    Clave_Grupo: '',
+    Fecha_creacion: '',
   }
 
   @Output() foroCreado = new EventEmitter<void>();
@@ -159,7 +158,7 @@ export class BotonMasComponent implements OnInit {
   crearGrupo() {
     console.log('Crear grupo:', this.grupoName, this.codigoGrupo);
     this.Grupo_send.Correo_Creador = String(localStorage.getItem('correoGlobal'));
-    this.Grupo_send.Nombre_Grupo = this.grupoName;Add commentMore actions
+    this.Grupo_send.Nombre_Grupo = this.grupoName;
     this.Grupo_send.Clave_Grupo = this.codigoGrupo;
     console.log(this.Grupo_send);
     this.usuariosService.postCreacionGrp(this.Grupo_send).subscribe({
@@ -176,9 +175,10 @@ export class BotonMasComponent implements OnInit {
   }
 
   // Unirse a grupo
-  unirseGrupo() {
-    if (this.codigoUnirse.length !== 5) {
+  unirseGrupo(codigoUnirse:string) {
+    if (this.codigoUnirse.length == 5) {
       this.errorUnirse = 'El código debe tener exactamente 5 caracteres';
+      console.log("codigo de envio: ", this.codigoUnirse)
       this.usuariosService.postUnirCodigo(this.codigoUnirse,String(localStorage.getItem('correoGlobal'))).subscribe({
         next: (response)=>{
           console.log("Te uniste de manera correcta");

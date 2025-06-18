@@ -96,7 +96,7 @@
       </div>
 
       <div class="modal-buttons">
-        <button (click)="unirseGrupo()" class="botonpopup" [disabled]="!codigoUnirse || codigoUnirse.length !== 5">Unirse</button>
+        <button (click)="unirseGrupo(codigoUnirse)" class="botonpopup" [disabled]="!codigoUnirse || codigoUnirse.length !== 5">Unirse</button>
         <button (click)="closeUnirseGrupoModal()" class="botonpopup">Cancelar</button>
       </div>
     </div>
