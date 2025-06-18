@@ -176,8 +176,7 @@ export class BotonMasComponent implements OnInit {
 
   // Unirse a grupo
   unirseGrupo(codigoUnirse:string) {
-    if (this.codigoUnirse.length == 5) {
-      this.errorUnirse = 'El código debe tener exactamente 5 caracteres';
+
       console.log("codigo de envio: ", this.codigoUnirse)
       this.usuariosService.postUnirCodigo(this.codigoUnirse,String(localStorage.getItem('correoGlobal'))).subscribe({
         next: (response)=>{
@@ -187,8 +186,8 @@ export class BotonMasComponent implements OnInit {
           console.log("no te uniste a ningun grupo")
         }
       })
-      return;
-    }
+      
+
 
     console.log('Unirse a grupo con código:', this.codigoUnirse);
     this.errorUnirse = '';
