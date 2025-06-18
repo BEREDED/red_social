@@ -26,9 +26,9 @@ export class MainComponent  implements OnInit {
     this.isUsersuscribed(this.Titulo_grupo,String(localStorage.getItem("correoGlobal")))
   }
   public isUsersuscribed(Titulo_grupo: string, correo: string) {
-  this.usuariosService.postissuscribed(Titulo_grupo, correo).subscribe({
+  this.usuariosService.postissuscribedgpr(Titulo_grupo, correo).subscribe({
     next: (response) => {
-      console.log('✅ Usuario suscrito:', response);
+      console.log('✅ Usuario suscrito:', response.issus);
       this.isinscrito = true;
     },
     error: (error) => {

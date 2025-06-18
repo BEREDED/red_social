@@ -25,10 +25,11 @@ export class PanelComponent  implements OnInit {
   }
   getUsuer(titulo_foro:string){
     console.log(titulo_foro)
-    this.usuariosService.getUsuariosEnforo(this.Titulo_grupo).subscribe({
+    this.usuariosService.getAlumnos(this.Titulo_grupo).subscribe({
       next: (response) =>{
-
+        console.log(response.inscritos)
         this.inscritos=response.inscritos
+        console.log("aaaaaaaaa",this.isinscrito)
       }
     })
   }

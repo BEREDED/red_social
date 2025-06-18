@@ -55,6 +55,7 @@ export class UsuariosService {
   postissuscribed(Titulo_foro:string,correo_Usuario:string){
     return this.http.post<{issus:boolean}>(`${this.api_http_rout}foro/issuscribed`,{Titulo_foro,correo_Usuario})
   }
+
   postInscribirForo(Titulo_foro:string,correo_Usuario:string, Fecha_Union:string){
     return this.http.post<{Mensaje:string}>(`${this.api_http_rout}foro/inscribir_foro`,{Titulo_foro,correo_Usuario,Fecha_Union})
   }
@@ -117,5 +118,11 @@ export class UsuariosService {
   }
   getInfogrp(Nombre_Grupo: string) {
   return this.http.post<{ Clave_Grupo:string}>(`${this.api_http_rout}Grupos/data_gpr`,{ Nombre_Grupo });
+  }
+  getAlumnos(Nombre_Grupo:string): Observable<{inscritos:{correo:string, Nombre_Usuario:string}[]}>{
+    return this.http.post<{inscritos:{correo:string,Nombre_Usuario:string}[]}>( `${this.api_http_rout}Grupos/get_alumnos`,{Nombre_Grupo})
+  }
+ postissuscribedgpr(Nombre_Grupo:string,correo_Usuario:string){
+    return this.http.post<{issus:boolean}>(`${this.api_http_rout}Grupos/issuscribed`,{Nombre_Grupo,correo_Usuario})
   }
 }
