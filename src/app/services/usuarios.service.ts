@@ -125,4 +125,10 @@ export class UsuariosService {
  postissuscribedgpr(Nombre_Grupo:string,correo_Usuario:string){
     return this.http.post<{issus:boolean}>(`${this.api_http_rout}Grupos/issuscribed`,{Nombre_Grupo,correo_Usuario})
   }
+  postInscribirGrupo(Nombre_Grupo:string,correo_Usuario:string, Fecha_Union:string){
+    return this.http.post<{Mensaje:string}>(`${this.api_http_rout}Grupos/inscribir_Grupo`,{Nombre_Grupo,correo_Usuario,Fecha_Union})
+  }
+  postDesinscribirGrupo(Nombre_Grupo:string,correo_Usuario:string){
+    return this.http.post<{Mensaje:string}>(`${this.api_http_rout}Grupos/deinscribir_Grupo`,{Nombre_Grupo,correo_Usuario})
+  }
 }

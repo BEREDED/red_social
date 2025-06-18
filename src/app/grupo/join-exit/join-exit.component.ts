@@ -39,7 +39,7 @@ export class JoinExitComponent {
   private joinCommunity() {
     console.log(`Uniéndose a la comunidad: ${this.communityId}`);
     const Fecha_Union = new Date().toISOString().split('T')[0];
-    this.usuariosService.postInscribirForo(
+    this.usuariosService.postInscribirGrupo(
       this.communityId,
       String(localStorage.getItem('correoGlobal')),
       Fecha_Union
@@ -55,7 +55,7 @@ export class JoinExitComponent {
 
   private leaveCommunity() {
     console.log(`Saliendo de la comunidad: ${this.communityId}`);
-    this.usuariosService.postDesinscribirForo(this.communityId, String(localStorage.getItem('correoGlobal'))).subscribe({
+    this.usuariosService.postDesinscribirGrupo(this.communityId, String(localStorage.getItem('correoGlobal'))).subscribe({
       next: (response) => {
         console.log(response.Mensaje);
       },
