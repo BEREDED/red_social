@@ -13,14 +13,9 @@
   background-color: #0f172a;
 }
 .container {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
+  margin: auto;
   align-items: center;
-  gap: 20px;
-  padding: 20px;
-  flex-wrap: nowrap;
-  overflow-x: auto;
+  padding: auto;
 }
 
 .logo {

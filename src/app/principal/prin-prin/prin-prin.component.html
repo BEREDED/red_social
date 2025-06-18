@@ -2,9 +2,12 @@
   <app-header></app-header>
 
   <main class="main-content">
-
+    <div class="container">
+      <app-boton-tgf></app-boton-tgf>
+    </div>
   <div class="contenedor-centrado">
     <div class="grupos-container">
+
       <app-group-card
         *ngFor="let item of Elementos"
         [titulo]="item.nombre"
