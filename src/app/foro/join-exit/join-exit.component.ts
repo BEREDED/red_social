@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class JoinExitComponent {
   @Input() communityId: string = '';
+  @Output() onExitRequest = new EventEmitter<void>(); // Nuevo evento
 
   private _isinscrito: boolean = false;
 
@@ -27,16 +28,23 @@ export class JoinExitComponent {
   constructor(private usuariosService: UsuariosService) {}
 
   toggleJoin() {
-    this.isJoined = !this.isJoined;
-
     if (this.isJoined) {
-      this.joinCommunity();
+      // En lugar de salir directamente, emitir evento para mostrar confirmación
+      this.onExitRequest.emit();
     } else {
-      this.leaveCommunity();
+      // Unirse directamente (sin confirmación)
+      this.joinCommunity();
     }
   }
 
+  // Método público para ser llamado después de la confirmación
+  public confirmExit() {
+    this.isJoined = false;
+    this.leaveCommunity();
+  }
+
   private joinCommunity() {
+    this.isJoined = true;
     console.log(`Uniéndose a la comunidad: ${this.communityId}`);
     const Fecha_Union = new Date().toISOString().split('T')[0];
     this.usuariosService.postInscribirForo(
@@ -49,6 +57,8 @@ export class JoinExitComponent {
       },
       error: (error) => {
         console.log(error);
+        // Revertir estado en caso de error
+        this.isJoined = false;
       }
     });
   }
@@ -61,8 +71,9 @@ export class JoinExitComponent {
       },
       error: (error) => {
         console.log(error);
+        // Revertir estado en caso de error
+        this.isJoined = true;
       }
-      });
+    });
   }
 }
-

@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { JoinExitComponent } from '../join-exit/join-exit.component'; // Ajusta la ruta según tu estructura
 
 
 @Component({
@@ -13,9 +14,11 @@ export class PanelComponent  implements OnInit {
   @Input() Titulo_foro: string = '';
   @Input() description: string = '';
   @Input() isinscrito:boolean=false;
+  @ViewChild('joinExitRef') joinExitComponent!: JoinExitComponent;
 
   accordionOneExpanded: boolean = false;
   inscritos:any[]=[]
+  showConfirmationPopup: boolean = false;
 
   constructor(private usuariosService: UsuariosService, private router: Router) { }
 
@@ -57,5 +60,27 @@ export class PanelComponent  implements OnInit {
     if (accordion === 'one') {
       this.accordionOneExpanded = !this.accordionOneExpanded;
     }
+  }
+
+  // Métodos para el popup de confirmación
+  onExitRequested() {
+    this.showConfirmationPopup = true;
+  }
+
+  onConfirmExit() {
+    this.showConfirmationPopup = false;
+    // Llamar al método del botón para completar la salida
+    this.joinExitComponent.confirmExit();
+    console.log('Usuario confirmó salir del foro');
+  }
+
+  onCancelExit() {
+    this.showConfirmationPopup = false;
+    console.log('Usuario canceló salir del foro');
+  }
+
+  // Método de prueba (puedes eliminarlo después)
+  showExitConfirmation() {
+    this.showConfirmationPopup = true;
   }
 }

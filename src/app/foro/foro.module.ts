@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular'; // Importar IonicModule
 
+import { ConfirmationPopupComponent } from './confirmation-popup/confirmation-popup.component';
 import { ForoRoutingModule } from './foro-routing.module';
 import { MainComponent } from './main/main.component';
 import { SideComponent } from './side/side.component';
@@ -28,6 +29,7 @@ import { SharedModule } from '../shared/shared.module';
     JoinExitComponent,
     PostCardComponent,
     CommentsSectionComponent,
+    ConfirmationPopupComponent
   ],
   imports: [
     CommonModule,

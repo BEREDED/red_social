@@ -9,10 +9,14 @@
 
   <div class="Boton">
     <app-join-exit
-  [communityId]="Titulo_foro"
-  [isinscrito]="isinscrito">
-  </app-join-exit>
+      #joinExitRef
+      [communityId]="Titulo_foro"
+      [isinscrito]="isinscrito"
+      (onExitRequest)="onExitRequested()">
+    </app-join-exit>
   </div>
+
+  <!-- Botón de prueba para mostrar el popup (temporal) -->
 
   <div class="accordion">
     <!-- Acordeón encabezado -->
@@ -38,5 +42,15 @@
     </div>
   </div>
 
+  <!-- Popup de confirmación -->
+  <app-confirmation-popup
+    [isVisible]="showConfirmationPopup"
+    title="Confirmar salida"
+    message="¿Deseas realmente salir del foro?"
+    confirmText="Sí, salir"
+    cancelText="Cancelar"
+    (onConfirm)="onConfirmExit()"
+    (onCancel)="onCancelExit()">
+  </app-confirmation-popup>
 
 </div>
