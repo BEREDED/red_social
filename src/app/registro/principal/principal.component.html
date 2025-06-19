@@ -17,9 +17,11 @@
           <div *ngIf="errorMessage" style="color: red; font-weight: bold; font-size: 0.8rem;">
             {{ errorMessage }}
           </div>
+          <div *ngIf="!Is_cuenta_created" >
+            <h2 style="color: red; font-weight: bold; font-size: 0.8rem;">Error al registrar cuenta</h2>
+          </div>
           <button  (click)="obtenerDatos()"
                   [disabled]="!formularioValido"
-                  [routerLink]="['/inicio_sesion']"
                   class="botonclr">Registrarse
           </button>
         </div>

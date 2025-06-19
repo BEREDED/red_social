@@ -5,6 +5,7 @@ import { CorreoComponent } from 'src/app/shared/correo/correo.component';
 import { NombreComponent } from 'src/app/shared/nombre/nombre.component';
 import { Usuario } from 'src/app/modelos/Usuario.interface';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -23,14 +24,14 @@ export class PrincipalComponent implements OnInit {
     Contraseña:'',
     image: undefined
   };
-
+  Is_cuenta_created:boolean=true;
   contrasenaValue: string = '';
   confirmPasswordValue: string = '';
   correoValido: boolean = true;
   contraValida: boolean = true;
   errorMessage: string = '';
 
-  constructor(private usuariosService: UsuariosService) { }
+  constructor(private usuariosService: UsuariosService, private router: Router) { }
 
   @ViewChild(NombreComponent) nombreComp!: NombreComponent;
   @ViewChild(CorreoComponent) correoComponent!: CorreoComponent;
@@ -128,9 +129,11 @@ export class PrincipalComponent implements OnInit {
     this.usuariosService.postRegistroUsuario(this.usuario).subscribe({
       next: (response) => {
         console.log('Usuario creado exitosamente', response);
+        this.router.navigate(['/login']);
       },
       error: (error) => {
         console.error('Error al crear usuario', error);
+        this.Is_cuenta_created=false
       }
     });
   }
