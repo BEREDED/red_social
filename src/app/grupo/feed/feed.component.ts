@@ -10,7 +10,9 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 })
 export class FeedComponent implements OnInit, OnDestroy {
   @Input() Titulo_grupo: string = '';
+  @Input() is_creador:boolean=false;
   @Output() idPostSeleccionado = new EventEmitter<number>();
+
   posts: Post[] = [];
   isLoading = false;
   page = 1;

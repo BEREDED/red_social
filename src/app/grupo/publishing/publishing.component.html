@@ -13,9 +13,12 @@
         {{ postContent.length }}/500
       </span>
       <div class="post-actions">
-        <div class="tarea">
-          <input type="checkbox">
+        <div class="tarea"  *ngIf="is_creador">
           Tarea
+          <label class="toggle">
+            <input type="checkbox" [(ngModel)]="isTarea"/>
+            <span class="slider"></span>
+          </label>
         </div>
         <button class="file-button" type="button">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -28,12 +31,13 @@
         <button
           class="post-button"
           [disabled]="!canPost()"
-          (click)="onPost()"> Postear
+          (click)="onPost()"
+          > Postear
         </button>
       </div>
 
     </div>
-    <div class="entrega">
+    <div class="entrega" *ngIf="is_creador">
       <label for="datetime">Fecha y Hora de entrega: </label>
         <input type="datetime-local" id="datetime" name="datetime" class="fecha">
     </div>

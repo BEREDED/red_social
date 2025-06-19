@@ -9,8 +9,10 @@ import { Post } from 'src/app/modelos/post.interface';
 })
 export class PublishingComponent {
   @Output() nuevoPost = new EventEmitter<void>();
+  @Input() is_creador:boolean=false;
   @Input() Titulo_grupo: string = '';
   postContent=''
+  isTarea=false
   postcreate:Post={
     Titulo_foro:'',
     correo_Usuario:'',
@@ -36,6 +38,7 @@ export class PublishingComponent {
 
   onPost(): void {
     if (this.canPost()) {
+      console.log("prueba de si selecciono la casilla",this.isTarea)
       const fecha=new Date()
       const fechaFormateada = fecha.toISOString().slice(0, 16).replace('T', ' ');
       this.postcreate.Contenido=this.postContent
