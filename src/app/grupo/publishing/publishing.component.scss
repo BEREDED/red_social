@@ -17,8 +17,15 @@
   justify-content: right;
   align-items: center;
 }
+.label{
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 500;
+  margin-inline: 4px;
+}
 .fecha{
-  font-size: 16px;
+  margin-inline: 4px;
+  font-size: 14px;
   background-color: #f8fafc;
   color: black;
   border: 1px solid #e2e8f0;
@@ -28,11 +35,60 @@
   width: auto;
   box-sizing: border-box;
 }
+
+.fecha::-webkit-calendar-picker-indicator {
+  filter: invert(50%) sepia(88%) saturate(749%) hue-rotate(180deg) brightness(90%) contrast(85%);
+  cursor: pointer;
+  padding: 2px;
+}
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+    &:checked + .slider {
+      background-color: #1da1f2;
+
+      &::before {
+        transform: translateX(24px);
+      }
+    }
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color:  #e1e8ed;
+    transition: 0.4s;
+    border-radius: 26px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+  }
+}
+
 .tarea{
   border-radius: 4px;
   padding: 0.4rem;
   padding-inline: 0.5rem;
-  border: 1px solid black;
+  border: 1px solid #e1e8ed;
 }
 .post-form {
   display: flex;
