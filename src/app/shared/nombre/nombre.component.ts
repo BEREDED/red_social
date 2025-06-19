@@ -12,12 +12,9 @@ export class NombreComponent implements OnInit {
   @Input() Nombre: string = '';
 
   onNombreChange(value: string) {
-    if (value.length <= 50) {
-      this.Nombre = value;
-    } else {
-      this.Nombre = value.slice(0, 50); // Cortar si se excede
-    }
-  }
+    if (value.length < 50) {
+      this.Nombre = value;}}
+  
 
   ngOnInit() {}
 }
