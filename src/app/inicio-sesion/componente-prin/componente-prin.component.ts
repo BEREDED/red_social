@@ -21,6 +21,8 @@ export class ComponentePrinComponent  implements OnInit {
   @ViewChild(ContrasenaComponent) contrasenaComp!: ContrasenaComponent;
   @ViewChild(CorreoComponent) correoComp!: CorreoComponent;
 
+  Inicio_ses:boolean=true;
+
  constructor(private userDataService: UsuariosService, private router: Router) { }
 
   ngOnInit() {}
@@ -41,12 +43,12 @@ export class ComponentePrinComponent  implements OnInit {
           this.router.navigate(['/principal']);});
 
           localStorage.setItem('correoGlobal', this.correoComp.Correo);
-        } else {
-          console.log('No se pudo iniciar sesión');
         }
       },
       error: (error) => {
         console.log('Error al iniciar sesión', error);
+        this.Inicio_ses=false
+        console.log(this.Inicio_ses)
       }
     });
   }

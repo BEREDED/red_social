@@ -2,12 +2,13 @@
   <body>
     <div>
       <div class="panel">
-        <h1 class="titulo">Inicio de sesion</h1>
+        <h1 class="titulo">Inicio de sesión</h1>
         <app-correo class="poscorreo"></app-correo>
         <app-contrasena class="poscontrasena"></app-contrasena>
         <button (click)="revisardatosdb()" class="botonclr">ingresar</button>
         <button [routerLink]="['/recuperacion']" class="botonclr2">Olvidé contraseña</button>
         <button [routerLink]="['/registro']" class="botonclr3">Registrarse</button>
+        <h1 *ngIf="!Inicio_ses" class="marca_error">Error al iniciar sesión</h1>
       </div>
     </div>
   </body>
