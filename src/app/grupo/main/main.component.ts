@@ -39,15 +39,16 @@ export class MainComponent  implements OnInit {
   });
 }
 
-  public ConseguirData(Titulo_grupo: string) {
-  console.log(Titulo_grupo)
+ public ConseguirData(Titulo_grupo: string) {
+  console.log(Titulo_grupo);
   this.usuariosService.getInfogrp(Titulo_grupo).subscribe({
     next: (response) => {
       this.Codigo_grupo = response.Clave_Grupo;
-      this.correo_creador_comp=response.Correo_Creador;
+      this.correo_creador_comp = response.Correo_Creador;
       console.log(this.Codigo_grupo);
-      if(this.correo_creador_comp=String(localStorage.getItem('correoGlobal'))){
-        this.is_creador=true;
+
+      if (this.correo_creador_comp === String(localStorage.getItem('correoGlobal'))) {
+        this.is_creador = true;
       }
     },
     error: (error) => {
