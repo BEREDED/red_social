@@ -39,7 +39,10 @@
     </div>
     <div class="entrega" *ngIf="is_creador">
       <label for="datetime">Fecha y Hora de entrega: </label>
-        <input type="datetime-local" id="datetime" name="datetime" class="fecha">
+        <input type="datetime-local" id="datetime" name="datetime" class="fecha" [(ngModel)]="Fecha_cad">
+        <div id="miAlerta" style="display:none; background: #f8d7da; color:#721c24; padding: 10px; border: 1px solid #f5c6cb; margin: 10px;">
+          publicando tarea
+        </div>
     </div>
   </div>
 </div>
