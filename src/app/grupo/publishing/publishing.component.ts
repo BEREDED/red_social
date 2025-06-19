@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { Post } from 'src/app/modelos/post.interface';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
 @Component({
   selector: 'app-publishing',
   templateUrl: './publishing.component.html',
