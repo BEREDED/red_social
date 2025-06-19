@@ -1,3 +1,4 @@
+import { IfStmt } from '@angular/compiler';
 import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { response } from 'express';
@@ -14,9 +15,9 @@ export class MainComponent  implements OnInit {
 
   Titulo_grupo: string = '';
   Codigo_grupo: string='';
-
+  correo_creador_comp:string='';
   isinscrito:boolean=true;
-
+  is_creador:boolean=false;
   constructor(private route: ActivatedRoute,private usuariosService: UsuariosService) { }
 
   ngOnInit() {
@@ -43,7 +44,11 @@ export class MainComponent  implements OnInit {
   this.usuariosService.getInfogrp(Titulo_grupo).subscribe({
     next: (response) => {
       this.Codigo_grupo = response.Clave_Grupo;
+      this.correo_creador_comp=response.Correo_Creador;
       console.log(this.Codigo_grupo);
+      if(this.correo_creador_comp=String(localStorage.getItem('correoGlobal'))){
+        this.is_creador=true;
+      }
     },
     error: (error) => {
       console.error('❌ Error al obtener descripción:', error);

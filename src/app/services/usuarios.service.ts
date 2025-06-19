@@ -117,7 +117,7 @@ export class UsuariosService {
     return this.http.post(`${this.api_http_rout}Grupos/ingresar_cod`,{ Codigo, Correo })
   }
   getInfogrp(Nombre_Grupo: string) {
-  return this.http.post<{ Clave_Grupo:string}>(`${this.api_http_rout}Grupos/data_gpr`,{ Nombre_Grupo });
+  return this.http.post<{ Clave_Grupo:string, Correo_Creador:string}>(`${this.api_http_rout}Grupos/data_gpr`,{ Nombre_Grupo });
   }
   getAlumnos(Nombre_Grupo:string): Observable<{inscritos:{correo:string, Nombre_Usuario:string}[]}>{
     return this.http.post<{inscritos:{correo:string,Nombre_Usuario:string}[]}>( `${this.api_http_rout}Grupos/get_alumnos`,{Nombre_Grupo})
