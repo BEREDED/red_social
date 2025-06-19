@@ -10,6 +10,7 @@ import { Post } from '../../modelos/post.interface';
 })
 export class PostCardComponent {
   @Input() post!: Post;
+  @Input() is_creador:boolean=false;
   @Input() commentText: string = '';
   @Output() commentTextChange = new EventEmitter<string>();
   @Output() addComment = new EventEmitter<string>();
