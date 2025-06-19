@@ -10,34 +10,45 @@ body {
   top: 50%;
   left: 50%;
   background-color:#f8fafc;
-  padding: 5%;
+  padding: 50px;
   border-radius: 5%;
-  height: 450px;
+  height: auto;
   width: 450px;
   align-items: center;
 }
+
+.container{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  //margin: 1em;
+//  padding-left: 2.5vw;
+//  transform: translate(0%);
+  /* Propiedades opcionales útiles */
+  gap: 20px; /* Espacio entre elementos */
+  //width: 65%;
+}
 .poscorreo{
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+//  position: absolute;
+
   width: auto;
 
 }
 .poscontrasena{
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+//  position: absolute;
+//  top: 60%;
+  //left: 50%;
+  //transform: translate(-50%,-50%);
   width: auto;
 }
 .titulo{
-  position: absolute;
-  top: 15%;
-  left: 50%;
+//  position: absolute;
+//  top: 15%;
+//  left: 50%;
   color: #0f172a;
-  transform: translate(-50%,-50%);
+//  transform: translate(-50%,-50%);
   width: auto;
+  text-align: center;
 }
 .botonclr{
   height: 3em;
@@ -46,12 +57,12 @@ body {
   color: white;
   border-radius: 6px;
   //margin: 1em;
-  position: absolute;
+//  position: absolute;
   cursor: pointer;
 
-  top: 80%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+//  top: 80%;
+//  left: 50%;
+  //transform: translate(-50%,-50%);
   &:hover {
     background-color: #0056b3;
   }
@@ -67,10 +78,10 @@ body {
   text-decoration: underline;
   background-color: transparent;
   color: #0f172a;
-  position: absolute;
-  top: 90%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+//  position: absolute;
+//  top: 90%;
+//  left: 50%;
+//  transform: translate(-50%,-50%);
 }
 .botonclr2:hover{
    filter: brightness(10);
@@ -79,10 +90,10 @@ body {
   text-decoration: underline;
   background-color: transparent;
   color: #0f172a;
-  position: absolute;
-  top: 95%;
-  left: 50%;
-  transform: translate(-50%,-50%);
+  //position: absolute;
+  //top: 95%;
+//  left: 50%;
+  //transform: translate(-50%,-50%);
 }
 .botonclr3:hover{
    filter: brightness(10);
@@ -90,7 +101,12 @@ body {
 .botonclr:hover{
    filter: brightness(0.8);
 }
+
 .marca_error{
   color: red;
+  text-align: center;
+  h1{
+    font-size: 1rem;
+  }
 
 }
