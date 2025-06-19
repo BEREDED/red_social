@@ -129,7 +129,7 @@ export class PrincipalComponent implements OnInit {
     this.usuariosService.postRegistroUsuario(this.usuario).subscribe({
       next: (response) => {
         console.log('Usuario creado exitosamente', response);
-        this.router.navigate(['/login']);
+        this.router.navigate(['/inicio_sesion']);
       },
       error: (error) => {
         console.error('Error al crear usuario', error);
