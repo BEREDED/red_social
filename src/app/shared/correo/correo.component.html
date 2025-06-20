@@ -1,5 +1,5 @@
 <div class="input-container">
-  <input type="text" class="panel" placeholder="Correo electrónico" [(ngModel)]="Correo" (input)="onCorreoInput()">
+  <input type="text" class="panel" placeholder="Ingresar Correo electrónico" [(ngModel)]="Correo" (input)="onCorreoInput()">
   <div *ngIf="!isValidCorreo" class="error-message">
     El correo debe terminar en &#64;ipn.mx o &#64;alumno.ipn.mx
   </div>

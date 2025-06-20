@@ -27,13 +27,16 @@
       <div *ngIf="!isValidName" class="error-message">
         El nombre del foro no puede terminar con &#64;ipn.mx o &#64;alumno.ipn.mx
       </div>
-      <input
+      <div *ngIf="!isValidLength" class="error-message">
+        El nombre debe tener entre 4 y 20 caracteres
+      </div>
+    <!--  <input
         type="text"
         [(ngModel)]="foroDesc"
         placeholder="Descripción del foro"
-      />
+      /> -->
       <div class="modal-buttons">
-        <button (click)="crearForo()" class="botonpopup" [disabled]="!isValidName">Crear</button>
+        <button (click)="crearForo()" class="botonpopup" [disabled]="!isValidName || !isValidLength">Crear</button>
         <button (click)="closeCrearForoModal()" class="botonpopup">Cancelar</button>
       </div>
     </div>

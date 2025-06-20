@@ -76,7 +76,6 @@ width: auto;
   width: 100%;
 }
 
-
   .return {
     background: none;
     border: none;
@@ -93,4 +92,12 @@ width: auto;
         text-decoration: underline;
       }
     }
+  }
+
+  .marca_error{
+      margin: auto;
+
+      h1{
+          font-size: 0.55rem;
+      }
   }
