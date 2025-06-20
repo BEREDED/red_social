@@ -21,6 +21,7 @@ interface Grupo {
 export class BotonMasComponent implements OnInit {
   isProfe: boolean = false;
 
+
   // Datos para foros
   Foros_send: foros = {
     Correo_Creador: '',
@@ -58,6 +59,7 @@ export class BotonMasComponent implements OnInit {
   // Validaciones
   isValidName: boolean = true;
   isValidGrupoName: boolean = true;
+  isValidLength: boolean = true;
 
   constructor(private router: Router, private usuariosService: UsuariosService) { }
 
@@ -116,6 +118,7 @@ export class BotonMasComponent implements OnInit {
   validateName() {
     const pattern = /@ipn\.mx$|@alumno\.ipn\.mx$/;
     this.isValidName = !pattern.test(this.foroName);
+    
   }
 
   validateGrupoName() {
@@ -186,7 +189,7 @@ export class BotonMasComponent implements OnInit {
           console.log("no te uniste a ningun grupo")
         }
       })
-      
+
 
 
     console.log('Unirse a grupo con código:', this.codigoUnirse);
