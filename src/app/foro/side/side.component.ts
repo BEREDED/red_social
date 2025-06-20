@@ -11,7 +11,7 @@ import { filter } from 'rxjs/operators';
   standalone: false
 })
 export class SideComponent implements OnInit {
-  @Input() title: string = 'HOME';
+//  @Input() title: string = 'HOME';
 
   // Variables para controlar la expansión de los acordeones
   accordionOneExpanded: boolean = true;

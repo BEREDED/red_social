@@ -125,7 +125,7 @@ export class BotonMasComponent implements OnInit {
   validateGrupoName() {
     const pattern = /@ipn\.mx$|@alumno\.ipn\.mx$/;
     this.isValidGrupoName = !pattern.test(this.grupoName);
-    this.isValidLength = this.foroName.length > 3 && this.foroName.length <= 20;
+    this.isValidLength = this.foroName.length > 2 && this.foroName.length <= 20;
 
   }
 
