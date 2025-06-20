@@ -90,51 +90,63 @@ export class PrincipalComponent implements OnInit {
   }
 
   obtenerDatos() {
-    this.errorMessage = '';
+  this.errorMessage = '';
 
-    if (!this.nombreComp.Nombre || !this.correoComponent.Correo || !this.contrasenaValue || !this.fechaNacimientoComp.Fecha_Nacimiento_string) {
-      this.errorMessage = 'Todos los campos son obligatorios.';
-      console.error(this.errorMessage);
-      return;
-    }
-
-    if (!this.correoValido) {
-      this.errorMessage = 'El correo no es válido.';
-      console.error(this.errorMessage);
-      return;
-    }
-
-    if (this.contrasenaValue.length < 8) {
-      this.errorMessage = 'La contraseña debe tener al menos 8 caracteres.';
-      console.error(this.errorMessage);
-      return;
-    }
-
-    if (!this.passwordsMatch) {
-      this.errorMessage = 'Las contraseñas no coinciden.';
-      console.error(this.errorMessage);
-      return;
-    }
-
-    const nameParts = this.extractNameParts(this.nombreComp.Nombre);
-    this.usuario.Nombre = nameParts.nombre;
-    this.usuario.Apellido_pat = nameParts.apellido_pat;
-    this.usuario.Apellido_mat = nameParts.apellido_mat;
-    this.usuario.Correo = this.correoComponent.Correo;
-    this.usuario.Contraseña = this.contrasenaValue;
-    this.fechaNacimientoComp.actualizarFecha();
-    this.usuario.Fch_Nacimiento = this.fechaNacimientoComp.Fecha_Nacimiento_date;
-
-    console.log("Datos del usuario:", this.usuario);
-    this.usuariosService.postRegistroUsuario(this.usuario).subscribe({
-      next: (response) => {
-        console.log('Usuario creado exitosamente', response);
-        this.router.navigate(['/inicio_sesion']);
-      },
-      error: (error) => {
-        console.error('Error al crear usuario', error);
-        this.Is_cuenta_created=false
-      }
-    });
+  if (
+    !this.nombreComp.Nombre ||
+    !this.correoComponent.Correo ||
+    !this.contrasenaValue ||
+    !this.fechaNacimientoComp.Fecha_Nacimiento_string
+  ) {
+    this.errorMessage = 'Todos los campos son obligatorios.';
+    console.error(this.errorMessage);
+    return;
   }
+
+  if (this.nombreComp.Nombre.length > 49) {
+    this.errorMessage = 'El nombre no puede exceder los 49 caracteres.';
+    console.error(this.errorMessage);
+    return;
+  }
+
+  if (!this.correoValido) {
+    this.errorMessage = 'El correo no es válido.';
+    console.error(this.errorMessage);
+    return;
+  }
+
+  if (this.contrasenaValue.length < 8) {
+    this.errorMessage = 'La contraseña debe tener al menos 8 caracteres.';
+    console.error(this.errorMessage);
+    return;
+  }
+
+  if (!this.passwordsMatch) {
+    this.errorMessage = 'Las contraseñas no coinciden.';
+    console.error(this.errorMessage);
+    return;
+  }
+
+  const nameParts = this.extractNameParts(this.nombreComp.Nombre);
+  this.usuario.Nombre = nameParts.nombre;
+  this.usuario.Apellido_pat = nameParts.apellido_pat;
+  this.usuario.Apellido_mat = nameParts.apellido_mat;
+  this.usuario.Correo = this.correoComponent.Correo;
+  this.usuario.Contraseña = this.contrasenaValue;
+  this.fechaNacimientoComp.actualizarFecha();
+  this.usuario.Fch_Nacimiento = this.fechaNacimientoComp.Fecha_Nacimiento_date;
+
+  console.log("Datos del usuario:", this.usuario);
+  this.usuariosService.postRegistroUsuario(this.usuario).subscribe({
+    next: (response) => {
+      console.log('Usuario creado exitosamente', response);
+      this.router.navigate(['/inicio_sesion']);
+    },
+    error: (error) => {
+      console.error('Error al crear usuario', error);
+      this.Is_cuenta_created = false;
+    }
+  });
+}
+
 }

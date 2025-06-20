@@ -91,22 +91,35 @@ export class PrincipalModComponent implements OnInit {
     return { nombre, apellido_pat, apellido_mat };
   }
   acceptEdit() {
-    const nameparts=this.extractNameParts(this.Nomcomp.Nombre)
-    this.usu_actulizar.Correo=String(localStorage.getItem('correoGlobal'))
-    this.usu_actulizar.Nombre=nameparts.nombre
-    this.usu_actulizar.Apellido_pat=nameparts.apellido_pat
-    this.usu_actulizar.Apellido_mat=nameparts.apellido_mat
-    this.usu_actulizar.Contraseña=this.Contracomp.contrasena
-    this.usu_actulizar.Fch_Nacimiento= this.FechNac.Fecha_Nacimiento_string
-    console.log(this.usu_actulizar)
-    this.isEditing = false;
-    this.usuarioservice.postActualizardata(this.usu_actulizar).subscribe({
-      next: (Response) =>{
-        console.log(Response)
-      },
-      error: (Error)=>{
-        console.log(Error)
-      }
-    })
+  if (!this.Nomcomp.Nombre || this.Nomcomp.Nombre.trim().length === 0) {
+    console.error('El nombre no puede estar vacío.');
+    return;
   }
+
+  if (this.Nomcomp.Nombre.length > 49) {
+    console.error('El nombre no puede exceder los 49 caracteres.');
+    return;
+  }
+
+  const nameparts = this.extractNameParts(this.Nomcomp.Nombre);
+  this.usu_actulizar.Correo = String(localStorage.getItem('correoGlobal'));
+  this.usu_actulizar.Nombre = nameparts.nombre;
+  this.usu_actulizar.Apellido_pat = nameparts.apellido_pat;
+  this.usu_actulizar.Apellido_mat = nameparts.apellido_mat;
+  this.usu_actulizar.Contraseña = this.Contracomp.contrasena;
+  this.usu_actulizar.Fch_Nacimiento = this.FechNac.Fecha_Nacimiento_string;
+
+  console.log(this.usu_actulizar);
+  this.isEditing = false;
+
+  this.usuarioservice.postActualizardata(this.usu_actulizar).subscribe({
+    next: (Response) => {
+      console.log(Response);
+    },
+    error: (Error) => {
+      console.log(Error);
+    }
+  });
+}
+
 }
