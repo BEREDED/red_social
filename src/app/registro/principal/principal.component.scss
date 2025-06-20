@@ -57,7 +57,10 @@ width: auto;
   cursor: pointer;
   transition: background-color 0.2s ease;
   margin-inline: auto;
+  margin-right: 80%;
   margin-top: 2vh;
+  transform: translate(-40%, 60%);
+
   &:hover {
     background-color: #0056b3;
   }

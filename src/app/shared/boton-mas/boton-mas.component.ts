@@ -59,7 +59,7 @@ export class BotonMasComponent implements OnInit {
   // Validaciones
   isValidName: boolean = true;
   isValidGrupoName: boolean = true;
-  isValidLength: boolean = true;
+  isValidLength: boolean = false;
 
   constructor(private router: Router, private usuariosService: UsuariosService) { }
 
