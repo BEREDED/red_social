@@ -118,12 +118,15 @@ export class BotonMasComponent implements OnInit {
   validateName() {
     const pattern = /@ipn\.mx$|@alumno\.ipn\.mx$/;
     this.isValidName = !pattern.test(this.foroName);
-    
+    this.isValidLength = this.foroName.length > 3 && this.foroName.length <= 20;
+
   }
 
   validateGrupoName() {
     const pattern = /@ipn\.mx$|@alumno\.ipn\.mx$/;
     this.isValidGrupoName = !pattern.test(this.grupoName);
+    this.isValidLength = this.foroName.length > 3 && this.foroName.length <= 20;
+
   }
 
   // Generar código aleatorio de 5 caracteres
