@@ -34,7 +34,6 @@ export class FeedComponent implements OnInit, OnDestroy {
 
     this.usuariosService.recuperarpsots(this.Titulo_foro).subscribe({
       next: (response) => {
-
         console.log("post recibidos:", response.posts);
         this.posts = response.posts.map(post => ({
         Titulo_foro: this.Titulo_foro,
@@ -43,8 +42,7 @@ export class FeedComponent implements OnInit, OnDestroy {
         Fecha_Publicacion: new Date(post.Fecha_Publicacion),
         Usuario_creador: post.Usuario_creador,
         id_post_out: Number(post.Id_Publicacion)
-}))
-.sort((a, b) => b.Fecha_Publicacion.getTime() - a.Fecha_Publicacion.getTime());
+})).sort((a, b) => b.Fecha_Publicacion.getTime() - a.Fecha_Publicacion.getTime());
 
         this.isLoading = false;
       },

@@ -129,7 +129,7 @@ getGrupos():void{
     this.mobileExpanded = false;
   }
   navigateToGrupo(grupo:any){
-    this.router.navigate(['/grupo',grupo.Titulo_grupo]);
+     this.router.navigate(['/grupo',grupo.Nombre_Grupo]);
     this.mobileExpanded = false;
   }
   // Método para obtener clases CSS dinámicas
